@@ -1,0 +1,73 @@
+@font-face {
+    font-family: Source;
+    src: url('../');
+}
+body {
+    background-color: green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Microsoft Tai Le", monospace;
+  }
+  a {
+    text-decoration: none;
+  }
+  td a {
+    background-color: rgba(0, 0, 0, 0.514);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  td a:hover {
+    background-color: black;
+  }
+  
+  table,
+  td,
+  th {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
+  table {
+    border-collapse: collapse;
+  }
+  .addnew {
+    background-color: rgb(255 152 0 / 56%);;
+    color: #fff;
+    width: 20%;
+    text-align: center;
+    padding: 3px 0px;
+    font-size: 1.2em;
+    margin: 10px;
+    height: 1.5em;
+    border-radius: 5px;
+    vertical-align: middle;
+  }
+  #truncate:hover,
+  .addnew:hover {
+    background-color: black;
+  }
+  #truncate {
+    background-color: rgb(255 152 0 / 56%);;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 3px 0px;
+    font-size: 1.2em;
+    margin: 10px;
+    height: 1.5em;
+    border-radius: 5px;
+    vertical-align: middle;
+    border: none;
+  }
+  form {
+    width: 20%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+  }
+  
