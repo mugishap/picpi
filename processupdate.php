@@ -7,7 +7,6 @@
     $gender = $_POST['gender'];
     $nationality = $_POST['nationality'];
     $userName = $_POST['username'];
-    $password = $_POST['password']; 
     $id=$_GET['id'];
 include './connection.php';
 
@@ -24,7 +23,7 @@ include './connection.php';
             $row = mysqli_fetch_assoc($select);
     
             // $encryptedPassword = hash("SHA512", $password);
-            $updateQuery = "UPDATE users SET firstName='$firstName', lastName='$lastName',email='$email',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$userName',password = '$password' WHERE user_id=$id";
+            $updateQuery = "UPDATE users SET firstName='$firstName', lastName='$lastName',email='$email',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$userName' WHERE user_id=$id";
             $insert =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
             if ($insert) {
                 echo "<h3 id='data_updated'>User updated successfully😁😁😁</h3>";

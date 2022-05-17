@@ -87,10 +87,6 @@ if (!$connection) {
                 <label for="username">Username</label>
                 <input  type="text" name="username" value="<?php echo $rows['username'];?>">
             </div>
-            <div class="labels">
-                <label for="password">Password</label>
-                <input type="password" name="password" value="<?php echo  $rows['password'];?>">
-            </div>
             <input value="Update" type="submit" name="submit">
         </form>
 
