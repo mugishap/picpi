@@ -22,6 +22,7 @@
             </div>
             <button type="submit" name="login" class="p-2 w-24 text-white hover:bg-blue-700 rounded bg-blue-400">Submit</button>
         </form>
+        <a href="forgotpassword">Forgot password?</a>
     </div>
 </body>
 

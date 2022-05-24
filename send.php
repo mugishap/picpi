@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="w-screen h-screen flex items-center justify-center">
     <?php
     include './connection.php';
     if (isset($_POST['login'])) {
@@ -25,9 +26,10 @@
             } else {
                 while (list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
     ?>
-                    <div class=”home”>
+                    <div class="home w-2/5 h-2/3 rounded-xl bg-gray-200 flex flex-col items-center justify-center">
+                        <img src="<?= $profile ?>" class="w-48 h-48 rounded-full" alt="">
                         Welcome <?= $firstName . $lastName ?>
-                        <a href="changepassword.php?userid=<?= $userid ?>">Change Password</a>
+                        <a class="mt-10" href="changepassword.php?userid=<?= $userid ?>">Change Password</a>
                     </div>
     <?php
                 }

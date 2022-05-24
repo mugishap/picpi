@@ -22,18 +22,7 @@
             </div>
             <button type="submit" name="changepass" class="p-2 w-24 text-white hover:bg-blue-700 rounded bg-blue-400">Submit</button>
         </form>
-    </div>
-    <!DOCTYPE html>
-    <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-
-    <body>
         <?php
 
         include './connection.php';
@@ -41,8 +30,10 @@
             $prevpassword = $_POST['prevpassword'];
             $newpassword = $_POST['newpassword'];
             $id = $_GET['userid'];
+
             if (trim($prevpassword) === '' || trim($newpassword) === "") {
                 echo "Invalid credentials";
+                return;
             } else if ($prevpassword === $newpassword) {
                 echo "You didn't change anything";
                 return;
@@ -55,12 +46,12 @@
                     echo "Wrong credentials";
                     return;
                 } else {
-                    $updatequery = mysqli_query($connection, "UPDATE TABLE users WHERE user_id='$id' AND password='$prevEncrypt' SET password='$encrypt'");
+                    $updatequery = mysqli_query($connection, "UPDATE users SET password='$encrypt'  WHERE user_id='$id' AND password='$prevEncrypt'");
                     echo "$updatequery";
                     while (list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
         ?>
                         <div class=”home”>
-                            Dear <?= $firstName . $lastName ?>, Your password has been changed successfuly
+                            Dear <?= $firstName . " " . $lastName ?>, Your password has been changed successfuly
                             <a href="login.php">Go back to home</a>
                         </div>
         <?php
@@ -69,9 +60,7 @@
             }
         }
         ?>
-    </body>
 
-    </html>
 </body>
 
 </html>
