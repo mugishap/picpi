@@ -27,8 +27,8 @@
     </div>
     <?php
     include './connection.php';
-    $id = $_GET['userid'];
-    $getuser = mysqli_query($connection, 'SELECT * FROM user WHERE user_id=$id');
+    $userid = $_GET['userid'];
+    $getuser = mysqli_query($connection, "SELECT * FROM user WHERE user_id='$userid'");
     if (mysqli_num_rows($getuser)) {
         echo "Error in getting your credentials...";
         return;
