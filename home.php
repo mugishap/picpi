@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
     <link type="text/css" href="global.css" rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+<script src="global.js" defer></script>
     <title>Home | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,11 +35,16 @@
             <img class="w-8 h-8" src="picpi.png" alt="">
             <p class="picpi">PicPi</p>
         </div>
+        <div>
+            <form action="search.php">
+            <input type="text" name='username'>
+            </form>
+        </div>
         <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a class="material-icons" href="home.php?userid=<?= $userid ?>">home</a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>
-            <li class="mr-4 cursor-pointer"><a href="newpost.php?userid=<?= $userid ?>"> New post</a></li>
-            <li class="mr-4 cursor-pointer"><a href="login.html"> <button class="hover:bg-red-600 p-1 hover:text-white rounded-sm">Logout</button></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title='View your account' class="material-icons" href="account.php?userid=<?= $userid ?>">account_circle</a></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
         </ul>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>
@@ -51,12 +59,12 @@
         }
     ?>
 
-        <div class="bg-[#eeeeee] rounded-xl m-1 w-4/12 h-[90vh] p-3">
+        <div class="bg-[#eeeeee] rounded-xl m-1 w-4/12 h-fit p-3">
             <div class="flex w-full items-center justify-start">
                 <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $profile ?>'>
                 <a href="user.php?username=<?= $username ?>"><?= $username ?></a>
             </div>
-            <img class=" object-cover rounded-xl mb-1 mt-1 h-4/5 w-full" src='<?= $image ?>'>
+            <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
         </div>
