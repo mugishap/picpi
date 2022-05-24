@@ -9,7 +9,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
-    <link href="global.css" rel="stylesheet">
+    <link type="text/css" href="global.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'>
+
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'>
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +63,12 @@
             }
             $savePost = mysqli_query($connection, "INSERT INTO posts(username,profile,caption,image) VALUES('$username','$profile','$caption','$postimage')");
             if ($savePost) {
-                echo "Post added succesfuly <a href='home.php?userid=$userid'>View</a>";
+                ?>
+                <script>
+                    window.location.replace('/myapp/PHP-Crud/home.php?userid=<?=$userid?>')
+                </script>
+                <?php
+
             } else {
                 echo "Error in uploading your post";
             }

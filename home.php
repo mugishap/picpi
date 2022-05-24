@@ -27,13 +27,13 @@
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
-    <div class="navbar shadow-2xl p-2 w-full h-12  flex items-center justify-around">
+    <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
             <p class="picpi">PicPi</p>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
+            <li class="mr-4 cursor-pointer"><a class="material-icons" href="home.php?userid=<?= $userid ?>">home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>
             <li class="mr-4 cursor-pointer"><a href="newpost.php?userid=<?= $userid ?>"> New post</a></li>
             <li class="mr-4 cursor-pointer"><a href="login.html"> <button class="hover:bg-red-600 p-1 hover:text-white rounded-sm">Logout</button></a></li>
@@ -43,7 +43,7 @@
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <a href="newpost.php?userid=<?= $userid ?>">Create new post</a>
+    <a class="mb-8" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
     while (list($postid, $time, $username, $profile, $caption, $image) = mysqli_fetch_array($query)) {
         if ($today === $time) {

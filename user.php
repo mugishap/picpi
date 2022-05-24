@@ -18,7 +18,9 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 
 
 
-    <link href="global.css" rel="stylesheet">
+    <link type="text/css" href="global.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'>
+
     <title><?= $username ?> | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
