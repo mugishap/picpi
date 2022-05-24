@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | PicPi</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -14,11 +15,11 @@
     include './connection.php';
     $userid = $_GET['userid'];
     $today = date("Y-m-d");
-    $query = mysqli_query($connection, 'SELECT * FROM posts');
+    $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY post_id DESC');
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
-    <div class="navbar w-full h-10 flex items-center justify-around mb-12">
+    <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around mb-12">
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>

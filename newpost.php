@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New post | PicPi</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+
+<body class="flex items-center justify-center flex-col">
     <?php
     include './connection.php';
     $userid = $_GET['userid'];
@@ -23,9 +26,7 @@
     if (isset($_POST['submit'])) {
         $caption = $_POST['caption'];
         if ($caption === '') {
-            echo "<script>setTimeout(()=>{
-window.alert('You should add a caption')
-        })<script>";
+            echo "You should add a caption";;
             return;
         } else {
             $directory = 'uploads/';
@@ -59,7 +60,7 @@ window.alert('You should add a caption')
         }
     }
     ?>
-    <div class="navbar w-full h-10 flex items-center justify-around">
+    <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around">
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>

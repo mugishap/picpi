@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     <div class="form w-1/3 m-auto bg-gray-300 rounded p-4 mt-48">
-        <form action="send.php" method="post" class="w-full flex flex-col">
+        <form action="send.php" method="post" class="w-full flex flex-col items-center justify-center">
             <div class="holders w-full flex flex-row items-center justify-between m-1">
                 <label for="username">Username: </label>
                 <input class="w-2/3 h-10 rounded p-1" type="text" placeholder="Enter username" name="username" id="username" required>

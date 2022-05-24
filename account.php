@@ -12,12 +12,14 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $username ?> | PicPi</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 <body class="w-screen h-[80vh] flex flex-col items-center">
-    <div class="navbar w-full h-10 flex items-center justify-around mb-12">
+    <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around mb-12">
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>

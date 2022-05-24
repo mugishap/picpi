@@ -22,6 +22,8 @@ if (!$connection) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update account</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+
     <link rel="stylesheet" href="signup.css">
 </head>
 
