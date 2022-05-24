@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
     <link href="global.css" rel="stylesheet">
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
@@ -13,16 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Kurale&family=Righteous&family=Ubuntu:wght@300&display=swap');
 
-    .picpi {
-        color: #00a0eb;
-        font-family: Righteous;
-        font-size: 1.5em;
-        margin-left: 10px;
-    }
-</style>
 
 <body class="flex items-center justify-center flex-col">
     <?php
@@ -72,7 +67,7 @@
         }
     }
     ?>
-    <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around">
+    <div class="navbar shadow-2xl p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
             <p class="picpi">PicPi</p>

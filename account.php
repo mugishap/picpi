@@ -12,6 +12,10 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
     <link href="global.css" rel="stylesheet">
     <title><?= $username ?> | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
@@ -23,12 +27,16 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 </head>
 
 <body class="w-screen h-[80vh] flex flex-col items-center">
-    <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around mb-12">
+    <div class="navbar shadow-2xl p-2 w-full h-12  flex items-center justify-around">
+        <div class="flex items-center justify-center">
+            <img class="w-8 h-8" src="picpi.png" alt="">
+            <p class="picpi">PicPi</p>
+        </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>
             <li class="mr-4 cursor-pointer"><a href="newpost.php?userid=<?= $userid ?>"> New post</a></li>
-            <li class="mr-4 cursor-pointer"><a href="login.html"> <button>Logout</button></a></li>
+            <li class="mr-4 cursor-pointer"><a href="login.html"> <button class="hover:bg-red-600 p-1 hover:text-white rounded-sm">Logout</button></a></li>
         </ul>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>

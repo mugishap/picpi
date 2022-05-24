@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="global.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+    <link type="text/css" href="global.css" rel="stylesheet">
     <title>Home | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,12 +27,16 @@
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
-    <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around mb-12">
+    <div class="navbar shadow-2xl p-2 w-full h-12  flex items-center justify-around">
+        <div class="flex items-center justify-center">
+            <img class="w-8 h-8" src="picpi.png" alt="">
+            <p class="picpi">PicPi</p>
+        </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>
             <li class="mr-4 cursor-pointer"><a href="newpost.php?userid=<?= $userid ?>"> New post</a></li>
-            <li class="mr-4 cursor-pointer"><a href="login.html"> <button>Logout</button></a></li>
+            <li class="mr-4 cursor-pointer"><a href="login.html"> <button class="hover:bg-red-600 p-1 hover:text-white rounded-sm">Logout</button></a></li>
         </ul>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>
