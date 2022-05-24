@@ -60,6 +60,19 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             </div>
         </form>
     </div>
+    <h2>Your posts</h2>
+    <div class="flex border-box  p-4 items-center bg-gray-200 mt-2 rounded-xl max-w-1/3 justify-center h-fit">
+        <?php
+        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
+        while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
+        ?>
+            <a class="m-2" href="post.php?postid=<?= $postid ?>?userid=<?= $userid ?>">
+                <img key='<?= $postid ?>' class="rounded w-32 h-32" src="<?= $image ?>">
+            </a>
+        <?php
+        }
+        ?>
+    </div>
 </body>
 
 </html>
