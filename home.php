@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="flex flex-col items-center">
@@ -44,7 +45,7 @@
         <div class="bg-[#eeeeee] rounded-xl m-1 w-4/12 h-[90vh] p-3">
             <div class="flex w-full items-center justify-start">
                 <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $profile ?>'>
-                <p><?= $username ?></p>
+                <a href="user.php?username=<?= $username ?>"><?= $username ?></a>
             </div>
             <img class=" object-cover rounded-xl mb-1 mt-1 h-4/5 w-full" src='<?= $image ?>'>
             <p class="text-gray-500 mt-2"><?= $time ?></p>

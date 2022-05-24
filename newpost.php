@@ -74,7 +74,7 @@
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <div class="form bg-gray-300 mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">
+    <div class="form bg-[#eeeeee] mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">
         <h2 class="heading-2 mb-4">Create new post</h2>
         <form class="w-full flex flex-col items-center justify-center" action="" method="POST" enctype="multipart/form-data">
             <div class="labels flex justify-between w-full mb-4 items-center">
