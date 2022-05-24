@@ -28,7 +28,8 @@
     ?>
                     <div class="home w-2/5 h-2/3 rounded-xl bg-gray-200 flex flex-col items-center justify-center">
                         <img src="<?= $profile ?>" class="w-48 h-48 rounded-full" alt="">
-                        Welcome <?= $firstName . $lastName ?>
+                        Welcome <?= $firstName . $lastName . '<br>' ?>
+                        Jump right to home by clicking <a href='home.php?userid=<?= $userid ?>'>here</a>
                         <a class="mt-10" href="changepassword.php?userid=<?= $userid ?>">Change Password</a>
                     </div>
     <?php

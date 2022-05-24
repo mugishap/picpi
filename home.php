@@ -9,9 +9,10 @@
 </head>
 
 <body>
-    <a href="newpost">Create new post</a>
     <?php
     include './connection.php';
+    $userid = $_GET['userid'];
+
     $query = mysqli_query($connection, 'SELECT * FROM posts');
     while ($list($time, $username, $profile, $caption, $image)) {
     ?>
@@ -25,6 +26,7 @@
     <?php
     }
     ?>
+    <a href="newpost.php?userid=<?= $userid?>">Create new post</a>
 </body>
 
 </html>
