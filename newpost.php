@@ -5,14 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="global.css" rel="stylesheet">
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kurale&family=Righteous&family=Ubuntu:wght@300&display=swap');
 
+    .picpi {
+        color: #00a0eb;
+        font-family: Righteous;
+        font-size: 1.5em;
+        margin-left: 10px;
+    }
+</style>
 
 <body class="flex items-center justify-center flex-col">
     <?php
@@ -63,11 +73,15 @@
     }
     ?>
     <div class="navbar shadow-2xl p-2 w-full h-10 flex items-center justify-around">
+        <div class="flex items-center justify-center">
+            <img class="w-8 h-8" src="picpi.png" alt="">
+            <p class="picpi">PicPi</p>
+        </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="home.php?userid=<?= $userid ?>"> Home</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"> Account</a></li>
             <li class="mr-4 cursor-pointer"><a href="newpost.php?userid=<?= $userid ?>"> New post</a></li>
-            <li class="mr-4 cursor-pointer"><a href="login.html"> <button>Logout</button></a></li>
+            <li class="mr-4 cursor-pointer"><a href="login.html"> <button class="hover:bg-red-600 p-1 hover:text-white rounded-sm">Logout</button></a></li>
         </ul>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>
@@ -83,7 +97,7 @@
             </div>
             <div class="labels flex justify-between w-full mb-4 items-start">
                 <label for="caption">Caption</label>
-                <textarea style="resize: none;"  class="w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
+                <textarea style="resize: none;" class="w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
             </div>
 
             <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="submit">
