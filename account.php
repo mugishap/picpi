@@ -14,7 +14,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <script src="global.js" defer></script>
+
     <title><?= $username ?> | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,15 +24,15 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 </head>
 
 <body class="w-screen h-[80vh] flex flex-col items-center overflow-hidden">
-       <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+    <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <p class="picpi">PicPi</p>
+            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
             <form action="search.php" class="flex items-center justify-center">
                 <input type="text" name='username' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                <button type="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                 <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
@@ -77,11 +77,22 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <div class="grid border-box  p-4 grid-cols-3 bg-gray-200 mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
-        while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
+        if (mysqli_num_rows($getUserPosts) < 1) {
         ?>
-            <a class="m-2 h-auto" href="post.php?postid=<?= $postid ?>?posterid=<?= $posterid ?>?userid=?<?= $userid ?>"><img key='<?= $postid ?>' class="object-cover rounded w-48 h-32" src="<?= $image ?>"></a>
+            <div class="flex h-full w-full flex-col items-center justify-center">
+                <p class="mb-2">Add a post</p>
+                <a title="Add a post" href="newpost.php?userid=<?= $userid ?>" class='w-16 h-16 flex items-center justify-center text-blue-500 p-10 rounded-full border-2 border-blue-500'>
+                    <i class='bx bxs-camera-plus bx-md'></i>
+                </a>
+            </div>
+            <?php
+        } else {
+            while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
+            ?>
+                <a class="m-2 h-auto" href="post.php?postid=<?= $postid ?>?posterid=<?= $posterid ?>?userid=?<?= $userid ?>"><img key='<?= $postid ?>' class="object-cover rounded w-48 h-32" src="<?= $image ?>"></a>
 
         <?php
+            }
         }
         ?>
     </div>

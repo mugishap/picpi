@@ -80,12 +80,12 @@
        <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <p class="picpi">PicPi</p>
+            <a href='home.php?userid=<?=$userid?>' class="picpi">PicPi</a>
         </div>
         <div>
             <form action="search.php" class="flex items-center justify-center">
                 <input type="text" name='username' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                <button type="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                 <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">

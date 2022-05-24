@@ -1,17 +1,81 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Kurale&family=Open+Sans:wght@300&family=Righteous&family=Ubuntu:wght@300&display=swap");
+.picpi {
+  color: #00a0eb;
+  font-family: Righteous;
+  font-size: 1.5em;
+  margin-left: 10px;
+}
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
-    background: transparent;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: grey;
-    border-radius: 5px;
-  }
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 5px;
+}
+
+* {
+  transition: ease all 0.5s;
+}
+.form {
+  background-color: #eee;
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-table;
+}
+
+#gender1,#gender2{
+  border: 0px;
+  width: 20px;
+  height: 20px;
+}
+.form input {
+  box-sizing: border-box;
+  padding: 10px;
+}
+.heading-2 {
+  text-align: center;
+  font-family: "Open Sans";
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.signupform {
+  margin: 10px 30px;
+  font-family: "Open Sans";
+  font-weight: 600;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0px;
+}
+.labels .radio {
+  display: flex;
+  justify-content: flex-start;
+  width: 300px;
+}
+.form input,
+select {
+  border-radius: 5px;
+  width: 300px;
+  height: 35px;
+  border: none;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: rgb(86, 87, 88);
+}

@@ -6,24 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
 
-    <title>Document</title>
+
+    <title>Welcome to PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="signup.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link type="text/css" rel="stylesheet" href="global.css">
 </head>
 
 <body>
-    <div class="form">
-        <h2 class="heading-2">Create account</h2>
-        <form action="process.php" method="POST" enctype="multipart/form-data">
+    <div class="m-auto form w-1/3 flex flex-col items-center justify-center">
+        <h2 class="heading-2">Welcome to PicPi</h2>
+        <img class="w-24 h-24 " src="picpi.png" alt="">
+        <form action="process.php" class="signupform" method="POST" enctype="multipart/form-data">
             <div class="labels">
                 <label for="">First Name</label>
                 <input placeholder="Enter First Name" type="text" id="firstName" name="firstName">
@@ -43,15 +44,16 @@
             <div class="labels">
                 <label for="telephone">Telephone</label>
                 <input placeholder="Enter telephone number" pattern="[0-9]{10,12}" type="text" name="telephone">
-                <!-- [a-z]lower case -->
-                <!-- [A-Z]uppercase case -->
-                <!-- [A-Za-z0-9]alphanumeric -->
             </div>
             <div class="labels" id="gender">
                 <label for="">Gender</label>
                 <div class="radio">
-                    <input type="radio" name="gender" value="Male">Male
-                    <input type="radio" name="gender" value="Female">Female
+                    <div class="mr-16 flex items-center">
+                        <input id="gender1" type="radio" name="gender" value="Male">Male
+                    </div>
+                    <div class=" flex items-center">
+                        <input id="gender2" type="radio" name="gender" value="Female">Female
+                    </div>
                 </div>
 
             </div>
@@ -83,7 +85,7 @@
                 <label for="confpass">Confirm Password</label>
                 <input placeholder="Confirm password" type="password" name="cpassword">
             </div>
-            <input value="Submit" type="submit" name="submit">
+            <input class="bg-blue-500 font-bold text-white w-1/3 cursor-pointer" value="Submit" type="submit" name="submit">
         </form>
 
     </div>

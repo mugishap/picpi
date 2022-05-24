@@ -12,7 +12,7 @@
     <link type="text/css" href="global.css" rel="stylesheet">
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <script src="global.js" defer></script>
+
     <title>Home | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,12 +33,12 @@
     <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <p class="picpi">PicPi</p>
+            <a href='home.php?userid=<?=$userid?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php" class="flex items-center justify-center">
-                <input type="text" name='username' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                <button type="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+            <form method="POST" action="search.php" class="flex items-center justify-center">
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
