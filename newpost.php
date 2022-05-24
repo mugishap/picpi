@@ -28,7 +28,7 @@ window.alert('You should add a caption')
         })<script>";
             return;
         } else {
-            $directory = 'uploads';
+            $directory = 'uploads/';
             $postimage = $directory . basename($_FILES['post-image']['name']);
             $uploadStatus = 1;
             $imageFileType = strtolower(pathinfo($postimage, PATHINFO_EXTENSION));
