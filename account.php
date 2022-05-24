@@ -31,8 +31,8 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         </div>
         <div>
             <form action="search.php" class="flex items-center justify-center">
-                <input type="text" name='username' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                 <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
@@ -42,36 +42,39 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <div class="flex border-box p-2 items-center bg-gray-200 rounded-xl mt-4 w-2/3 justify-center h-1/2">
-        <div class="w-2/3 flex items-center justify-center">
-            <img class="object-cover w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
+    <div class="flex flex-col border-box p-2 items-center bg-gray-200 rounded-xl mt-4 w-2/3 justify-center h-1/2">
+        <div class="flex items-center w-full justify-center h-full">
+            <div class="w-2/3 flex items-center justify-center">
+                <img class="object-cover w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
+            </div>
+            <form class="flex flex-col items-center justify-center w-3/5">
+                <div class="flex w-10/12 items-center justify-between">
+                    <label>Names: </label>
+                    <input type="text" disabled class="bg-transparent" value='<?= $firstName . " " . $lastName ?>'>
+                </div>
+                <div class="flex w-10/12 items-center justify-between">
+                    <label>Username: </label>
+                    <input type="text" disabled class="bg-transparent" value='<?= $username ?>'>
+                </div>
+                <div class="flex w-10/12 items-center justify-between ">
+                    <label>Country: </label>
+                    <input type="text" disabled class="bg-transparent" value='<?= $nationality ?>'>
+                </div>
+                <div class="flex w-10/12 items-center justify-between ">
+                    <label>Telephone: </label>
+                    <input type="text" disabled class="bg-transparent" value='<?= $telephone ?>'>
+                </div>
+                <div class="flex w-10/12 items-center justify-between ">
+                    <label>Gender: </label>
+                    <input type="text" disabled class="bg-transparent" value='<?= $gender ?>'>
+                </div>
+                <div class="flex w-10/12 items-center justify-between ">
+                    <label>Email: </label>
+                    <input type="text" disabled class="bg-transparent" value='<?= $email ?>'>
+                </div>
+            </form>
         </div>
-        <form class="flex flex-col items-center justify-center w-3/5">
-            <div class="flex w-10/12 items-center justify-between">
-                <label>Names: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $firstName . " " . $lastName ?>'>
-            </div>
-            <div class="flex w-10/12 items-center justify-between">
-                <label>Username: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $username ?>'>
-            </div>
-            <div class="flex w-10/12 items-center justify-between ">
-                <label>Country: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $nationality ?>'>
-            </div>
-            <div class="flex w-10/12 items-center justify-between ">
-                <label>Telephone: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $telephone ?>'>
-            </div>
-            <div class="flex w-10/12 items-center justify-between ">
-                <label>Gender: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $gender ?>'>
-            </div>
-            <div class="flex w-10/12 items-center justify-between ">
-                <label>Email: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $email ?>'>
-            </div>
-        </form>
+        <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
     </div>
     <h2>Your posts</h2>
     <div class="grid border-box  p-4 grid-cols-3 bg-gray-200 mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">

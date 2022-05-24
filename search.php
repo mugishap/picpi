@@ -1,7 +1,6 @@
 <?php
 include './connection.php';
-if (isset($_POST['submit'])) {
-echo "Hello";
+if (isset($_POST['search'])) {
     $name = $_POST['name'];
 ?>
 
@@ -14,9 +13,32 @@ echo "Hello";
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search | <?= $name ?></title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     </head>
 
     <body>
+        <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+            <div class="flex items-center justify-center">
+                <img class="w-8 h-8" src="picpi.png" alt="">
+                <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
+            </div>
+            <div>
+                <form method="POST" action="search.php" class="flex items-center justify-center">
+                    <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                    <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                </form>
+            </div>
+            <ul class="flex flex-row items-center justify-center list-none">
+                <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+                <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
+                <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
+                <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
+            </ul>
+        </div>
         <?php
 
         $getUsers = mysqli_query($connection, "SELECT u.user_id,u.username,u.nationality,u.email,u.telephone FROM users u WHERE u.username like '%$name%' OR u.firstname like '%$name%' OR u.lastname='%$name%'") or die("Error occured in deleting user" . mysqli_error($connection));

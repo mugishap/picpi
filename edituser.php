@@ -4,115 +4,111 @@ include './connection.php';
 if (!$connection) {
     echo "Connection not successfull" . mysqli_connect_error();
 } else {
-    $id = $_GET['id'];
+    $id = $_GET['userid'];
     $sql = "SELECT * FROM users where user_id=$id;";
-    $select  = mysqli_query($connection,$sql) or die(mysqli_error($connection));
+    $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
-    if($select == TRUE){
+    if ($select == TRUE) {
         $count = mysqli_num_rows($select);
-        if($count > 0){
-            while($rows=mysqli_fetch_assoc($select)){
+        if ($count > 0) {
+            while ($rows = mysqli_fetch_assoc($select)) {
 ?>
- 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <!DOCTYPE html>
+                <html lang="en">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
 
-    <link type="text/css" href="global.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
+                    <link type="text/css" href="global.css" rel="stylesheet">
+                    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-    <title>Update account</title>
-    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="signup.css">
-</head>
+                    <title>Update account</title>
+                    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+                    <script defer src="https://cdn.tailwindcss.com"></script>
+                </head>
 
-<body>
-    <div class="form">
-        <h2 class="heading-2">Update account</h2>
-        <form action="processupdate.php?id=<?php echo $rows['user_id'] ?>" method="post" enctype='multipart/form-data'>
-            <div class="labels">
-                <label for="">First Name</label>
-                <input type="text" id="firstName" value="<?php echo $rows['firstName'];?>" name="firstName">
-            </div>
-            <div class="labels">
-                <label for="">Last Name</label>
-                <input type="text" name="lastName" value="<?php echo $rows['lastName'];?>">
-            </div>
-            <div class="labels">
-                <label for="">Email</label>
-                <input type="email" name="email" value="<?php echo $rows['email'];?>">
-            </div>
-            <div class="labels">
-                <label for="profile-image">Profile</label>
-                <input type="file" id="profile-image" value="<?php echo $rows['profile'];?>" name="profile-image">
-            </div>
-            <img src="<?php echo $rows['profile'];?>" class='profile' style='width:100px;height:100px;border-radius:50%;' alt="">
-            <div class="labels">
-                <label for="telephone">Telephone</label>
-                <input pattern="[0-9]{10,12}" type="text" name="telephone" value="<?php echo $rows['telephone'];?>">
-            </div>
-            <?php if ($rows['gender'] == "Male") {?>
-            <div class="labels" id="gender">
-                <label for="">Gender</label>
-                <div class="radio">
-                    <input type="radio" name="gender" value="Male" checked>Male
-                    <input type="radio" name="gender" value="Female">Female
-                </div>
-            </div>
-           <?php }
-           else{?>
-            <div class="labels" id="gender">
-                <label for="">Gender</label>
-                <div class="radio">
-                    <input type="radio" name="gender" value="Male" checked>Male
-                    <input type="radio" name="gender" value="Female">Female
-                </div>
-            </div>
+                <body class="">
+                    <div class="m-auto mt-32 formupdate neumorphism flex flex-col w-4/12 p-4 box-border">
+                        <h2 class="heading-2">Update PicPi account</h2>
+                        <form action="processupdate.php?id=<?php echo $rows['user_id'] ?>" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="">First Name</label>
+                                <input class="rounded p-1 w-2/3" type="text" id="firstName" value="<?php echo $rows['firstName']; ?>" name="firstName">
+                            </div>
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="">Last Name</label>
+                                <input class="rounded p-1 w-2/3" type="text" name="lastName" value="<?php echo $rows['lastName']; ?>">
+                            </div>
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="">Email</label>
+                                <input class="rounded p-1 w-2/3" type="email" name="email" value="<?php echo $rows['email']; ?>">
+                            </div>
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="profile-image">Profile</label>
+                                <input class="rounded p-1 w-2/3" type="file" id="profile-image" value="<?php echo $rows['profile']; ?>" name="profile-image">
+                            </div>
+                            <img class="object-cover" src="<?php echo $rows['profile']; ?>" class='profile' style='width:100px;height:100px;border-radius:50%;' alt="">
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="telephone">Telephone</label>
+                                <input pattern="[0-9]{10,12}" type="text" name="telephone" value="<?php echo $rows['telephone']; ?>">
+                            </div>
+                            <?php if ($rows['gender'] == "Male") { ?>
+                                <div class="labels" id="gender">
+                                    <label for="">Gender</label>
+                                    <div class="radio">
+                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
+                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="labels" id="gender">
+                                    <label for="">Gender</label>
+                                    <div class="radio">
+                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
+                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
+                                    </div>
+                                </div>
 
-          <?php } ?>
-      
-            <div class="labels">
-                <label for="Nationality">Nationality</label>
-                <select name="nationality">
-                    <option>--Select--</option>
-                    <?php 
-                    $nationalities = ["Rwanda","Kenya","South Africa","Nigeria","Canada","Algeria","USA","Uganda","Liberia","Senegal"];
-                    for($i = 0;$i < count($nationalities);$i++){ ?>
-                    <option value="<?= $nationalities[$i] ?>" <?= ($rows['nationality'] == $nationalities[$i])? "selected" : "" ?>><?=$nationalities[$i] ?></option>
-                    <?php } ?>
-                </select>
-            </div>
+                            <?php } ?>
 
-    
-            <div class="labels">
-                <label for="username">Username</label>
-                <input  type="text" name="username" value="<?php echo $rows['username'];?>">
-            </div>
-            <input value="Update" type="submit" name="submit">
-        </form>
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="Nationality">Nationality</label>
+                                <select name="nationality">
+                                    <option>--Select--</option>
+                                    <?php
+                                    $nationalities = ["Rwanda", "Kenya", "South Africa", "Nigeria", "Canada", "Algeria", "USA", "Uganda", "Liberia", "Senegal"];
+                                    for ($i = 0; $i < count($nationalities); $i++) { ?>
+                                        <option value="<?= $nationalities[$i] ?>" <?= ($rows['nationality'] == $nationalities[$i]) ? "selected" : "" ?>><?= $nationalities[$i] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
 
-    </div>
-</body>
 
-</html>
+                            <div class="w-full flex justify-between items-center mt-1">
+                                <label for="username">Username</label>
+                                <input class="rounded p-1 w-2/3" type="text" name="username" value="<?php echo $rows['username']; ?>">
+                            </div>
+                            <input class="p-1 text-white rounded w-32 bg-blue-500 neumorphism" value="Update" type="submit" name="submit">
+                        </form>
+
+                    </div>
+                </body>
+
+                </html>
 <?php
-}
-}
-
-}
-
+            }
+        }
+    }
 }
 
 ?>

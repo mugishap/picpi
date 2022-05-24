@@ -11,10 +11,8 @@
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +82,7 @@
         </div>
         <div>
             <form action="search.php" class="flex items-center justify-center">
-                <input type="text" name='username' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                  <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>

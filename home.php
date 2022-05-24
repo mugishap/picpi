@@ -14,6 +14,7 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Home | PicPi</title>
+    
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,8 +39,8 @@
         <div>
             <form method="POST" action="search.php" class="flex items-center justify-center">
                 <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
-            </form>
+                <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
+            </form> 
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>

@@ -27,19 +27,30 @@
 * {
   transition: ease all 0.5s;
 }
+body{
+background-color: #f0f0f0;}
 .form {
-  background-color: #eee;
+  background-color:#f0f0f0; 
   padding: 20px;
   border-radius: 10px;
   display: inline-table;
 }
-
+.formupdate {
+  background-color: #f0f0f0;
+    padding: 20px;
+  border-radius: 10px;
+  display: inline-table;
+}
 #gender1,#gender2{
   border: 0px;
   width: 20px;
   height: 20px;
 }
 .form input {
+  box-sizing: border-box;
+  padding: 10px;
+}
+.formupdate input {
   box-sizing: border-box;
   padding: 10px;
 }
@@ -76,6 +87,20 @@ select {
   box-sizing: border-box;
 }
 
+.formupdate input,
+select {
+  border-radius: 5px;
+  width: 300px;
+  height: 35px;
+  border: none;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
 input::placeholder {
   color: rgb(86, 87, 88);
+}
+.neumorphism{
+  background-color: #f0f0f1;
+  box-shadow: 5px 6px 11px rgb(0 0 0 / 20%), -4px -4px 10px white;
 }
