@@ -12,7 +12,7 @@
     <link type="text/css" href="global.css" rel="stylesheet">
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
+    <script src="global.js" defer></script>
     <title>Home | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,18 +36,15 @@
             <p class="picpi">PicPi</p>
         </div>
         <div>
-            <form action="search.php">
-            <input type="text" name='username'>
+            <form action="search.php" class="flex items-center justify-center">
+                <input type="text" name='username' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <button type="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title='View your account' class="material-icons" href="account.php?userid=<?= $userid ?>">account_circle</a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
-        </ul>
-        <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
