@@ -4,8 +4,8 @@ include './connection.php';
 if (!$connection) {
     echo "Connection not successfull" . mysqli_connect_error();
 } else {
-    $id = $_GET['userid'];
-    $sql = "SELECT * FROM users where user_id=$id;";
+    $userid = $_GET['userid'];
+    $sql = "SELECT * FROM users where user_id=$userid;";
     $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
     if ($select == TRUE) {
@@ -37,10 +37,28 @@ if (!$connection) {
                     <script defer src="https://cdn.tailwindcss.com"></script>
                 </head>
 
-                <body class="">
+                <body>
+                <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+        <div class="flex items-center justify-center">
+            <img class="w-8 h-8" src="picpi.png" alt="">
+            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
+        </div>
+        <div>
+            <form action="search.php" class="flex items-center justify-center">
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+            </form>
+        </div>
+        <ul class="flex flex-row items-center justify-center list-none">
+            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
+            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $rows['profile'] ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
+        </ul>
+    </div>
                     <div class="m-auto mt-32 formupdate neumorphism flex flex-col w-4/12 p-4 box-border">
                         <h2 class="heading-2">Update PicPi account</h2>
-                        <form action="processupdate.php?id=<?php echo $rows['user_id'] ?>" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
+                        <form action="processupdate.php?userid=<?php echo $rows['user_id'] ?>" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
                             <div class="w-full flex justify-between items-center mt-1">
                                 <label for="">First Name</label>
                                 <input class="rounded p-1 w-2/3" type="text" id="firstName" value="<?php echo $rows['firstName']; ?>" name="firstName">
@@ -63,19 +81,19 @@ if (!$connection) {
                                 <input pattern="[0-9]{10,12}" type="text" name="telephone" value="<?php echo $rows['telephone']; ?>">
                             </div>
                             <?php if ($rows['gender'] == "Male") { ?>
-                                <div class="labels" id="gender">
+                                <div class="labels flex justify-between items-center w-full" id="gender">
                                     <label for="">Gender</label>
                                     <div class="radio">
-                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
-                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
+                                        <input  id="gender1" class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
+                                        <input  id="gender2" class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
                                     </div>
                                 </div>
                             <?php } else { ?>
-                                <div class="labels" id="gender">
+                                <div class="labels flex justify-between items-center w-full" id="gender">
                                     <label for="">Gender</label>
                                     <div class="radio">
-                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
-                                        <input class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
+                                        <input  id="gender1" class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
+                                        <input  id="gender2" class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
                                     </div>
                                 </div>
 

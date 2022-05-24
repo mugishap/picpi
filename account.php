@@ -21,6 +21,30 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        const popup = (src) => {
+            const overlay = document.querySelector('.theoverlay')
+            overlay.style.display = 'flex'
+            overlay.innerHTML = '<i class="material-icons cursor-pointer" onclick="removepopup()">close</i>'
+
+            const div = document.createElement('div')
+            div.classList.add('white')
+
+            const image = document.createElement('img')
+            image.classList.add('image')
+            image.src = src
+
+            div.appendChild(image)
+            overlay.appendChild(div)
+            const username = document.createTextNode('<?=$username?>')
+            div.appendChild(username)
+        }
+        const removepopup = () => {
+            const overlay = document.querySelector('.theoverlay')
+            overlay.innerHTML = ''
+            overlay.style.display = 'none'
+        }
+    </script>
 </head>
 
 <body class="w-screen h-[80vh] flex flex-col items-center overflow-hidden">
@@ -41,6 +65,9 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
+    </div>
+    <div class="theoverlay flex-col w-screen absolute items-center z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
+
     </div>
     <div class="flex flex-col border-box p-2 items-center bg-gray-200 rounded-xl mt-4 w-2/3 justify-center h-1/2">
         <div class="flex items-center w-full justify-center h-full">
@@ -92,7 +119,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         } else {
             while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
             ?>
-                <a class="m-2 h-auto" href="post.php?postid=<?= $postid ?>?posterid=<?= $posterid ?>?userid=?<?= $userid ?>"><img key='<?= $postid ?>' class="object-cover rounded w-48 h-32" src="<?= $image ?>"></a>
+                <img key='<?= $postid ?>' onclick="popup('<?= $image ?>','flex')" class="m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $image ?>">
 
         <?php
             }
