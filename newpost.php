@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -53,7 +55,7 @@
             }
             $savePost = mysqli_query($connection, "INSERT INTO posts(username,profile,caption,image) VALUES('$username','$profile','$caption','$postimage')");
             if ($savePost) {
-                echo "Post added succesfuly <a href='home.php?<?=$userid?>'>View</a>";
+                echo "Post added succesfuly <a href='home.php?userid=$userid'>View</a>";
             } else {
                 echo "Error in uploading your post";
             }
@@ -69,22 +71,22 @@
         </ul>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="w-10 h-10 rounded-full" alt=""></a></li>
+            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <div class="form">
-        <h2 class="heading-2">Create new post</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="labels">
+    <div class="form bg-gray-300 mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">
+        <h2 class="heading-2 mb-4">Create new post</h2>
+        <form class="w-full flex flex-col items-center justify-center" action="" method="POST" enctype="multipart/form-data">
+            <div class="labels flex justify-between w-full mb-4 items-center">
                 <label for="post-image">Image</label>
-                <input type="file" id="post-image" name="post-image">
+                <input class="w-2/3" type="file" id="post-image" name="post-image">
             </div>
-            <div class="labels">
+            <div class="labels flex justify-between w-full mb-4 items-start">
                 <label for="caption">Caption</label>
-                <input placeholder="Enter Caption" type="textarea" name="caption">
+                <textarea style="resize: none;"  class="w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
             </div>
 
-            <input value="Submit" type="submit" name="submit">
+            <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="submit">
         </form>
     </div>
 

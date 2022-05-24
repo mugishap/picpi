@@ -20,7 +20,7 @@
 
     if (($firstName == "") || ($lastName == "") || ($email == "") || ($password !== $cpassword) || ($nationality === "")) {
       echo "I don't have full details";
-      echo "<a href='signup.html' style='width: 100%;'>Go back to form</a>";
+      echo "<a href='signup.php' style='width: 100%;'>Go back to form</a>";
     } else {
 
       $directory = "uploads/";

@@ -13,7 +13,9 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $username ?> | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -28,12 +30,12 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         </ul>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><?= $firstName . " " . $lastName ?></a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="w-10 h-10 rounded-full" alt=""></a></li>
+            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
     <div class="flex border-box p-2 items-center bg-gray-200 rounded-xl w-2/3 justify-center h-1/2">
         <div class="w-2/3 flex items-center justify-center">
-            <img class="w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
+            <img class="object-cover w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
         </div>
         <form class="flex flex-col items-center justify-center w-3/5">
             <div class="flex w-10/12 items-center justify-between">
@@ -69,7 +71,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
         ?>
             <a class="m-2" href="post.php?postid=<?= $postid ?>?userid=<?= $userid ?>">
-                <img key='<?= $postid ?>' class="rounded w-32 h-32" src="<?= $image ?>">
+                <img key='<?= $postid ?>' class="object-cover rounded w-32 h-32" src="<?= $image ?>">
             </a>
         <?php
         }
