@@ -106,12 +106,12 @@ input::placeholder {
   color: rgb(86, 87, 88);
 }
 .neumorphism {
-  background-color: #f0f0f1;
+  background-color: #ddd;
   box-shadow: 5px 6px 11px rgb(0 0 0 / 20%), -4px -4px 10px white;
 }
 .white {
   border-radius: 1em;
-  background-color: #fff;
+  background-color: #ddd;
   width: fit-content;
   height: 70%;
   width: 60%;

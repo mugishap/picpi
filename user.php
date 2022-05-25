@@ -20,6 +20,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+<script src="global.js" defer></script>
 
     <title><?= $username ?> | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
