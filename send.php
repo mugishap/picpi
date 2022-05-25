@@ -40,7 +40,7 @@
             $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND password='$encrypt'");
             if (mysqli_num_rows($query) === 0) {
     ?>
-                <div class="neumorphism home w-2/5 h-1  /3 rounded-xl flex flex-col items-center justify-center">
+                <div class="neumorphism home w-2/5 h-1/3 rounded-xl flex flex-col items-center justify-center">
                     <p> Wrong email or password </p>
                     <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
                 </div>

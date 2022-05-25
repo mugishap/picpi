@@ -11,6 +11,7 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Home | PicPi</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,29 +21,9 @@
     <script defer>
         const liking = (e) => {
             const classes = e.classList
-            const dislike = document.querySelector('i').nextElementSibling
-            const dislikeClasses = dislike.classList
-            console.log(dislikeClasses)
-            dislikeClasses.contains('bxs-dislike') ? () => {
-                    dislike.classList.replace('bxs-dislike', 'bx-dislike')
-                    e.classList.replace('bx-like', 'bxs-like')
-                } :
-                classes.contains('bxs-like') ?
-                e.classList.replace('bxs-like', 'bx-like') :
-                e.classList.replace('bx-like', 'bxs-like')
-        }
-        const disliking = (e) => {
-            const classes = e.classList
-            e.classList.replace('bx-dislike', 'bxs-dislike')
-            const like = document.querySelector('i')
-            const likeClasses = like.classList
-            likeClasses.contains('bxs-like') ? () => {
-                    dislike.classList.replace('bxs-like', 'bx-like')
-                    e.classList.replace('bx-like', 'bxs-like')
-                } :
-                classes.contains('bxs-dislike') ?
-                e.classList.replace('bxs-like', 'bx-like') :
-                e.classList.replace('bx-like', 'bxs-like')
+            classes.contains('bx-like') ?
+                e.classList.replace('bx-like', 'bxs-like') :
+                e.classList.replace('bxs-like', 'bx-like')
         }
     </script>
 </head>
@@ -73,7 +54,7 @@
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
-    <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+    <div class="navbar bg-white fixed z-10 shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
@@ -91,38 +72,70 @@
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <a class="mb-8" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
+    <a class="mt-24 mb-8" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
-    while (list($postid, $time, $username, $profile, $caption, $image) = mysqli_fetch_array($query)) {
+
+    while (list($postid, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
+        $getComments = mysqli_query($connection, "SELECT c.comment_id,c.time,c.commenterusername,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenterusername  WHERE post_id=$postid ORDER BY c.comment_id DESC");
         if ($today === $time) {
             $time = 'Today';
         }
     ?>
 
-        <div class="neumorphism rounded-xl m-1 w-4/12 h-fit p-3">
+        <div id="<?=$postid?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 w-4/12 h-fit p-3">
             <div class="flex w-full items-center justify-start">
                 <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $profile ?>'>
-                <a href="user.php?username=<?= $username ?>"><?= $username ?></a>
+                <a href="user.php?username=<?= $posterusername ?>"><?= $posterusername ?></a>
             </div>
             <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
             <div class="w-full mt-3 mb-3 flex items-center justify-around">
                 <i onclick="liking(this)" class='bx bx-sm bx-like w-1/2 h-full rounded hover:bg-blue-200 text-center box-border p-2 cursor-pointer'></i>
-                <i onclick="disliking(this)" class='bx bx-sm bx-dislike w-1/2 h-full rounded hover:bg-red-200 text-center box-border p-2 cursor-pointer'></i>
             </div>
-            <form action="" method="POST" class="w-full">
-                <input type="text" name="comment-text" class="w-3/5 bg-gray-300 rounded p-2" placeholder="Comment here">
+            <form action="?postid=<?= $postid ?>&userid=<?= $userid ?>&username='<?= $username ?>'" method="POST" class="w-full">
+                <input required type="text" name="comment-text" class="w-3/5 bg-gray-300 rounded p-2" placeholder="Comment here">
                 <button type="submit" name='comment' class="2/5 rounded bg-blue-500 hover:bg-blue-600 text-white p-2 w-32">Send</button>
             </form>
+            <div>
+                <?php
+                while (list($commentid,$commenttime, $commenterusername, $commenttext,$commenterprofile) = mysqli_fetch_array($getComments)) {
+                ?>
+                    <div class="w-10/12 relative flex items-center justify-around  rounded m-2 box-border" >
+                        <div class="w-16 h-16 rounded-full neumorphism flex items-center justify-center">
+                        <img class="w-12 h-12 rounded-full object-cover" src="<?=$commenterprofile?>" alt="">
+                        </div>
+                        <div class="w-2/3 neumorphism rounded text-sm flex flex-col items-start justify-center p-1">
+                            <a href="user.php?username=<?=$commenterusername?>&userid=<?=$userid?>"><?= $commenterusername ?></a>
+                            <p><?= $commenttext ?></p>
+                            <p class="text-xs text-gray-600"><?= $commenttime ?></p>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
         </div>
-    <?php
+        <?php
     }
     if (isset($_POST['comment'])) {
         $comment = $_POST['comment-text'];
-        $getComments = mysqli_query($connection, "SELECT COUNT(c.comment_id) FROM comments c WHERE post_id=$postid");
-        list($commentcount) = mysqli_fetch_array($getComments);
-        $addComment = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
+        if ($comment === '') {
+        ?>
+            <script>
+                swal('Error', 'You should add a comment', 'error', {
+                    buttons: false,
+                    timer: 1500
+                })
+            </script>
+    <?php
+        }
+        echo $postid;
+        $postid = $_GET['postid'];
+        $username = $_GET['username'];
+        $commentQuery = "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,$username,'$comment')";
+        // echo $quf;
+        $addComment = mysqli_query($connection, $commentQuery) or die(mysqli_error($connection));
     }
 
     ?>

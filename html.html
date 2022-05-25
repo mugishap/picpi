@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link type="text/css" href="global.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Home | PicPi</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div
+      class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5"
+    >
+      <a class="w-full flex items-center justify-center" href="home.php?userid=<?=$userid?>#${postid}"
+        ><button
+          type="button"
+          class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600"
+        >View full post</button
+      ></a>
+      <img class="w-full h-10/12" src="picpi.png" alt="" />
+    </div>
+  </body>
+</html>

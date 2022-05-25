@@ -1,8 +1,29 @@
 <?php
 
 include './connection.php';
-$username = $_GET['username'];
-$query = mysqli_query($connection, "SELECT * FROM users WHERE username='$username'");
+$userid = $_GET['userid'];
+if (!$userid || $userid == '') {
+?>
+    <script>
+        window.location.replace('/myapp/PHP-Crud/login.html')
+    </script>
+<?php
+    return;
+}
+$getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
+if (mysqli_num_rows($getIds) != 1) {
+?>
+    <script>
+        window.location.replace('/myapp/PHP-Crud/login.html')
+    </script>
+<?php
+    return;
+}
+$getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
+list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
+
+$searchedusername = $_GET['username'];
+$query = mysqli_query($connection, "SELECT * FROM users WHERE username='$searchedusername'");
 list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
 
 ?>
@@ -22,22 +43,18 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <script>
-        const popup = (src) => {
+        const popup = (src, postid) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
-            overlay.innerHTML = '<i class="material-icons cursor-pointer" onclick="removepopup()">close</i>'
-
-            const div = document.createElement('div')
-            div.classList.add('white')
-
-            const image = document.createElement('img')
-            image.classList.add('image')
-            image.src = src
-
-            div.appendChild(image)
-            overlay.appendChild(div)
-            const username = document.createTextNode('<?= $username ?>')
-            div.appendChild(username)
+            overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+            <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
+                <a class="w-full flex items-center justify-center" href="home.php?userid=<?= $userid ?>#${postid}">
+                    <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
+                    View full post
+                    </button>
+                </a>
+                <img class="w-full h-10/12" src="picpi.png" alt="" />
+            </div>`
         }
         const removepopup = () => {
             const overlay = document.querySelector('.theoverlay')
@@ -83,7 +100,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             </div>
             <div class="flex w-10/12 items-center justify-between">
                 <label>Username: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $username ?>'>
+                <input type="text" disabled class="bg-transparent" value='<?= $searchedusername ?>'>
             </div>
             <div class="flex w-10/12 items-center justify-between ">
                 <label>Country: </label>
@@ -106,12 +123,11 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <h2><?= $username ?>'s posts</h2>
     <div class="grid border-box  p-4 grid-cols-4 bg-gray-200 mt-2 rounded-xl w-2/3 h-1/3 overflow-y-scroll">
         <?php
-        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
+        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
         while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
+
         ?>
-            <!-- <a class="m-2" href="post.php?postid=<?= $postid ?>?userid=<?= $userid ?>"> -->
-            <img onclick="popup('<?= $image ?>')" key='<?= $postid ?>' class="cursor-pointer object-cover m-2 rounded w-48 h-32" src="<?= $image ?>">
-            <!-- </a> -->
+            <img onclick="popup('<?= $image ?>',<?= $postid ?>)" key='<?= $postid ?>' class="cursor-pointer object-cover m-2 rounded w-48 h-32" src="<?= $image ?>">
         <?php
         }
         ?>
