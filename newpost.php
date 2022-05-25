@@ -11,10 +11,10 @@
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    
+
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,24 @@
     <?php
     include './connection.php';
     $userid = $_GET['userid'];
+
+    if (!$userid || $userid == '') {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+    <?php
+        return;
+    }
+    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
+    if (mysqli_num_rows($getIds) != 1) {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+        <?php
+        return;
+    }
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     if (mysqli_num_rows($getuser) === 0) {
         echo "Error in getting your credentials...";
@@ -65,7 +83,7 @@
             }
             $savePost = mysqli_query($connection, "INSERT INTO posts(username,profile,caption,image) VALUES('$username','$profile','$caption','$postimage')");
             if ($savePost) {
-    ?>
+        ?>
                 <script>
                     window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $userid ?>')
                 </script>

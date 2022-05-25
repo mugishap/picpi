@@ -1,6 +1,23 @@
 <?php
 include './connection.php';
 $userid = $_GET['userid'];
+    if (!$userid || $userid == '') {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+    <?php
+        return;
+    }
+    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
+    if (mysqli_num_rows($getIds) != 1) {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+        <?php
+        return;
+    }
 $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
 list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
 ?>

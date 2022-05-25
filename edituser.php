@@ -5,6 +5,23 @@ if (!$connection) {
     echo "Connection not successfull" . mysqli_connect_error();
 } else {
     $userid = $_GET['userid'];
+    if (!$userid || $userid == '') {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+    <?php
+        return;
+    }
+    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
+    if (mysqli_num_rows($getIds) != 1) {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+        <?php
+        return;
+    }
     $sql = "SELECT * FROM users where user_id=$userid;";
     $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 

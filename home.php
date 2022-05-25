@@ -17,12 +17,57 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer>
+        const liking = (e) => {
+            const classes = e.classList
+            const dislike = document.querySelector('i').nextElementSibling
+            const dislikeClasses = dislike.classList
+            console.log(dislikeClasses)
+            dislikeClasses.contains('bxs-dislike') ? () => {
+                    dislike.classList.replace('bxs-dislike', 'bx-dislike')
+                    e.classList.replace('bx-like', 'bxs-like')
+                } :
+                classes.contains('bxs-like') ?
+                e.classList.replace('bxs-like', 'bx-like') :
+                e.classList.replace('bx-like', 'bxs-like')
+        }
+        const disliking = (e) => {
+            const classes = e.classList
+            e.classList.replace('bx-dislike', 'bxs-dislike')
+            const like = document.querySelector('i')
+            const likeClasses = like.classList
+            likeClasses.contains('bxs-like') ? () => {
+                    dislike.classList.replace('bxs-like', 'bx-like')
+                    e.classList.replace('bx-like', 'bxs-like')
+                } :
+                classes.contains('bxs-dislike') ?
+                e.classList.replace('bxs-like', 'bx-like') :
+                e.classList.replace('bx-like', 'bxs-like')
+        }
+    </script>
 </head>
 
 <body class="flex flex-col items-center">
     <?php
     include './connection.php';
     $userid = $_GET['userid'];
+    if (!$userid || $userid == '') {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+    <?php
+        return;
+    }
+    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
+    if (mysqli_num_rows($getIds) != 1) {
+    ?>
+        <script>
+            window.location.replace('/myapp/PHP-Crud/login.html')
+        </script>
+    <?php
+        return;
+    }
     $today = date("Y-m-d");
     $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY post_id DESC');
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
@@ -34,7 +79,7 @@
             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form method="POST" action="search.php?userid=<?=$userid?>" class="flex items-center justify-center">
+            <form method="POST" action="search.php?userid=<?= $userid ?>" class="flex items-center justify-center">
                 <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
@@ -63,8 +108,8 @@
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
             <div class="w-full mt-3 mb-3 flex items-center justify-around">
-                <i class='bx bx-sm bx-like w-1/2 h-full rounded hover:bg-blue-200 text-center box-border p-2 cursor-pointer'></i>
-                <i class='bx bx-sm bx-dislike w-1/2 h-full rounded hover:bg-red-200 text-center box-border p-2 cursor-pointer'></i>
+                <i onclick="liking(this)" class='bx bx-sm bx-like w-1/2 h-full rounded hover:bg-blue-200 text-center box-border p-2 cursor-pointer'></i>
+                <i onclick="disliking(this)" class='bx bx-sm bx-dislike w-1/2 h-full rounded hover:bg-red-200 text-center box-border p-2 cursor-pointer'></i>
             </div>
             <form action="" method="POST" class="w-full">
                 <input type="text" name="comment-text" class="w-3/5 bg-gray-300 rounded p-2" placeholder="Comment here">
@@ -79,16 +124,7 @@
         list($commentcount) = mysqli_fetch_array($getComments);
         $addComment = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
     }
-    if (isset($_POST['like'])) {
-        $like = $_POST['like'];
-        $addLike = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
-        $getLikes = mysqli_query($connection, "SELECT * FROM comments");
-    }
-    if (isset($_POST['dislike'])) {
-        $dislike = $_POST['dislike'];
-        $addComment = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
-        $getComments = mysqli_query($connection, "SELECT * FROM comments");
-    }
+
     ?>
 </body>
 

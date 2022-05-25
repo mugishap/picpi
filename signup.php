@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
-
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
@@ -21,10 +18,10 @@
 </head>
 
 <body>
-    <div class="m-auto form w-1/3 flex flex-col items-center justify-center">
+    <div class="neumorphism mt-8 m-auto form w-1/3 flex flex-col items-center justify-center">
         <h2 class="heading-2">Welcome to PicPi</h2>
         <img class="w-24 h-24 " src="picpi.png" alt="">
-        <form action="process.php" class="signupform" method="POST" enctype="multipart/form-data">
+        <form action="process.php" class=" signupform" method="POST" enctype="multipart/form-data">
             <div class="labels">
                 <label for="">First Name</label>
                 <input placeholder="Enter First Name" type="text" id="firstName" name="firstName">
@@ -85,9 +82,9 @@
                 <label for="confpass">Confirm Password</label>
                 <input placeholder="Confirm password" type="password" name="cpassword">
             </div>
-            <input class="bg-blue-500 font-bold text-white w-1/3 cursor-pointer" value="Submit" type="submit" name="submit">
+            <input class="bg-blue-500 hover:bg-blue-600 font-bold text-white w-1/3 cursor-pointer" value="Submit" type="submit" name="submit">
         </form>
-
+<p>Already have an account? <a class="hover:font-bold hover:text-blue-600" href="login.html">Login</a></p>
     </div>
 </body>
 
