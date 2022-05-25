@@ -35,7 +35,7 @@
         </div>
         <div>
             <form method="POST" action="search.php?userid=<?=$userid?>" class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>

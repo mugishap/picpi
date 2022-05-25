@@ -32,7 +32,7 @@ if (isset($_POST['search'])) {
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
 
-    <body>
+    <body class="flex flex-col items-center justify-center">
         <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
             <div class="flex items-center justify-center">
                 <img class="w-8 h-8" src="picpi.png" alt="">
@@ -40,7 +40,7 @@ if (isset($_POST['search'])) {
             </div>
             <div>
                 <form method="POST" action="search.php?userid=<?= $userid ?>" class="flex items-center justify-center">
-                    <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
+                    <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                     <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
                 </form>
             </div>
@@ -52,22 +52,27 @@ if (isset($_POST['search'])) {
             </ul>
         </div>
         <?php
-        $getUsers = mysqli_query($connection, "SELECT user_id,username,nationality,email,telephone FROM users WHERE username like '%$name%' OR firstname like '%$name%' OR lastname='%$name%'") or die("Error occured in deleting user" . mysqli_error($connection));
-        var_dump($getUsers);
-        list($user_id, $username, $nationality, $email, $telephone) = mysqli_fetch_array($getUsers);
-        echo '<br>' . $username;
+        $getUsers = mysqli_query($connection, "SELECT user_id,username,profile,nationality,email,telephone FROM users WHERE username like '%$name%' OR firstname like '%$name%' OR lastname='%$name%'");
         if (mysqli_num_rows($getUsers) == 0) {
         ?>
-            <div>No users found with that username or name</div>
-        <?php
+            <div class="overflow-y-scroll">No users found with that username or name</div>
+            <?php
         } else {
-            while (list($user_id, $username, $nationality, $email, $telephone) = mysqli_fetch_array($getUsers))
-        ?><a href='user.php?username="<?= $username ?>"'>
-                <div>
-                    <?= $username ?>
-                </div>
-            </a>
+            echo "Found " .  mysqli_num_rows($getUsers) . " users with $name";
+            while (list($searcheduser_id, $searchedusername, $searchedprofile, $searchednationality, $searchedemail, $searchedtelephone) = mysqli_fetch_array($getUsers)) {
+            ?><a class="w-2/5 h-32 m-4" href='user.php?username=<?= $username ?>'>
+                    <div class="w-full rounded neumorphism items-center box-border p-3 flex h-full">
+                        <div class="neumorphism bg-[#ddd] rounded-full p-2 ml-4 mr-24">
+                        <img class="object-cover rounded-full w-24 h-24 searched-image" src="<?= $searchedprofile ?>" alt="<?= $username ?>'s image">
+                        </div>
+                        <div class="block">
+                        <p><?= $searchedusername ?></p>
+                        <p class="text-gray-500"><?= $searchedemail ?></p>
+                        </div>
+                    </div>
+                </a>
     <?php
+            }
         }
     }
     ?>

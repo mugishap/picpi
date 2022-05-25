@@ -11,7 +11,7 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
 
-    <title>Document</title>
+    <title>All users</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

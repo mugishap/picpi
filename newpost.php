@@ -84,8 +84,8 @@
         </div>
         <div>
             <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
-                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
@@ -104,7 +104,7 @@
             </div>
             <div class="labels flex justify-between w-full mb-4 items-start">
                 <label for="caption">Caption</label>
-                <textarea required style="resize: none;" class="w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
+                <textarea required style="resize: none;" class="p-2 rounded border-box w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
             </div>
 
             <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="submit">

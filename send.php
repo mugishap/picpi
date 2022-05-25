@@ -13,7 +13,7 @@
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-    <title>Document</title>
+    <title>Authentication</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,10 +34,14 @@
             // echo "Credentials are valid";
             $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND password='$encrypt'");
             if (mysqli_num_rows($query) === 0) {
-                echo "Wrong credentials";
-            } else {
-                while (list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
     ?>
+                <div class="neumorphism home w-2/5 h-2/3 rounded-xl flex flex-col items-center justify-center">
+                  <p> Wrong email or password </p>
+                </div>
+                <?php
+            } else {
+                while (list($userid, $firstName, $lastName,, $profile,,, $username,,,) = mysqli_fetch_array($query)) {
+                ?>
                     <div class="home w-2/5 h-2/3 rounded-xl bg-gray-200 flex flex-col items-center justify-center">
                         <img src="<?= $profile ?>" class="w-48 h-48 rounded-full" alt="">
                         Welcome <?= $firstName . $lastName . '<br>' ?>

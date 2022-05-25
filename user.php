@@ -14,14 +14,14 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-<script>
+    <script>
         const popup = (src) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
@@ -36,7 +36,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 
             div.appendChild(image)
             overlay.appendChild(div)
-            const username = document.createTextNode('<?=$username?>')
+            const username = document.createTextNode('<?= $username ?>')
             div.appendChild(username)
         }
         const removepopup = () => {
@@ -54,15 +54,15 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 </head>
 
 <body class="w-screen h-[80vh] flex flex-col items-center">
-       <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+    <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <a href='home.php?userid=<?=$userid?>' class="picpi">PicPi</a>
+            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php?userid=<?=$userid?>" method='POST' class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
-                 <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+            <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
+                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
@@ -103,19 +103,21 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             </div>
         </form>
     </div>
-    <h2><?=$username?>'s posts</h2>
+    <h2><?= $username ?>'s posts</h2>
     <div class="grid border-box  p-4 grid-cols-4 bg-gray-200 mt-2 rounded-xl w-2/3 h-1/3 overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
         while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
         ?>
-            <a class="m-2" href="post.php?postid=<?= $postid ?>?userid=<?= $userid ?>">
-                <img key='<?= $postid ?>' class="object-cover rounded w-32 h-32" src="<?= $image ?>">
-            </a>
+            <!-- <a class="m-2" href="post.php?postid=<?= $postid ?>?userid=<?= $userid ?>"> -->
+            <img onclick="popup('<?= $image ?>')" key='<?= $postid ?>' class="cursor-pointer object-cover m-2 rounded w-48 h-32" src="<?= $image ?>">
+            <!-- </a> -->
         <?php
         }
         ?>
     </div>
+    <div class="theoverlay flex-col w-screen absolute items-center z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
+
 </body>
 
 </html>
