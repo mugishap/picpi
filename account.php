@@ -1,23 +1,23 @@
 <?php
 include './connection.php';
 $userid = $_GET['userid'];
-    if (!$userid || $userid == '') {
-    ?>
-        <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
-        </script>
-    <?php
-        return;
-    }
-    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
-    if (mysqli_num_rows($getIds) != 1) {
-    ?>
-        <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
-        </script>
-        <?php
-        return;
-    }
+if (!$userid || $userid == '') {
+?>
+    <script>
+        window.location.replace('/myapp/PHP-Crud/login.html')
+    </script>
+<?php
+    return;
+}
+$getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
+if (mysqli_num_rows($getIds) != 1) {
+?>
+    <script>
+        window.location.replace('/myapp/PHP-Crud/login.html')
+    </script>
+<?php
+    return;
+}
 $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
 list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
 ?>
@@ -39,22 +39,18 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        const popup = (src) => {
+        const popup = (src, postid) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
-            overlay.innerHTML = '<i class="material-icons cursor-pointer" onclick="removepopup()">close</i>'
-
-            const div = document.createElement('div')
-            div.classList.add('white')
-
-            const image = document.createElement('img')
-            image.classList.add('image')
-            image.src = src
-
-            div.appendChild(image)
-            overlay.appendChild(div)
-            const username = document.createTextNode('<?=$username?>')
-            div.appendChild(username)
+            overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+            <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
+                <a class="w-full flex items-center justify-center" href="home.php?userid=<?= $userid ?>#${postid}">
+                    <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
+                    View full post
+                    </button>
+                </a>
+                <img class="w-full h-10/12" src="${src}" alt="" />
+            </div>`
         }
         const removepopup = () => {
             const overlay = document.querySelector('.theoverlay')
@@ -71,7 +67,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php?userid=<?=$userid?>" method='POST' class="flex items-center justify-center">
+            <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
                 <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
@@ -123,7 +119,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <h2>Your posts</h2>
     <div class="grid border-box  p-4 grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
-        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
+        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
         if (mysqli_num_rows($getUserPosts) < 1) {
         ?>
             <div class="flex h-full w-full flex-col items-center justify-center">
@@ -134,9 +130,9 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             </div>
             <?php
         } else {
-            while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
+            while (list($posterid,, $postid,$posttime, $otherimage, $caption) = mysqli_fetch_array($getUserPosts)) {
             ?>
-                <img key='<?= $postid ?>' onclick="popup('<?= $image ?>','flex')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $image ?>">
+                <img key='<?= $postid ?>' onclick="popup('<?= $otherimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $otherimage ?>" alt="<?=$username?>'s post on <?=$posttime?>">
 
         <?php
             }

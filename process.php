@@ -44,10 +44,11 @@
       if (($firstName == "") || ($lastName == "") || ($email == "") || ($password !== $cpassword) || ($nationality === "")) {
         echo "I don't have full details";
     ?>
-        <script>
-          console.log("Not full")
-          window.location.replace('/myapp/PHP-Crud/signup.php')
-        </script>
+        <div class="home w-2/5 h-2/3 rounded-xl neumorphism flex flex-col items-center justify-center p-2 mt-48">
+          <h1 class="font-bold text-xl">Error!!!</h1>
+          <p> You must fill all credentials.</p>
+          <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
+        </div>
         <?php
       } else {
         $anotherUsername = mysqli_query($connection, "SELECT username from users WHERE username='$userName'");
@@ -70,7 +71,7 @@
             <p> Email already exists </p>
             <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
           </div>
-          <?php
+        <?php
           return;
         }
 
@@ -78,31 +79,43 @@
         $profileimage = $directory . basename($_FILES["profile-image"]["name"]);
         $uploadStatus = 1;
         $imageFileType = strtolower(pathinfo($profileimage, PATHINFO_EXTENSION));
-
+        if ($profileimage === "uploads/") {
+        ?>
+          <div class="home w-2/5 h-3/3 rounded-xl neumorphism flex flex-col items-center justify-center p-2 mt-48">
+            <script>
+              document.querySelector('title').innerHTML = 'Error | Profile'
+            </script>
+            <h1 class="font-bold text-xl">Error!!!</h1>
+            <p> You must add a profile picture please.</p>
+            <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
+          </div>
+          <?php
+          return;
+        };
         $check = getimagesize($_FILES["profile-image"]["tmp_name"]);
         if ($check !== false) {
           echo "File is an image" . $check["mime"] . ".";
           $uploadStatus = 1;
         } else {
-          echo "File is not an image";
+          // echo "File is not an image";
           $uploadStatus = 0;
         }
         if ($uploadStatus == 0) {
-          echo "Sorry, your image was not uploaded.";
+          echo "Upload an image please  ";
         } else {
           if (move_uploaded_file($_FILES["profile-image"]["tmp_name"], $profileimage)) {
             echo "The image " . htmlspecialchars(basename($_FILES["profile-image"]["name"])) . " has been uploaded";
           }
           $encryptedPassword = hash("SHA512", $password);
           $insertQuery = "INSERT INTO users(firstName,lastName,email,profile,telephone,gender,nationality,userName,password) VALUES('$firstName','$lastName','$email','$profileimage','$telephone','$gender','$nationality','$userName','$encryptedPassword');";
-          $insert =  mysqli_query($connection, $insertQuery) or die("Error occured" . mysqli_error($connection));
+          $insert =  mysqli_query($connection, $insertQuery);
           if ($insert) {
             $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$userName' AND firstname='$firstName' AND lastName='$lastName'");
             list($userid) = mysqli_fetch_array($getloggeduser);
           ?>
             <script>
               window.location.replace("/myapp/PHP-Crud/home.php?userid=<?= $userid ?>")
-            </script>
+            </script> 
     <?php
           } else {
             echo "Sorry, there was an error was an error uploading your file.";

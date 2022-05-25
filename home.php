@@ -82,10 +82,10 @@
         }
     ?>
 
-        <div id="<?=$postid?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 w-4/12 h-fit p-3">
+        <div id="post<?=$postid?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 w-4/12 h-fit p-3">
             <div class="flex w-full items-center justify-start">
-                <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $profile ?>'>
-                <a href="user.php?username=<?= $posterusername ?>"><?= $posterusername ?></a>
+                <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $posterprofile ?>'>
+                <a href="user.php?username=<?= $posterusername ?>&userid=<?=$userid?>"><?= $posterusername ?></a>
             </div>
             <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
@@ -136,6 +136,13 @@
         $commentQuery = "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,$username,'$comment')";
         // echo $quf;
         $addComment = mysqli_query($connection, $commentQuery) or die(mysqli_error($connection));
+        if($addComment){
+            ?>
+            <script>
+                window.location.replace('/myapp/PHP-Crud/home.php?userid=<?=$userid?>#post<?=$postid?>' )
+            </script>
+            <?php
+        }
     }
 
     ?>

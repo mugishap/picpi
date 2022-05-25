@@ -20,11 +20,11 @@ if (mysqli_num_rows($getIds) != 1) {
     return;
 }
 $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
+list(, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
 
 $searchedusername = $_GET['username'];
 $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$searchedusername'");
-list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
+list($searcheduserid, $firstName, $lastName, $telephone, $searchedprofile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
 
 ?>
 <!DOCTYPE html>
@@ -91,7 +91,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     </div>
     <div class="flex border-box p-2 items-center bg-gray-200 rounded-xl w-2/3 justify-center h-1/2">
         <div class="w-2/3 flex items-center justify-center">
-            <img class="object-cover w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
+            <img class="object-cover w-48 h-48 rounded-full" src="<?= $searchedprofile ?>" alt="">
         </div>
         <form class="flex flex-col items-center justify-center w-3/5">
             <div class="flex w-10/12 items-center justify-between">
@@ -120,10 +120,10 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             </div>
         </form>
     </div>
-    <h2><?= $username ?>'s posts</h2>
+    <h2><?= $searchedusername ?>'s posts</h2>
     <div class="grid border-box  p-4 grid-cols-4 bg-gray-200 mt-2 rounded-xl w-2/3 h-1/3 overflow-y-scroll">
         <?php
-        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
+        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.username='$searchedusername' ORDER BY p.post_id DESC");
         while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
 
         ?>
