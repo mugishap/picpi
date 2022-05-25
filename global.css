@@ -41,9 +41,9 @@ body {
   border-radius: 10px;
   display: inline-table;
 }
-.right-white{
-display: flex;
-flex-direction: column;
+.right-white {
+  display: flex;
+  flex-direction: column;
 }
 #gender1,
 #gender2 {
@@ -104,7 +104,7 @@ select {
 .acc-img {
   pointer-events: none;
 }
-.searched-image{
+.searched-image {
   border: 50px solid #000;
   /* background-color: #eee; */
   box-shadow: 5px 6px 11px rgb(0 0 0 / 20%), -4px -4px 10px white;
@@ -140,6 +140,13 @@ input::placeholder {
   height: 100%;
   width: 50%;
 }
-@media screen and (max-width:1286px) {
-  
+@media screen and (max-width: 1286px) {
+}
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

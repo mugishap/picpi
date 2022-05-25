@@ -120,7 +120,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         </div>
     </div>
     <h2>Your posts</h2>
-    <a class="" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
+    <a class="" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create a post</button></a>
     <div class="grid border-box  p-4 grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
