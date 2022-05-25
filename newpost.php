@@ -83,8 +83,8 @@
             <a href='home.php?userid=<?=$userid?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php" class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+            <form action="search.php" method='POST' class="flex items-center justify-center">
+                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                  <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
@@ -95,16 +95,16 @@
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <div class="form bg-[#eeeeee] mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">
+    <div class="form neumorphism mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">
         <h2 class="heading-2 mb-4">Create new post</h2>
         <form class="w-full flex flex-col items-center justify-center" action="" method="POST" enctype="multipart/form-data">
             <div class="labels flex justify-between w-full mb-4 items-center">
                 <label for="post-image">Image</label>
-                <input class="w-2/3" type="file" id="post-image" name="post-image">
+                <input class="w-2/3" required type="file" id="post-image" name="post-image">
             </div>
             <div class="labels flex justify-between w-full mb-4 items-start">
                 <label for="caption">Caption</label>
-                <textarea style="resize: none;" class="w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
+                <textarea required style="resize: none;" class="w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
             </div>
 
             <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="submit">

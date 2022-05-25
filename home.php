@@ -38,7 +38,7 @@
         </div>
         <div>
             <form method="POST" action="search.php" class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
@@ -57,7 +57,7 @@
         }
     ?>
 
-        <div class="neumorphism bg-[#eeeeee] rounded-xl m-1 w-4/12 h-fit p-3">
+        <div class="neumorphism rounded-xl m-1 w-4/12 h-fit p-3">
             <div class="flex w-full items-center justify-start">
                 <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $profile ?>'>
                 <a href="user.php?username=<?= $username ?>"><?= $username ?></a>
@@ -65,6 +65,10 @@
             <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
+            <div class="w-full mt-3 mb-3 flex items-center justify-around">
+                <i class='bx bx-sm bx-like w-1/2 h-full rounded hover:bg-blue-200 text-center box-border p-2 cursor-pointer'></i>
+                <i class='bx bx-sm bx-dislike w-1/2 h-full rounded hover:bg-red-200 text-center box-border p-2 cursor-pointer'></i>
+            </div>
             <form action="" method="POST" class="w-full">
                 <input type="text" name="comment-text" class="w-3/5 bg-gray-300 rounded p-2" placeholder="Comment here">
                 <button type="submit" name='comment' class="2/5 rounded bg-blue-500 hover:bg-blue-600 text-white p-2 w-32">Send</button>
@@ -74,16 +78,17 @@
     }
     if (isset($_POST['comment'])) {
         $comment = $_POST['comment-text'];
+        $getComments = mysqli_query($connection, "SELECT COUNT(c.comment_id) FROM comments c WHERE post_id=$postid");
+        list($commentcount) = mysqli_fetch_array($getComments);
         $addComment = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
-        $getComments = mysqli_query($connection, "SELECT * FROM comments");
     }
     if (isset($_POST['like'])) {
-        $comment = $_POST['like'];
-        $addComment = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
-        $getComments = mysqli_query($connection, "SELECT * FROM comments");
+        $like = $_POST['like'];
+        $addLike = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
+        $getLikes = mysqli_query($connection, "SELECT * FROM comments");
     }
     if (isset($_POST['dislike'])) {
-        $comment = $_POST['dislike'];
+        $dislike = $_POST['dislike'];
         $addComment = mysqli_query($connection, "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,'$username,'$comment')");
         $getComments = mysqli_query($connection, "SELECT * FROM comments");
     }

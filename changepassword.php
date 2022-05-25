@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div class="form w-1/3 m-auto bg-[#eeeeee] rounded p-4 mt-48">
+    <div class="form w-1/3 m-auto rounded p-4 mt-48">
         <form action="" method="post" class="w-full flex flex-col">
             <div class="holders w-full flex flex-row items-center justify-between m-1">
                 <label for="username">Previous password: </label>

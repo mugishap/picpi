@@ -38,24 +38,24 @@ if (!$connection) {
                 </head>
 
                 <body>
-                <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
-        <div class="flex items-center justify-center">
-            <img class="w-8 h-8" src="picpi.png" alt="">
-            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
-        </div>
-        <div>
-            <form action="search.php" class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
-            </form>
-        </div>
-        <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $rows['profile'] ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
-        </ul>
-    </div>
+                    <div class="neumorphism navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+                        <div class="flex items-center justify-center">
+                            <img class="w-8 h-8" src="picpi.png" alt="">
+                            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
+                        </div>
+                        <div>
+                            <form action="search.php" method='POST' class="flex items-center justify-center">
+                                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
+                                <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
+                            </form>
+                        </div>
+                        <ul class="flex flex-row items-center justify-center list-none">
+                            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+                            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
+                            <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
+                            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $rows['profile'] ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
+                        </ul>
+                    </div>
                     <div class="m-auto mt-32 formupdate neumorphism flex flex-col w-4/12 p-4 box-border">
                         <h2 class="heading-2">Update PicPi account</h2>
                         <form action="processupdate.php?userid=<?php echo $rows['user_id'] ?>" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
@@ -84,16 +84,16 @@ if (!$connection) {
                                 <div class="labels flex justify-between items-center w-full" id="gender">
                                     <label for="">Gender</label>
                                     <div class="radio">
-                                        <input  id="gender1" class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
-                                        <input  id="gender2" class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
+                                        <input id="gender1" class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
+                                        <input id="gender2" class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
                                     </div>
                                 </div>
                             <?php } else { ?>
                                 <div class="labels flex justify-between items-center w-full" id="gender">
                                     <label for="">Gender</label>
                                     <div class="radio">
-                                        <input  id="gender1" class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
-                                        <input  id="gender2" class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
+                                        <input id="gender1" class="rounded p-1 w-2/3" type="radio" name="gender" value="Male" checked>Male
+                                        <input id="gender2" class="rounded p-1 w-2/3" type="radio" name="gender" value="Female">Female
                                     </div>
                                 </div>
 

@@ -27,16 +27,16 @@
   transition: ease all 0.5s;
 }
 body {
-  background-color: #f0f0f0;
+  background-color: #eee;
 }
 .form {
-  background-color: #f0f0f0;
+  background-color: #eee;
   padding: 20px;
   border-radius: 10px;
   display: inline-table;
 }
 .formupdate {
-  background-color: #f0f0f0;
+  background-color: #eee;
   padding: 20px;
   border-radius: 10px;
   display: inline-table;
@@ -101,17 +101,28 @@ select {
   padding: 3px;
   box-sizing: border-box;
 }
+.acc-img {
+  pointer-events: none;
+}
 
+.selector {
+  -webkit-user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 input::placeholder {
   color: rgb(86, 87, 88);
 }
 .neumorphism {
-  background-color: #ddd;
+  background-color: #eee;
   box-shadow: 5px 6px 11px rgb(0 0 0 / 20%), -4px -4px 10px white;
 }
 .white {
   border-radius: 1em;
-  background-color: #ddd;
+  background-color: #eee;
   width: fit-content;
   height: 70%;
   width: 60%;

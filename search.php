@@ -1,7 +1,7 @@
 <?php
 include './connection.php';
-if (isset($_POST['search'])) {
-    $name = $_POST['name'];
+if (isset($_GET['search'])) {
+    $name = $_GET['name'];
 ?>
 
 
@@ -13,11 +13,11 @@ if (isset($_POST['search'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search | <?= $name ?></title>
-    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
 
     <body>
@@ -28,8 +28,8 @@ if (isset($_POST['search'])) {
             </div>
             <div>
                 <form method="POST" action="search.php" class="flex items-center justify-center">
-                    <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
-                    <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                    <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
+                    <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
                 </form>
             </div>
             <ul class="flex flex-row items-center justify-center list-none">
@@ -40,7 +40,7 @@ if (isset($_POST['search'])) {
             </ul>
         </div>
         <?php
-
+        echo "Welcome";
         $getUsers = mysqli_query($connection, "SELECT u.user_id,u.username,u.nationality,u.email,u.telephone FROM users u WHERE u.username like '%$name%' OR u.firstname like '%$name%' OR u.lastname='%$name%'") or die("Error occured in deleting user" . mysqli_error($connection));
 
         if (mysqli_num_rows($getUsers) < 1) {

@@ -54,8 +54,8 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php" class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+            <form action="search.php" method='POST' class="flex items-center justify-center">
+                <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                 <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
@@ -69,7 +69,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <div class="theoverlay flex-col w-screen absolute items-center z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
 
     </div>
-    <div class="flex flex-col border-box p-2 items-center bg-gray-200 rounded-xl mt-4 w-2/3 justify-center h-1/2">
+    <div class="neumorphism flex flex-col border-box p-2 items-center nuemorphism rounded-xl mb-4 mt-4 w-2/3 justify-center h-1/2">
         <div class="flex items-center w-full justify-center h-full">
             <div class="w-2/3 flex items-center justify-center">
                 <img class="object-cover w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
@@ -104,7 +104,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
     </div>
     <h2>Your posts</h2>
-    <div class="grid border-box  p-4 grid-cols-3 bg-gray-200 mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
+    <div class="grid border-box  p-4 grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
         if (mysqli_num_rows($getUserPosts) < 1) {
@@ -119,7 +119,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         } else {
             while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
             ?>
-                <img key='<?= $postid ?>' onclick="popup('<?= $image ?>','flex')" class="m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $image ?>">
+                <img key='<?= $postid ?>' onclick="popup('<?= $image ?>','flex')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $image ?>">
 
         <?php
             }
