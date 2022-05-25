@@ -7,10 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
     <link type="text/css" href="global.css" rel="stylesheet">
-
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Home | PicPi</title>
@@ -37,7 +34,7 @@
             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form method="POST" action="search.php" class="flex items-center justify-center">
+            <form method="POST" action="search.php?userid=<?=$userid?>" class="flex items-center justify-center">
                 <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>

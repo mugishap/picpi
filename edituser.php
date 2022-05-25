@@ -44,7 +44,7 @@ if (!$connection) {
                             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
                         </div>
                         <div>
-                            <form action="search.php" method='POST' class="flex items-center justify-center">
+                            <form action="search.php?userid=<?=$userid?>" method='POST' class="flex items-center justify-center">
                                 <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
                             </form>

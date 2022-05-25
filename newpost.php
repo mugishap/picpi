@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
+    
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
+    
     <title>New post | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,11 +65,11 @@
             }
             $savePost = mysqli_query($connection, "INSERT INTO posts(username,profile,caption,image) VALUES('$username','$profile','$caption','$postimage')");
             if ($savePost) {
-                ?>
+    ?>
                 <script>
-                    window.location.replace('/myapp/PHP-Crud/home.php?userid=<?=$userid?>')
+                    window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $userid ?>')
                 </script>
-                <?php
+    <?php
 
             } else {
                 echo "Error in uploading your post";
@@ -77,15 +77,15 @@
         }
     }
     ?>
-       <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+    <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <a href='home.php?userid=<?=$userid?>' class="picpi">PicPi</a>
+            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php" method='POST' class="flex items-center justify-center">
+            <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
                 <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
-                 <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
+                <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">

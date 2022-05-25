@@ -1,7 +1,15 @@
 <?php
 include './connection.php';
-if (isset($_GET['search'])) {
-    $name = $_GET['name'];
+$userid = $_GET['userid'];
+$getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
+if (mysqli_num_rows($getuser) === 0) {
+    echo "Error in getting your credentials...";
+    return;
+} else {
+    list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
+}
+if (isset($_POST['search'])) {
+    $name = $_POST['name'];
 ?>
 
 
@@ -14,6 +22,10 @@ if (isset($_GET['search'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search | <?= $name ?></title>
         <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link type="text/css" href="global.css" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
@@ -27,7 +39,7 @@ if (isset($_GET['search'])) {
                 <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
             </div>
             <div>
-                <form method="POST" action="search.php" class="flex items-center justify-center">
+                <form method="POST" action="search.php?userid=<?= $userid ?>" class="flex items-center justify-center">
                     <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                     <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
                 </form>
@@ -40,10 +52,11 @@ if (isset($_GET['search'])) {
             </ul>
         </div>
         <?php
-        echo "Welcome";
-        $getUsers = mysqli_query($connection, "SELECT u.user_id,u.username,u.nationality,u.email,u.telephone FROM users u WHERE u.username like '%$name%' OR u.firstname like '%$name%' OR u.lastname='%$name%'") or die("Error occured in deleting user" . mysqli_error($connection));
-
-        if (mysqli_num_rows($getUsers) < 1) {
+        $getUsers = mysqli_query($connection, "SELECT user_id,username,nationality,email,telephone FROM users WHERE username like '%$name%' OR firstname like '%$name%' OR lastname='%$name%'") or die("Error occured in deleting user" . mysqli_error($connection));
+        var_dump($getUsers);
+        list($user_id, $username, $nationality, $email, $telephone) = mysqli_fetch_array($getUsers);
+        echo '<br>' . $username;
+        if (mysqli_num_rows($getUsers) == 0) {
         ?>
             <div>No users found with that username or name</div>
         <?php

@@ -20,8 +20,31 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
 
     <link type="text/css" href="global.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<script src="global.js" defer></script>
 
+<script>
+        const popup = (src) => {
+            const overlay = document.querySelector('.theoverlay')
+            overlay.style.display = 'flex'
+            overlay.innerHTML = '<i class="material-icons cursor-pointer" onclick="removepopup()">close</i>'
+
+            const div = document.createElement('div')
+            div.classList.add('white')
+
+            const image = document.createElement('img')
+            image.classList.add('image')
+            image.src = src
+
+            div.appendChild(image)
+            overlay.appendChild(div)
+            const username = document.createTextNode('<?=$username?>')
+            div.appendChild(username)
+        }
+        const removepopup = () => {
+            const overlay = document.querySelector('.theoverlay')
+            overlay.innerHTML = ''
+            overlay.style.display = 'none'
+        }
+    </script>
     <title><?= $username ?> | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +60,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             <a href='home.php?userid=<?=$userid?>' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php" method='POST' class="flex items-center justify-center">
+            <form action="search.php?userid=<?=$userid?>" method='POST' class="flex items-center justify-center">
                 <input type="text" name='name' class="p-1 bg-[#f0f0f0] rounded" placeholder="Search">
                  <button type="submit" name="submit" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
@@ -81,7 +104,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         </form>
     </div>
     <h2><?=$username?>'s posts</h2>
-    <div class="flex border-box  p-4 items-center bg-gray-200 mt-2 rounded-xl max-w-1/3 justify-center h-fit">
+    <div class="grid border-box  p-4 grid-cols-4 bg-gray-200 mt-2 rounded-xl w-2/3 h-1/3 overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid'");
         while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
