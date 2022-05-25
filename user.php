@@ -46,14 +46,14 @@ list($searcheduserid, $firstName, $lastName, $telephone, $searchedprofile, $gend
         const popup = (src, postid) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
-            overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+            overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;color:white;" onclick="removepopup()">close</i>
             <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
                 <a class="w-full flex items-center justify-center" href="home.php?userid=<?= $userid ?>#${postid}">
                     <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
                     View full post
                     </button>
                 </a>
-                <img class="w-full h-10/12" src="picpi.png" alt="" />
+                <img class="w-full h-10/12" src="${src}" alt="" />
             </div>`
         }
         const removepopup = () => {

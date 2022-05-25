@@ -20,8 +20,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center">
-    <div class="neumorphism form w-1/3 m-auto rounded p-4 mt-48">
+<body class="flex items-center justify-center flex-col">
+    <div class="neumorphism flex flex-col items-center justify-center form w-1/3 m-auto rounded p-4 mt-48">
+        <img src="picpi.png" class="w-32 h-32 m-4" alt="">
+        <h2 class="text-2xl m-4">Welcome Back</h2>
         <form action="send.php" method="post" class="w-full flex flex-col items-center">
             <div class="holders w-full flex flex-row items-center justify-between m-1">
                 <label for="username">Username: </label>
@@ -31,7 +33,7 @@
                 <label for="password">Password: </label>
             <input type="password" placeholder="Enter password" name="password" id="password" required>
             </div>
-            <button type="submit" name="login" class="p-2 mt-4 w-24 text-white rounded bg-blue-400">Submit</button>
+            <button type="submit" name="login" class="p-2 mt-4 w-24 hover:bg-blue-600 text-white rounded bg-blue-400">Submit</button>
             <p class="whitespace-nowrap mt-2">Not a member yet? <a class="hover:text-blue-600" href="signup.php">Signup</a></p>
         </form>
     </div>

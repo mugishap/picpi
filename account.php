@@ -114,25 +114,24 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
                 </div>
             </form>
         </div>
-        <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
+        <div>
+            <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
+            <a href="processdelete.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-red-400 hover:bg-red-600 rounded">Delete Account</button></a>
+        </div>
     </div>
     <h2>Your posts</h2>
+    <a class="" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <div class="grid border-box  p-4 grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
         if (mysqli_num_rows($getUserPosts) < 1) {
         ?>
-            <div class="flex h-full w-full flex-col items-center justify-center">
-                <p class="mb-2">Add a post</p>
-                <a title="Add a post" href="newpost.php?userid=<?= $userid ?>" class='w-16 h-16 flex items-center justify-center text-blue-500 p-10 rounded-full border-2 border-blue-500'>
-                    <i class='bx bxs-camera-plus bx-md'></i>
-                </a>
-            </div>
+            <p>You have no posts</p>
             <?php
         } else {
-            while (list($posterid,, $postid,$posttime, $otherimage, $caption) = mysqli_fetch_array($getUserPosts)) {
+            while (list($posterid,, $postid, $posttime, $otherimage, $caption) = mysqli_fetch_array($getUserPosts)) {
             ?>
-                <img key='<?= $postid ?>' onclick="popup('<?= $otherimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $otherimage ?>" alt="<?=$username?>'s post on <?=$posttime?>">
+                <img key='<?= $postid ?>' onclick="popup('<?= $otherimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $otherimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
 
         <?php
             }

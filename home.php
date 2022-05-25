@@ -105,7 +105,7 @@
                         <div class="w-16 h-16 rounded-full neumorphism flex items-center justify-center">
                         <img class="w-12 h-12 rounded-full object-cover" src="<?=$commenterprofile?>" alt="">
                         </div>
-                        <div class="w-2/3 neumorphism rounded text-sm flex flex-col items-start justify-center p-1">
+                        <div class="w-2/3 neumorphism rounded text-sm flex flex-col items-start justify-center pt-1 pb-1 pr-3 pl-4">
                             <a href="user.php?username=<?=$commenterusername?>&userid=<?=$userid?>"><?= $commenterusername ?></a>
                             <p><?= $commenttext ?></p>
                             <p class="text-xs text-gray-600"><?= $commenttime ?></p>

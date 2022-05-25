@@ -26,7 +26,7 @@
     </script>
 </head>
 
-<body class="w-screen h-screen flex items-center justify-center">
+<body class="w-screen h-screen flex flex-col items-center justify-center">
     <?php
     include './connection.php';
     if (isset($_POST['login'])) {
@@ -39,7 +39,8 @@
             // echo "Credentials are valid";
             $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND password='$encrypt'");
             if (mysqli_num_rows($query) === 0) {
-    ?>
+echo $encrypt;
+?>
                 <div class="neumorphism home w-2/5 h-1/3 rounded-xl flex flex-col items-center justify-center">
                     <p> Wrong email or password </p>
                     <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
@@ -48,10 +49,10 @@
             } else {
                 while (list($userid, $firstName, $lastName,, $profile,,, $username,,,) = mysqli_fetch_array($query)) {
                 ?>
-                    <div class="home w-2/5 h-2/3 rounded-xl neumorphism flex flex-col items-center justify-center">
+                    <div class="home w-2/5 h-2/3 m-3 rounded-xl neumorphism flex flex-col items-center justify-center">
                         <h1 class="font-bold text-xl">Is this you?</h1>
                         <div class="neumorphism rounded  w-2/3 flex flex-col items-center justify-center p-2">
-                            <img src="<?= $profile ?>" class="w-32 h-32 rounded-full" alt="">
+                            <img src="<?= $profile ?>" class="object-cover w-32 h-32 rounded-full m-4" alt="">
                             Welcome <?= $firstName . $lastName . '<br>' ?>
                             Jump right to home by clicking <a class="font-bold" href='home.php?userid=<?= $userid ?>'>here</a>
                         </div>

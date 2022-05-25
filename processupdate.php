@@ -6,7 +6,7 @@ $telephone = $_POST['telephone'];
 $gender = $_POST['gender'];
 $nationality = $_POST['nationality'];
 $userName = $_POST['username'];
-$id = $_GET['userid'];
+$userid = $_GET['userid'];
 include './connection.php';
 
 if (!$connection) {
@@ -22,12 +22,12 @@ if (!$connection) {
     $row = mysqli_fetch_assoc($select);
 
     // $encryptedPassword = hash("SHA512", $password);
-    $updateQuery = "UPDATE users SET firstName='$firstName', lastName='$lastName',email='$email',telephone='$telephone',gender='$gender',nationality='$nationality',username='$userName' WHERE user_id=$id";
-    $insert =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
-    if ($insert) {
+    $updateQuery = "UPDATE users SET firstName='$firstName', lastName='$lastName',email='$email',telephone='$telephone',gender='$gender',nationality='$nationality',username='$userName' WHERE user_id=$userid";
+    $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
+    if ($update) {
 ?>
       <script>
-        window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $id ?>')
+        window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $userid ?>')
       </script>
     <?php
     }
@@ -54,12 +54,12 @@ if (!$connection) {
     $row = mysqli_fetch_assoc($select);
 
     // $encryptedPassword = hash("SHA512", $password);
-    $updateQuery = "UPDATE users SET firstName='$firstName', lastName='$lastName',email='$email',profile='$profileimage',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$userName',password = '$password' WHERE user_id=$id";
+    $updateQuery = "UPDATE users SET firstName='$firstName', lastName='$lastName',email='$email',profile='$profileimage',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$userName',password = '$password' WHERE user_id=$userid";
     $insert =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
     if ($insert) {
     ?>
       <script>
-        window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $id ?>')
+        window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $userid ?>')
       </script>
 <?php
     }

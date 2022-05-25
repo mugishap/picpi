@@ -140,3 +140,6 @@ input::placeholder {
   height: 100%;
   width: 50%;
 }
+@media screen and (max-width:1286px) {
+  
+}
