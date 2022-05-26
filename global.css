@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Kurale&family=Open+Sans:wght@300&family=Righteous&family=Ubuntu:wght@300&display=swap");
 .picpi {
   color: #00a0eb;
@@ -141,10 +145,10 @@ input::placeholder {
   width: 50%;
 }
 @media screen and (max-width: 1024) {
-  .image-holder{
+  .image-holder {
     width: 33%;
   }
-  .acc-holder{
+  .acc-holder {
     display: block !important;
   }
 }
@@ -156,11 +160,10 @@ img {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
-.emoji-holder{
+.emoji-holder {
   display: none;
   grid-template-columns: 4;
-
 }
-.emojis:hover .emoji-holder{
-display: grid;
+.emojis:hover .emoji-holder {
+  display: grid;
 }

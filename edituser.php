@@ -44,6 +44,7 @@ if (!$connection) {
 
 
                     <link type="text/css" href="global.css" rel="stylesheet">
+<link type="text/css" href="tailwind.css" rel="stylesheet">
                     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
                     <title>Update account</title>
