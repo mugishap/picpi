@@ -25,7 +25,13 @@
             classes.contains('bx-like') ?()=>{
                 e.classList.replace('bx-like', 'bxs-like') 
                 <?php
-                    
+                    $like = mysqli_query($connection,"INSERT INTO likes(liker_id,post_id,liker_profile,likerusername) VALUES('$userid','','$profile','$username')");
+                    if(!$like){
+                        ?>
+
+                        e.classList.replace('bxs-like', 'bx-like') 
+                        <?php
+                    }
                     ?>
             }
               :()=>{
