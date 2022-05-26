@@ -4,6 +4,7 @@ include './connection.php';
 if (!$connection) {
     echo "Connection not successfull" . mysqli_connect_error();
 } else {
+
     $userid = $_GET['userid'];
     if (!$userid || $userid == '') {
     ?>
@@ -18,7 +19,7 @@ if (!$connection) {
     ?>
         <script>
             window.location.replace('/myapp/PHP-Crud/login.html')
-        </script>
+        </script>   
         <?php
         return;
     }
