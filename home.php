@@ -50,7 +50,8 @@
     <?php
         return;
     }
-    $today = date("Y-m-d");
+    $today = date("Y-m-d HH:mm:ss");
+    echo $today;
     $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY post_id DESC');
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
