@@ -85,6 +85,8 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+
+            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
@@ -121,7 +123,20 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
             </div>
         </form>
     </div>
+    <?php
+    if($userid === $searcheduserid){
+        ?>
+    <h2>Your posts</h2>
+    
+    <?php
+}
+    else{
+        ?>
     <h2><?= $searchedusername ?>'s posts</h2>
+
+        <?php
+    }
+    ?>
     <div class="grid border-box  p-4 grid-cols-4 bg-gray-200 mt-2 rounded-xl w-2/3 h-1/3 overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.username='$searchedusername' ORDER BY p.post_id DESC");

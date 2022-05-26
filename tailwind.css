@@ -939,6 +939,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 3rem;
 }
 
+.w-5\/12 {
+  width: 41.666667%;
+}
+
+.w-6\/12 {
+  width: 50%;
+}
+
 .flex-shrink {
   flex-shrink: 1;
 }
@@ -2864,6 +2872,10 @@ img {
     }
   }
 
+  .sm\:w-6\/12 {
+    width: 50%;
+  }
+
   .sm\:underline {
     -webkit-text-decoration-line: underline;
             text-decoration-line: underline;
@@ -2873,6 +2885,10 @@ img {
 @media (min-width: 768px) {
   .md\:w-3\/5 {
     width: 60%;
+  }
+
+  .md\:w-4\/12 {
+    width: 33.333333%;
   }
 
   .md\:grid-cols-3 {

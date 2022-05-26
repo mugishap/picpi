@@ -68,6 +68,7 @@
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
@@ -84,7 +85,7 @@
         }
     ?>
 
-        <div id="post<?=$postid?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 w-4/12 h-fit p-3">
+        <div id="post<?=$postid?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-fit p-3">
             <div class="flex w-full items-center justify-start">
                 <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $posterprofile ?>'>
                 <a href="user.php?username=<?= $posterusername ?>&userid=<?=$userid?>"><?= $posterusername ?></a>
