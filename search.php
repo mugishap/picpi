@@ -4,7 +4,7 @@ $userid = $_GET['userid'];
     if (!$userid || $userid == '') {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
     <?php
         return;
@@ -13,7 +13,7 @@ $userid = $_GET['userid'];
     if (mysqli_num_rows($getIds) != 1) {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
         <?php
         return;
@@ -23,7 +23,7 @@ if (mysqli_num_rows($getuser) === 0) {
     echo "Error in getting your credentials...";
     return;
 } else {
-    list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
+    list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
 }
 if (isset($_POST['search'])) {
     $name = $_POST['name'];

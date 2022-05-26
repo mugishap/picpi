@@ -62,10 +62,10 @@
                 } else {
                     $updatequery = mysqli_query($connection, "UPDATE users SET password='$encrypt'  WHERE user_id='$id' AND password='$prevEncrypt'");
                     echo "$updatequery";
-                    while (list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
+                    while (list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
         ?>
                         <div class=”home”>
-                            Dear <?= $firstName . " " . $lastName ?>, Your password has been changed successfuly
+                            Dear <?= $firstname . " " . $lastname ?>, Your password has been changed successfuly
                             <a href="login.php">Go back to home</a>
                         </div>
         <?php

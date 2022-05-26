@@ -5,7 +5,7 @@ $userid = $_GET['userid'];
 if (!$userid || $userid == '') {
 ?>
     <script>
-        window.location.replace('/myapp/PHP-Crud/login.html')
+        window.location.replace('/php-crud/login.html')
     </script>
 <?php
     return;
@@ -14,17 +14,17 @@ $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$u
 if (mysqli_num_rows($getIds) != 1) {
 ?>
     <script>
-        window.location.replace('/myapp/PHP-Crud/login.html')
+        window.location.replace('/php-crud/login.html')
     </script>
 <?php
     return;
 }
 $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-list(, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
+list(, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
 
 $searchedusername = $_GET['username'];
 $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$searchedusername'");
-list($searcheduserid, $firstName, $lastName, $telephone, $searchedprofile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
+list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
 
 ?>
 <!DOCTYPE html>
@@ -97,7 +97,7 @@ list($searcheduserid, $firstName, $lastName, $telephone, $searchedprofile, $gend
         <form class="flex flex-col items-center justify-center w-3/5">
             <div class="flex w-10/12 items-center justify-between">
                 <label>Names: </label>
-                <input type="text" disabled class="bg-transparent" value='<?= $firstName . " " . $lastName ?>'>
+                <input type="text" disabled class="bg-transparent" value='<?= $firstname . " " . $lastname ?>'>
             </div>
             <div class="flex w-10/12 items-center justify-between">
                 <label>Username: </label>

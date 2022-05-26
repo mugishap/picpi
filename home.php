@@ -36,7 +36,7 @@
     if (!$userid || $userid == '') {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
     <?php
         return;
@@ -45,7 +45,7 @@
     if (mysqli_num_rows($getIds) != 1) {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
     <?php
         return;
@@ -53,7 +53,7 @@
     $today = date("Y-m-d");
     $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY post_id DESC');
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-    list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
+    list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
     <div class="navbar bg-white fixed z-10 shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
@@ -77,7 +77,8 @@
     <?php
 
     while (list($postid, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
-        $getComments = mysqli_query($connection, "SELECT c.comment_id,c.time,c.commenterusername,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenterusername  WHERE post_id=$postid ORDER BY c.comment_id DESC");
+        $newComm = "SELECT c.comment_id,c.comment_time,c.commenter_username,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenter_username  WHERE post_id='$postid' ORDER BY c.comment_id DESC";
+        $getComments = mysqli_query($connection, $newComm) or die(mysqli_error($connection));
         if ($today === $time) {
             $time = 'Today';
         }
@@ -134,13 +135,13 @@
         echo $postid;
         $postid = $_GET['postid'];
         $username = $_GET['username'];
-        $commentQuery = "INSERT INTO comments(post_id,commenter_id,commenterusername,comment) VALUES($postid,$userid,$username,'$comment')";
-        // echo $quf;
+        $commentQuery = "INSERT INTO comments(post_id,commenter_id,commenter_username,comment) VALUES('$postid','$userid',$username,'$comment')";
+        // echo $commentQuery; 
         $addComment = mysqli_query($connection, $commentQuery) or die(mysqli_error($connection));
         if($addComment){
             ?>
             <script>
-                window.location.replace('/myapp/PHP-Crud/home.php?userid=<?=$userid?>#post<?=$postid?>' )
+                window.location.replace('/php-crud/home.php?userid=<?=$userid?>#post<?=$postid?>' )
             </script>
             <?php
         }

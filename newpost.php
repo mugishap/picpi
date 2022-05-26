@@ -40,7 +40,7 @@
     if (!$userid || $userid == '') {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
     <?php
         return;
@@ -49,7 +49,7 @@
     if (mysqli_num_rows($getIds) != 1) {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
         <?php
         return;
@@ -59,10 +59,11 @@
         echo "Error in getting your credentials...";
         return;
     } else {
-        list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
+        list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
     }
     if (isset($_POST['submit'])) {
-        $caption = $_POST['caption'];
+        $text = $_POST['caption'];
+        $caption = $text.str_replace("'","\'",$text);
         if ($caption === '') {
             echo "You should add a caption";;
             return;
@@ -89,11 +90,13 @@
                     Sorry, there was an error uploading your file.";
                 }
             }
-            $savePost = mysqli_query($connection, "INSERT INTO posts(username,profile,caption,image) VALUES('$username','$profile','$caption','$postimage')");
+            $query ="INSERT INTO posts(username,profile,caption,image) VALUES('$username','$profile','$caption','$postimage')";
+            echo $query;
+            $savePost = mysqli_query($connection, $query) or die(mysqli_error($connection));
             if ($savePost) {
         ?>
                 <script>
-                    window.location.replace('/myapp/PHP-Crud/home.php?userid=<?= $userid ?>')
+                    window.location.replace('/php-crud/home.php?userid=<?= $userid ?>')
                 </script>
     <?php
 

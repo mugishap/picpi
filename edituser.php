@@ -9,7 +9,7 @@ if (!$connection) {
     if (!$userid || $userid == '') {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>
     <?php
         return;
@@ -18,7 +18,7 @@ if (!$connection) {
     if (mysqli_num_rows($getIds) != 1) {
     ?>
         <script>
-            window.location.replace('/myapp/PHP-Crud/login.html')
+            window.location.replace('/php-crud/login.html')
         </script>   
         <?php
         return;
@@ -80,11 +80,11 @@ if (!$connection) {
                         <form action="processupdate.php?userid=<?php echo $rows['user_id'] ?>" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
                             <div class="w-full flex justify-between items-center mt-1">
                                 <label for="">First Name</label>
-                                <input class="rounded p-1 w-2/3" type="text" id="firstName" value="<?php echo $rows['firstName']; ?>" name="firstName">
+                                <input class="rounded p-1 w-2/3" type="text" id="firstname" value="<?php echo $rows['firstname']; ?>" name="firstname">
                             </div>
                             <div class="w-full flex justify-between items-center mt-1">
                                 <label for="">Last Name</label>
-                                <input class="rounded p-1 w-2/3" type="text" name="lastName" value="<?php echo $rows['lastName']; ?>">
+                                <input class="rounded p-1 w-2/3" type="text" name="lastname" value="<?php echo $rows['lastname']; ?>">
                             </div>
                             <div class="w-full flex justify-between items-center mt-1">
                                 <label for="">Email</label>

@@ -31,19 +31,19 @@
     if (isset($_POST['submit'])) {
 
 
-      $firstName = $_POST['firstName'];
-      $lastName = $_POST['lastName'];
+      $firstname = $_POST['firstname'];
+      $lastname = $_POST['lastname'];
       $email = $_POST['email'];
       $telephone = $_POST['telephone'];
       $gender = $_POST['gender'];
       $nationality = $_POST['nationality'];
-      $userName = $_POST['username'];
+      $username = $_POST['username'];
       $password = $_POST['password'];
       $cpassword = $_POST['cpassword'];
 
 
-      if (($firstName == "") || ($lastName == "") || ($email == "") || ($password !== $cpassword) || ($nationality === "")) {
-        echo "I don't have full details";
+      if (($firstname == "") || ($lastname == "")|| $username == "" || ($email == "") || ($password !== $cpassword) || ($nationality === "")) {
+        echo "You don't have full details";
     ?>
         <div class="home w-2/5 h-2/3 rounded-xl neumorphism flex flex-col items-center justify-center p-2 mt-48">
           <h1 class="font-bold text-xl">Error!!!</h1>
@@ -52,7 +52,7 @@
         </div>
         <?php
       } else {
-        $anotherUsername = mysqli_query($connection, "SELECT username from users WHERE username='$userName'");
+        $anotherUsername = mysqli_query($connection, "SELECT username from users WHERE username='$username'");
         if (mysqli_num_rows($anotherUsername) > 0) {
         ?>
           <div class="home w-2/5 h-2/3 rounded-xl neumorphism flex flex-col items-center justify-center p-2 mt-48">
@@ -108,14 +108,14 @@
             echo "The image " . htmlspecialchars(basename($_FILES["profile-image"]["name"])) . " has been uploaded";
           }
           $encryptedPassword = hash("SHA512", $password);
-          $insertQuery = "INSERT INTO users(firstName,lastName,email,profile,telephone,gender,nationality,userName,password) VALUES('$firstName','$lastName','$email','$profileimage','$telephone','$gender','$nationality','$userName','$encryptedPassword');";
+          $insertQuery = "INSERT INTO users(firstname,lastname,email,profile,telephone,gender,nationality,username,password) VALUES('$firstname','$lastname','$email','$profileimage','$telephone','$gender','$nationality','$username','$encryptedPassword');";
           $insert =  mysqli_query($connection, $insertQuery);
           if ($insert) {
-            $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$userName' AND firstname='$firstName' AND lastName='$lastName'");
+            $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND firstname='$firstname' AND lastname='$lastname'");
             list($userid) = mysqli_fetch_array($getloggeduser);
           ?>
             <script>
-              window.location.replace("/myapp/PHP-Crud/home.php?userid=<?= $userid ?>")
+              window.location.replace("/php-crud/home.php?userid=<?= $userid ?>")
             </script> 
     <?php
           } else {

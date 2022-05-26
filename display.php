@@ -120,7 +120,7 @@ include './connection.php';
                     <!-- <th>ID</th> -->
                     <th>Profile</th>
                     <th>FirstName</th>
-                    <th>LastName</th>
+                    <th>lastname</th>
                     <th>Gender</th>
                     <th>Username</th>
                     <th>email</th>
@@ -138,8 +138,8 @@ include './connection.php';
                 <tr>
                     <!-- <td><?php echo $row['user_id'] ?></td> -->
                     <td><img src="<?php echo $row['profile'] ?>" width=50 height=50 class='profiles' alt=""></td>
-                    <td><?php  echo  $row['firstName']; ?></td>
-                    <td><?php  echo $row['lastName']; ?></td>
+                    <td><?php  echo  $row['firstname']; ?></td>
+                    <td><?php  echo $row['lastname']; ?></td>
                     <td><?php  echo  $row['gender'];  ?></td>
                     <td><?php   echo $row['username']; ?></td>
                     <td><?php  echo $row['email']; ?></td>
