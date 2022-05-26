@@ -30,7 +30,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" href="global.css" rel="stylesheet">
-<link type="text/css" href="tailwind.css" rel="stylesheet">
+    <link type="text/css" href="tailwind.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title><?= $username ?> | PicPi</title>
@@ -57,6 +57,12 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
             const overlay = document.querySelector('.theoverlay')
             overlay.innerHTML = ''
             overlay.style.display = 'none'
+        }
+        const toggleList = () => {
+            if (document.documentElement.clientWidth < 654) {
+                const navel = `
+`
+            }
         }
     </script>
 </head>
