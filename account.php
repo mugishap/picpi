@@ -135,9 +135,9 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
             <p>You have no posts</p>
             <?php
         } else {
-            while (list($posterid,, $postid, $posttime, $otherimage, $caption) = mysqli_fetch_array($getUserPosts)) {
+            while (list($posterid,, $postid, $posttime, $postedimage, $caption) = mysqli_fetch_array($getUserPosts)) {
             ?>
-                <img key='<?= $postid ?>' onclick="popup('<?= $otherimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $otherimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
+                <img key='<?= $postid ?>' onclick="popup('<?= $postedimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $postedimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
 
         <?php
             }
