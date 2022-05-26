@@ -150,3 +150,11 @@ img {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+.emojis:hover .emoji-holder{
+display: grid;
+}
+.emoji-holder{
+  display: none;
+  grid-template-columns: 4;
+
+}

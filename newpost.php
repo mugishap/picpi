@@ -28,7 +28,6 @@
     <?php
     include './connection.php';
     $userid = $_GET['userid'];
-
     if (!$userid || $userid == '') {
     ?>
         <script>
@@ -124,7 +123,62 @@
                 <label for="caption">Caption</label>
                 <textarea required style="resize: none;" class="p-2 rounded border-box w-2/3 h-24" placeholder="Enter Caption" type="textarea" name="caption"></textarea>
             </div>
-
+            <div class="emoji-holder neumorphism p-1 relative left-32 bottom-[5em] rounded">
+                <?php
+                $emojis = [
+                    '&#9994',
+                    '&#9995',
+                    '&#9996',
+                    '&#9997',
+                    '&#127790',
+                    '&#127828',
+                    '&#127863',
+                    '&#127877',
+                    '&#127939',
+                    '&#127940',
+                    '&#127947',
+                    '&#128049',
+                    '&#128064',
+                    '&#129409',
+                    '&#128070',
+                    '&#128071',
+                    '&#128072',
+                    '&#128073',
+                    '&#128074',
+                    '&#128075',
+                    '&#128076',
+                    '&#128077',
+                    '&#128078',
+                    '&#128079',
+                    '&#128080',
+                    '&#128102',
+                    '&#128103',
+                    '&#128104',
+                    '&#128105',
+                    '&#128106',
+                    '&#128107',
+                    '&#129408',
+                    '&#128109',
+                    '&#128110',
+                    '&#128111',
+                    '&#128112',
+                    '&#128113',
+                    '&#128114',
+                    '&#128115',
+                    '&#128116',
+                    '&#128117',
+                    '&#128118',
+                    '&#128119',
+                    '&#128120'
+                ];
+                for ($i = 0; $i < count($emojis); $i++) {
+                ?>
+                    <p class="hover:bg-blue-300 cursor-pointer rounded" onclick="addemoji(this)"><?= $emojis[$i] ?></p>
+                <?php
+                }
+                ?>
+            </div>
+            <i class="material-icons p-1 rounded-full cursor-pointer neumorphism emojis relative left-48 bottom-16">mood</i>
             <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="submit">
         </form>
     </div>
