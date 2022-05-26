@@ -148,7 +148,7 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
         }
         ?>
     </div>
-    <div class="theoverlay flex-col w-screen absolute items-center z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
+    <div class="theoverlay flex-col w-screen absolute z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
 
 </body>
 
