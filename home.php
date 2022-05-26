@@ -61,7 +61,7 @@
         </div>
         <div>
             <form method="POST" action="search.php?userid=<?= $userid ?>" class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <input required type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>

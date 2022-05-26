@@ -140,7 +140,13 @@ input::placeholder {
   height: 100%;
   width: 50%;
 }
-@media screen and (max-width: 1286px) {
+@media screen and (max-width: 1024) {
+  .image-holder{
+    width: 33%;
+  }
+  .acc-holder{
+    display: block !important;
+  }
 }
 img {
   -webkit-user-drag: none;
@@ -150,11 +156,11 @@ img {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
-.emojis:hover .emoji-holder{
-display: grid;
-}
 .emoji-holder{
   display: none;
   grid-template-columns: 4;
 
+}
+.emojis:hover .emoji-holder{
+display: grid;
 }

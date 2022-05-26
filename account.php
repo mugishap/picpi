@@ -68,7 +68,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
         </div>
         <div>
             <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
-                <input type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
+                <input required type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
@@ -82,35 +82,33 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     <div class="theoverlay flex-col w-screen absolute items-center z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
 
     </div>
-    <div class="neumorphism flex flex-col border-box p-2 items-center nuemorphism rounded-xl mb-4 mt-4 w-2/3 justify-center h-1/2">
-        <div class="flex items-center w-full justify-center h-full">
-            <div class="w-2/3 flex items-center justify-center">
-                <img class="object-cover w-48 h-48 rounded-full" src="<?= $profile ?>" alt="">
-            </div>
-            <form class="flex flex-col items-center justify-center w-3/5">
-                <div class="flex w-10/12 items-center justify-between">
-                    <label>Names: </label>
-                    <input type="text" disabled class="bg-transparent" value='<?= $firstName . " " . $lastName ?>'>
+    <div class="neumorphism flex flex-col border-box p-4 items-center nuemorphism rounded-xl mb-4 mt-4 w-2/3 justify-center h-1/2">
+        <div class="acc-holder md:flex-row flex items-center w-full flex-col justify-around h-full">
+            <img class="object-cover w-32 h-32 rounded-full" src="<?= $profile ?>" alt="">
+            <form class="flex flex-col items-center justify-center w-full md:w-3/5">
+                <div class="flex w-full items-center justify-between">
+                    <label class="w-2/5">Names: </label>
+                    <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $firstName . " " . $lastName ?>'>
                 </div>
-                <div class="flex w-10/12 items-center justify-between">
-                    <label>Username: </label>
-                    <input type="text" disabled class="bg-transparent" value='<?= $username ?>'>
+                <div class="flex w-full items-center justify-between">
+                    <label class="w-2/5">Username: </label>
+                    <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $username ?>'>
                 </div>
-                <div class="flex w-10/12 items-center justify-between ">
-                    <label>Country: </label>
-                    <input type="text" disabled class="bg-transparent" value='<?= $nationality ?>'>
+                <div class="flex w-full items-center justify-between ">
+                    <label class="w-2/5">Country: </label>
+                    <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $nationality ?>'>
                 </div>
-                <div class="flex w-10/12 items-center justify-between ">
-                    <label>Telephone: </label>
-                    <input type="text" disabled class="bg-transparent" value='<?= $telephone ?>'>
+                <div class="flex w-full items-center justify-between ">
+                    <label class="w-2/5">Telephone: </label>
+                    <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $telephone ?>'>
                 </div>
-                <div class="flex w-10/12 items-center justify-between ">
-                    <label>Gender: </label>
-                    <input type="text" disabled class="bg-transparent" value='<?= $gender ?>'>
+                <div class="flex w-full items-center justify-between ">
+                    <label class="w-2/5">Gender: </label>
+                    <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $gender ?>'>
                 </div>
-                <div class="flex w-10/12 items-center justify-between ">
-                    <label>Email: </label>
-                    <input type="text" disabled class="bg-transparent" value='<?= $email ?>'>
+                <div class="flex w-full items-center justify-between ">
+                    <label class="w-2/5">Email: </label>
+                    <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $email ?>'>
                 </div>
             </form>
         </div>
@@ -121,7 +119,7 @@ list($userid, $firstName, $lastName, $telephone, $profile, $gender, $nationality
     </div>
     <h2>Your posts</h2>
     <a class="" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create a post</button></a>
-    <div class="grid border-box  p-4 grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
+    <div class="grid border-box  p-4 grid-cols-2 md:grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
         if (mysqli_num_rows($getUserPosts) < 1) {
