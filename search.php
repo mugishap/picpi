@@ -78,7 +78,7 @@ if (isset($_POST['search'])) {
         } else {
             echo "Found " .  mysqli_num_rows($getUsers) . " users with $name";
             while (list($searcheduser_id, $searchedusername, $searchedprofile, $searchednationality, $searchedemail, $searchedtelephone) = mysqli_fetch_array($getUsers)) {
-            ?><a class="w-2/5 h-32 m-4" href='user.php?username=<?= $username ?>'>
+            ?><a class="w-2/5 h-32 m-4" href='user.php?username=<?= $username ?>&userid=<?=$userid?>'>
                     <div class="w-full rounded neumorphism items-center box-border p-3 flex h-full">
                         <div class="neumorphism bg-[#ddd] rounded-full p-2 ml-4 mr-24">
                         <img class="object-cover rounded-full w-24 h-24 searched-image" src="<?= $searchedprofile ?>" alt="<?= $username ?>'s image">

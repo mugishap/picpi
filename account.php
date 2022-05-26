@@ -86,7 +86,7 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <div class="theoverlay flex-col w-screen absolute items-center z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
+    <div class="theoverlay flex-col w-screen absolute z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
 
     </div>
     <div class="neumorphism flex flex-col border-box p-4 items-center nuemorphism rounded-xl mb-4 mt-4 w-2/3 justify-center h-1/2">
@@ -120,8 +120,9 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
             </form>
         </div>
         <div>
-            <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
-            <a href="processdelete.php?userid=<?= $userid ?>"><button class="w-48 h-8 text-white bg-red-400 hover:bg-red-600 rounded">Delete Account</button></a>
+        <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 m-1 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
+        <a href="changepassword.php?userid=<?= $userid ?>"><button class=" m-1 change-password-btn w-48 h-8 text-white hover:bg-orange-400 rounded">Change Password</button></a>
+            <a href="processdelete.php?userid=<?= $userid ?>"><button class="m-1 w-48 h-8 text-white bg-red-400 hover:bg-red-600 rounded">Delete Account</button></a>
         </div>
     </div>
     <h2>Your posts</h2>

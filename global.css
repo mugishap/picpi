@@ -9,6 +9,9 @@
   font-size: 1.5em;
   margin-left: 10px;
 }
+.change-password-btn{
+  background-color: rgb(219, 182, 0);
+}
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

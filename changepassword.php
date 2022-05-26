@@ -43,7 +43,7 @@
         if (isset($_POST['changepass'])) {
             $prevpassword = $_POST['prevpassword'];
             $newpassword = $_POST['newpassword'];
-            $id = $_GET['userid'];
+            $userid = $_GET['userid'];
 
             if (trim($prevpassword) === '' || trim($newpassword) === "") {
                 echo "Invalid credentials";
@@ -55,18 +55,18 @@
                 $encrypt = hash("SHA512", $newpassword);
                 $prevEncrypt = hash("SHA512", $prevpassword);
 
-                $query = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$id' AND password='$prevEncrypt'");
+                $query = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid' AND password='$prevEncrypt'");
                 if (mysqli_num_rows($query) === 0) {
                     echo "Wrong credentials";
                     return;
                 } else {
-                    $updatequery = mysqli_query($connection, "UPDATE users SET password='$encrypt'  WHERE user_id='$id' AND password='$prevEncrypt'");
+                    $updatequery = mysqli_query($connection, "UPDATE users SET password='$encrypt'  WHERE user_id='$userid' AND password='$prevEncrypt'");
                     echo "$updatequery";
                     while (list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
         ?>
                         <div class=”home”>
                             Dear <?= $firstname . " " . $lastname ?>, Your password has been changed successfuly
-                            <a href="login.php">Go back to home</a>
+                            <a href="home.php?userid=<?=$userid?>">Go back to home</a>
                         </div>
         <?php
                     }
