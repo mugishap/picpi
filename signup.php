@@ -123,6 +123,7 @@
             name="lastname"
           />
         </p>
+      <p>Already have an account? <a href="login.html">Login</a></p>
       </div>
       <div class="tab">
         Contact Info:
@@ -138,16 +139,22 @@
             pattern="[0-9]{10,12}"
           />
         </p>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+
       </div>
       <div class="tab">
         Profile picture:
         <p><input required type="file" name="profile-image" /></p>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+
       </div>
       <div class="tab">
         Login Info:
         <p>
           <input required type="text" placeholder="Username..." name="username" />
         </p>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+
       </div>
       <div class="tab">
         Additional info:
@@ -165,6 +172,8 @@
             />Female
           </div>
         </div>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+
       </div>
       <div class="tab">
         Location info:
@@ -181,6 +190,8 @@ for($i = 0; $i<count($country_list)-1; $i++){
 ?>
 </select>
         </div>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+
       </div>
       <div class="tab">
         Password:
@@ -201,6 +212,8 @@ for($i = 0; $i<count($country_list)-1; $i++){
             type="password"
           />
         </p>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+
       </div>
       <div style="overflow: auto">
         <div style="float: right">
