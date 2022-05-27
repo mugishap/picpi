@@ -94,11 +94,29 @@
                     ?>
                         <i class="bx bx-edit p-2 bg-blue-400 m-1 bx-tada-hover rounded-full cursor-pointer"></i>
                         <i class="material-icons p-1  m-1 shadow-2xl shadow-black bx-flashing-hover bg-red-400 rounded-full cursor-pointer">delete</i>
-                    <?php
+                        <?php
                     } else {
-                    ?>
-                        <button onclick="follow(this,'<?=$posterusername?>')" class="bg-blue-500 rounded p-1 w-32 text-white m-1">Follow</button>
-                        <button onclick="follow(this,'<?=$posterusername?>')" class="bg-blue-500 rounded p-1 w-32 text-white m-1">Unfollow</button>
+                        $knowIfFollowing = mysqli_query($connection, "SELECT following_username from following_$username");
+                        $followingArray = [];
+                        $following = false;
+                        while ($arr = mysqli_fetch_assoc($knowIfFollowing)) {
+                            array_push($followingArray, $arr['following_username']);
+                        }
+                        for ($i = 0; $i < count($followingArray) - 1; $i++) {
+                            if ($followingArray[$i] === $posterusername) {
+                                $following = true;
+                            }
+                        }
+                        if ($following) {
+                        ?>
+                            <button onclick="follow(this,'<?= $posterusername ?>')" class="bg-blue-500 rounded p-1 w-32 text-white m-1">Unfollow</button>
+                        <?php
+                        } else {
+                        ?>
+                            <button onclick="follow(this,'<?= $posterusername ?>')" class="bg-blue-500 rounded p-1 w-32 text-white m-1">Follow</button>
+                        <?php
+                        }
+                        ?>
                     <?php
                     }
                     ?>
@@ -194,7 +212,41 @@
     ?>
 </body>
 <script>
-    console.log("%cLOADED THE HOME PAGE","font-size:3em;color:green;")
+    console.log("%cLOADED THE HOME PAGE", "font-size:3em;color:green;")
+    async function follow(e, toFollowUsername) {
+        console.log(e.textContent)
+        const text = e.textContent
+        text === 'Follow' ?
+            (async () => {
+                e.textContent.replace('Follow', 'Unfollow')
+                var formData = new FormData();
+                formData.append("followingusername", toFollowUsername);
+                formData.append("status", "follow");
+                const api = await fetch('follow.php?userid=<?= $userid ?>', {
+                    method: 'POST',
+                    // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
+                    body: formData
+                })
+                const response = await api.json()
+                console.log(JSON.stringify(response))
+            })() :
+            (async () => {
+                e.textContent.replace('Unfollow', 'Follow')
+                console.log(e.textContent)
+                const text = e.textContent
+                text === 'Unfollow'
+                var formData = new FormData();
+                formData.append("followingusername", toFollowUsername);
+                formData.append("status", "unfollow");
+                const api = await fetch('follow.php?userid=<?= $userid ?>', {
+                    method: 'POST',
+                    // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
+                    body: formData
+                })
+                const response = await api.json()
+                console.log(response)
+            })()
+    }
     async function liking(e, post_id) {
         console.log(e.classList)
         const classes = e.classList

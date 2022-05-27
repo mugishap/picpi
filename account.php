@@ -40,8 +40,7 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script>
-            console.log("%cLOADED THE ACCOUNT PAGE","font-size:3em;color:green;")
-
+        console.log("%cLOADED THE ACCOUNT PAGE", "font-size:3em;color:green;")
         const popup = (src, postid) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
@@ -124,8 +123,8 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
             </form>
         </div>
         <div>
-        <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 m-1 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
-        <a href="changepassword.php?userid=<?= $userid ?>"><button class=" m-1 change-password-btn w-48 h-8 text-white hover:bg-orange-400 rounded">Change Password</button></a>
+            <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 m-1 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
+            <a href="changepassword.php?userid=<?= $userid ?>"><button class=" m-1 change-password-btn w-48 h-8 text-white hover:bg-orange-400 rounded">Change Password</button></a>
             <a href="processdelete.php?userid=<?= $userid ?>"><button class="m-1 w-48 h-8 text-white bg-red-400 hover:bg-red-600 rounded">Delete Account</button></a>
         </div>
     </div>
