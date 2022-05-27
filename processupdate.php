@@ -22,7 +22,7 @@ if (!$connection) {
     $row = mysqli_fetch_assoc($select);
 
     // $encryptedPassword = hash("SHA512", $password);
-    $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',telephone='$telephone',gender='$gender',nationality='$nationality',username='$username' WHERE user_id=$userid";
+    $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',telephone='$telephone',gender='$gender',nationality='$nationality',username='$username' WHERE user_id='$userid'";
     $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
     if ($update) {
 ?>
@@ -54,7 +54,7 @@ if (!$connection) {
     $row = mysqli_fetch_assoc($select);
 
     // $encryptedPassword = hash("SHA512", $password);
-    $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',profile='$profileimage',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$username',password = '$password' WHERE user_id=$userid";
+    $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',profile='$profileimage',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$username',password = '$password' WHERE user_id='$userid'";
     $insert =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
     if ($insert) {
     ?>

@@ -7,7 +7,7 @@ if (!$connection) {
 
     $userid = $_GET['userid'];
     if (!$userid || $userid == '') {
-    ?>
+?>
         <script>
             window.location.replace('/php-crud/login.html')
         </script>
@@ -19,18 +19,18 @@ if (!$connection) {
     ?>
         <script>
             window.location.replace('/php-crud/login.html')
-        </script>   
+        </script>
         <?php
         return;
     }
-    $sql = "SELECT * FROM users where user_id=$userid;";
+    $sql = "SELECT * FROM users where user_id='$userid';";
     $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
     if ($select == TRUE) {
         $count = mysqli_num_rows($select);
         if ($count > 0) {
             while ($rows = mysqli_fetch_assoc($select)) {
-?>
+        ?>
 
                 <!DOCTYPE html>
                 <html lang="en">
@@ -45,7 +45,7 @@ if (!$connection) {
 
 
                     <link type="text/css" href="global.css" rel="stylesheet">
-<link type="text/css" href="tailwind.css" rel="stylesheet">
+                    <link type="text/css" href="tailwind.css" rel="stylesheet">
                     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
                     <title>Update account</title>
@@ -63,7 +63,7 @@ if (!$connection) {
                             <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
                         </div>
                         <div>
-                            <form action="search.php?userid=<?=$userid?>" method='POST' class="flex items-center justify-center">
+                            <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
                                 <input required type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
                             </form>
@@ -71,7 +71,7 @@ if (!$connection) {
                         <ul class="flex flex-row items-center justify-center list-none">
                             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
 
-            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
+                            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
                             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
                             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
                             <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $rows['profile'] ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
@@ -99,7 +99,7 @@ if (!$connection) {
                             <img class="object-cover" src="<?php echo $rows['profile']; ?>" class='profile' style='width:100px;height:100px;border-radius:50%;' alt="">
                             <div class="w-full flex justify-between items-center mt-1">
                                 <label for="telephone">Telephone</label>
-                                <input pattern="[0-9]{10,12}" type="text" name="telephone" value="<?php echo $rows['telephone']; ?>">
+                                <input pattern="[0-9]{9,12}" type="text" name="telephone" value="<?php echo $rows['telephone']; ?>">
                             </div>
                             <?php if ($rows['gender'] == "Male") { ?>
                                 <div class="labels flex justify-between items-center w-full" id="gender">
@@ -125,7 +125,7 @@ if (!$connection) {
                                 <select name="nationality">
                                     <option>--Select--</option>
                                     <?php
-                                    $nationalities = ["Rwanda", "Kenya", "South Africa", "Nigeria", "Canada", "Algeria", "USA", "Uganda", "Liberia", "Senegal"];
+                                    $nationalities = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Cayman Islands", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cruise Ship", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyz Republic", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Satellite", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "St. Lucia", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
                                     for ($i = 0; $i < count($nationalities); $i++) { ?>
                                         <option value="<?= $nationalities[$i] ?>" <?= ($rows['nationality'] == $nationalities[$i]) ? "selected" : "" ?>><?= $nationalities[$i] ?></option>
                                     <?php } ?>

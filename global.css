@@ -170,3 +170,10 @@ img {
 .emojis:hover .emoji-holder {
   display: grid;
 }
+.emoji-holder-home {
+  display: none;
+  grid-template-columns: 4;
+}
+.emojis-home:hover .emoji-holder {
+  display: grid;
+}
