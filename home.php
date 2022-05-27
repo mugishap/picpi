@@ -88,17 +88,20 @@
                     <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $posterprofile ?>'>
                     <a href="user.php?username=<?= $posterusername ?>&userid=<?= $userid ?>"><?= $posterusername ?></a>
                 </div>
-                <div class="w-3/5 flex items-center justify-center">
+                <div class="w-3/5 flex items-center justify-end">
                     <?php
-                    if($username === $posterusername){
-                        ?>
-                        <i class="bx bx-edit"></i>
-                        <i class="material-icons">delete</i>
-                        <?php
+                    if ($username === $posterusername) {
+                    ?>
+                        <i class="bx bx-edit p-2 bg-blue-400 m-1 bx-tada-hover rounded-full cursor-pointer"></i>
+                        <i class="material-icons p-1  m-1 shadow-2xl shadow-black bx-flashing-hover bg-red-400 rounded-full cursor-pointer">delete</i>
+                    <?php
+                    } else {
+                    ?>
+                        <button onclick="follow(this,'<?=$posterusername?>')" class="bg-blue-500 rounded p-1 w-32 text-white m-1">Follow</button>
+                        <button onclick="follow(this,'<?=$posterusername?>')" class="bg-blue-500 rounded p-1 w-32 text-white m-1">Unfollow</button>
+                    <?php
                     }
                     ?>
-                    <button></button>
-                    <button></button>
                 </div>
             </div>
             <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
@@ -191,7 +194,7 @@
     ?>
 </body>
 <script>
-    console.log("LOADED")
+    console.log("%cLOADED THE HOME PAGE","font-size:3em;color:green;")
     async function liking(e, post_id) {
         console.log(e.classList)
         const classes = e.classList

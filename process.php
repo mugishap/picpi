@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup process</title>
   <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <link type="text/css" rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link type="text/css" href="global.css" rel="stylesheet">
-<link type="text/css" href="tailwind.css" rel="stylesheet">
+  <link type="text/css" href="tailwind.css" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -42,7 +42,7 @@
       $cpassword = $_POST['cpassword'];
 
 
-      if (($firstname == "") || ($lastname == "")|| $username == "" || ($email == "") || ($password !== $cpassword) || ($nationality === "")) {
+      if (($firstname == "") || ($lastname == "") || $username == "" || ($email == "") || ($password !== $cpassword) || ($nationality === "")) {
         echo "You don't have full details";
     ?>
         <div class="home w-2/5 h-2/3 rounded-xl neumorphism flex flex-col items-center justify-center p-2 mt-48">
@@ -109,17 +109,19 @@
           }
           $encryptedPassword = hash("SHA512", $password);
           $insertQuery = "INSERT INTO users(firstname,lastname,email,profile,telephone,gender,nationality,username,password) VALUES('$firstname','$lastname','$email','$profileimage','$telephone','$gender','$nationality','$username','$encryptedPassword');";
-          $insert =  mysqli_query($connection, $insertQuery);
+          $createFollowersTable = mysqli_query($connection,"CREATE TABLE followers_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,follower_id varchar(255) not null,follower_username varchar(32) not null,follower_profile varchar(255) not null);")  or die($connection);
+          $createFollowingTable = mysqli_query($connection,"CREATE TABLE following_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,following_id varchar(255) not null,following_username varchar(32) not null,following_profile varchar(255) not null);")  or die($connection);
+          $insert =  mysqli_query($connection, $insertQuery) or die($connection);
           if ($insert) {
             $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND firstname='$firstname' AND lastname='$lastname'");
             list($userid) = mysqli_fetch_array($getloggeduser);
           ?>
             <script>
               window.location.replace("/php-crud/home.php?userid=<?= $userid ?>")
-            </script> 
+            </script>
     <?php
           } else {
-            echo "Sorry, there was an error was an error uploading your file.";
+            echo "Sorry, there was an error was in creating your account.";
           }
         }
       }

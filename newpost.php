@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script>
+            console.log("%cLOADED THE NEWPOST PAGE","font-size:3em;color:green;")
         const addemoji = (e) => {
             const textarea = document.querySelector('.thetextarea')
             const text = textarea.value + e.textContent
