@@ -45,7 +45,7 @@
     }
     $today = date("Y-m-d H:M:S");
     echo $today;
-    $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY post_id DESC');
+    $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY count DESC');
     $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
     list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
@@ -71,7 +71,7 @@
     <a class="mt-24 mb-8" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
 
-    while (list($postid, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
+    while (list($postid,$count, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
         $newComm = "SELECT c.comment_id,c.comment_time,c.commenter_username,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenter_username  WHERE post_id='$postid' ORDER BY c.comment_id DESC";
         $getComments = mysqli_query($connection, $newComm) or die(mysqli_error($connection));
         if ($today === $time) {
@@ -220,7 +220,7 @@
             (async () => {
                 e.textContent.replace('Follow', 'Unfollow')
                 var formData = new FormData();
-                formData.append("followingusername", toFollowUsername);
+                formData.append("toFollowUsername", toFollowUsername);
                 formData.append("status", "follow");
                 const api = await fetch('follow.php?userid=<?= $userid ?>', {
                     method: 'POST',
@@ -236,7 +236,7 @@
                 const text = e.textContent
                 text === 'Unfollow'
                 var formData = new FormData();
-                formData.append("followingusername", toFollowUsername);
+                formData.append("toFollowUsername", toFollowUsername);
                 formData.append("status", "unfollow");
                 const api = await fetch('follow.php?userid=<?= $userid ?>', {
                     method: 'POST',
