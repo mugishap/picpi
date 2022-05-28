@@ -121,3 +121,25 @@ Create Table
 `follower_profile` varchar(255) NOT NULL,
 PRIMARY KEY (`follow_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
+
+### Table descriptions
+--------------------
+Command runned :desc table_name;
+
+#User's table
+------------
+#Posts' table
+------------
+#Likes' table
+------------
+#Comments' table
+------------
+#following_{username}'s table
+------------
+#followers_{username}'s table
+------------
+#highlights's table
+------------
+
+
