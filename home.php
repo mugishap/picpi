@@ -71,7 +71,7 @@
     <a class="mt-24 mb-8" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
 
-    while (list($postid,$count, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
+    while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
         $newComm = "SELECT c.comment_id,c.comment_time,c.commenter_username,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenter_username  WHERE post_id='$postid' ORDER BY c.comment_id DESC";
         $getComments = mysqli_query($connection, $newComm) or die(mysqli_error($connection));
         if ($today === $time) {
@@ -214,11 +214,12 @@
 <script>
     console.log("%cLOADED THE HOME PAGE", "font-size:3em;color:green;")
     async function follow(e, toFollowUsername) {
-        console.log(e.textContent)
+        // console.log(e.textContent)
         const text = e.textContent
         text === 'Follow' ?
             (async () => {
-                e.textContent.replace('Follow', 'Unfollow')
+                e.textContent = 'Unfollow'
+                // console.log(e.textContent)
                 var formData = new FormData();
                 formData.append("toFollowUsername", toFollowUsername);
                 formData.append("status", "follow");
@@ -227,12 +228,12 @@
                     // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
                     body: formData
                 })
-                const response = await api.json()
-                console.log(JSON.stringify(response))
+                // const response = await api.json()
+                // console.log(JSON.stringify(response))
             })() :
             (async () => {
-                e.textContent.replace('Unfollow', 'Follow')
-                console.log(e.textContent)
+                e.textContent = 'Follow'
+                // console.log(e.textContent)
                 const text = e.textContent
                 text === 'Unfollow'
                 var formData = new FormData();
@@ -243,8 +244,8 @@
                     // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
                     body: formData
                 })
-                const response = await api.json()
-                console.log(response)
+                // const response = await api.json()
+                // console.log(response)
             })()
     }
     async function liking(e, post_id) {
