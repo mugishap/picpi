@@ -44,7 +44,9 @@
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
+            <li class="mr-4 cursor-pointer">
+                <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+            </li>
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
@@ -66,7 +68,7 @@
             <div class="flex w-full items-center justify-start">
                 <div class="flex w-2/5 items-center justify-start">
                     <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $posterprofile ?>'>
-                    <a href="user.php?username=<?= $posterusername ?>&userid=<?= $userid ?>"><?= $posterusername ?></a>
+                    <a href="user.php?username=<?= $posterusername ?>"><?= $posterusername ?></a>
                 </div>
                 <div class="w-3/5 flex items-center justify-end">
                     <?php
@@ -81,8 +83,9 @@
                         $following = false;
                         while ($arr = mysqli_fetch_assoc($knowIfFollowing)) {
                             array_push($followingArray, $arr['following_username']);
+                            // print_r($followingArray);
                         }
-                        for ($i = 0; $i < count($followingArray) - 1; $i++) {
+                        for ($i = 0; $i < count($followingArray); $i++) {
                             if ($followingArray[$i] === $posterusername) {
                                 $following = true;
                             }

@@ -10,7 +10,7 @@ if (!isset($_COOKIE['PICPI-USERID'])) {
 }
 $userid = $_COOKIE['PICPI-USERID'];
 $getUser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-if (!$getUser) {
+if (!$getUser || mysqli_num_rows($getUser) !== 1) {
 ?>
     <script>
         window.location.replace('/php-crud/login.html')

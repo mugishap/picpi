@@ -50,7 +50,7 @@ include './checkloggedin.php';
 </head>
 
 <body class="w-screen h-[80vh] flex flex-col items-center overflow-hidden">
-    <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
+    <div class="navbar shadow-2xl mb-8 p-4 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
             <a href='home.php' class="picpi">PicPi</a>
@@ -66,14 +66,16 @@ include './checkloggedin.php';
 
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
-            <li class="mr-4 cursor-pointer"><form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form></li>
+            <li class="mr-4 cursor-pointer">
+                <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+            </li>
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
     <div class="theoverlay flex-col w-screen absolute z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
 
     </div>
-    <div class="neumorphism flex flex-col border-box p-4 items-center nuemorphism rounded-xl mb-4 mt-4 w-2/3 justify-center h-1/2">
+    <div class="neumorphism flex flex-col border-box p-2 items-center nuemorphism rounded-xl mb-4 mt-4 w-2/3 justify-center h-1/2">
         <div class="acc-holder md:flex-row flex items-center w-full flex-col justify-around h-full">
             <img class="object-cover w-32 h-32 rounded-full" src="<?= $profile ?>" alt="">
             <form class="flex flex-col items-center justify-center w-full md:w-3/5">
@@ -123,14 +125,16 @@ include './checkloggedin.php';
             ?>
                 <img key='<?= $postid ?>' onclick="popup('<?= $postedimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $postedimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
 
-        <?php
+            <?php
             }
         }
-        if(isset($_GET['logout'])){
+        if (isset($_GET['logout'])) {
             setcookie("PICPI-USERID", "", time() - 3600);
             ?>
-            <script>window.location.replace('/php-crud/login.html')</script>
-            <?php
+            <script>
+                window.location.replace('/php-crud/login.html')
+            </script>
+        <?php
         }
         ?>
     </div>

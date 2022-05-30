@@ -109,12 +109,13 @@
           }
           $encryptedPassword = hash("SHA512", $password);
           $insertQuery = "INSERT INTO users(firstname,lastname,email,profile,telephone,gender,nationality,username,password) VALUES('$firstname','$lastname','$email','$profileimage','$telephone','$gender','$nationality','$username','$encryptedPassword');";
-          $createFollowersTable = mysqli_query($connection,"CREATE TABLE followers_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,follower_id varchar(255) not null,follower_username varchar(32) not null,follower_profile varchar(255) not null);")  or die($connection);
-          $createFollowingTable = mysqli_query($connection,"CREATE TABLE following_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,following_id varchar(255) not null,following_username varchar(32) not null,following_profile varchar(255) not null);")  or die($connection);
+          $createFollowersTable = mysqli_query($connection, "CREATE TABLE followers_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,follower_id varchar(255) not null,follower_username varchar(32) not null,follower_profile varchar(255) not null);")  or die($connection);
+          $createFollowingTable = mysqli_query($connection, "CREATE TABLE following_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,following_id varchar(255) not null,following_username varchar(32) not null,following_profile varchar(255) not null);")  or die($connection);
           $insert =  mysqli_query($connection, $insertQuery) or die($connection);
           if ($insert) {
             $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND firstname='$firstname' AND lastname='$lastname'");
             list($userid) = mysqli_fetch_array($getloggeduser);
+            setcookie('PICPI-USERID', $userid, time() + (86400 * 30), "/");
           ?>
             <script>
               window.location.replace("/php-crud/home.php")
