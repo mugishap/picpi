@@ -1,6 +1,16 @@
 <?php
 include './connection.php';
 include './checkloggedin.php';
+$getFollowersCount  = mysqli_query($connection, "SELECT COUNT(follow_id) from followers_$username");
+$getFollowingCount = mysqli_query($connection, "SELECT COUNT(follow_id) from following_$username");
+if (!$getFollowersCount || $getFollowingCount) {
+    $followercount = "Error";
+    $followingcount = "Error";
+    // return;
+}
+list($followercount) = mysqli_fetch_array($getFollowersCount);
+list($followingcount) = mysqli_fetch_array($getFollowingCount);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,6 +114,16 @@ include './checkloggedin.php';
                     <input type="text" disabled class="w-3/5 bg-transparent" value='<?= $email ?>'>
                 </div>
             </form>
+        </div>
+        <div class="follow-data flex items-center justify-around w-2/5 m-2">
+            <div class="w-1/2 flex items-center flex-col justify-center">
+                <a class="font-bold text-xl" href="followdata.php?username=<?= $username ?>">Followers</a>
+                <p class="text-xl"><?= $followercount ?></p>
+            </div>
+            <div class="w-1/2 flex items-center flex-col justify-center">
+                <a class="font-bold text-xl" href="followdata.php?username=<?= $username ?>">Following</a>
+                <p class="text-xl"><?= $followingcount ?></p>
+            </div>
         </div>
         <div>
             <a href="edituser.php"><button class="w-48 h-8 m-1 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
