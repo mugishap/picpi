@@ -27,7 +27,7 @@
         const addemoji = (e) => {
             const textarea = document.querySelector('.thetextarea')
             const text = textarea.value + e.textContent
-            console.log(text)
+            text.value = ''
             textarea.value = text
         }
     </script>
@@ -37,31 +37,7 @@
 <body class="flex items-center justify-center flex-col">
     <?php
     include './connection.php';
-    $userid = $_GET['userid'];
-    if (!$userid || $userid == '') {
-    ?>
-        <script>
-            window.location.replace('/php-crud/login.html')
-        </script>
-    <?php
-        return;
-    }
-    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
-    if (mysqli_num_rows($getIds) != 1) {
-    ?>
-        <script>
-            window.location.replace('/php-crud/login.html')
-        </script>
-        <?php
-        return;
-    }
-    $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-    if (mysqli_num_rows($getuser) === 0) {
-        echo "Error in getting your credentials...";
-        return;
-    } else {
-        list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
-    }
+    include './checkloggedin.php';
     if (isset($_POST['submit'])) {
         $text = $_POST['caption'];
         $caption = $text.str_replace("'","\'",$text);
@@ -97,7 +73,7 @@
             if ($savePost) {
         ?>
                 <script>
-                    window.location.replace('/php-crud/home.php?userid=<?= $userid ?>')
+                    window.location.replace('/php-crud/home.php')
                 </script>
     <?php
 
@@ -110,21 +86,21 @@
     <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
+            <a href='home.php' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
+            <form action="search.php" method='POST' class="flex items-center justify-center">
                 <input required type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
-            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
+            <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
     <div class="form neumorphism mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">

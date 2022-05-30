@@ -66,7 +66,7 @@
         ?>
                         <div class=”home”>
                             Dear <?= $firstname . " " . $lastname ?>, Your password has been changed successfuly
-                            <a href="home.php?userid=<?= $userid ?>">Go back to home</a>
+                            <a href="home.php">Go back to home</a>
                         </div>
         <?php
                     }

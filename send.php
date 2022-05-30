@@ -11,7 +11,7 @@
 
 
     <link type="text/css" href="global.css" rel="stylesheet">
-<link type="text/css" href="tailwind.css" rel="stylesheet">
+    <link type="text/css" href="tailwind.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Authentication</title>
@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script defer>
         const redirect = () => {
             window.history.go(-1)
@@ -40,8 +40,8 @@
             // echo "Credentials are valid";
             $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND password='$encrypt'");
             if (mysqli_num_rows($query) === 0) {
-// echo $encrypt;
-?>
+                // echo $encrypt;
+    ?>
                 <div class="neumorphism home w-2/5 h-1/3 rounded-xl flex flex-col items-center justify-center">
                     <p> Wrong email or password </p>
                     <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
@@ -49,15 +49,16 @@
                 <?php
             } else {
                 while (list($userid, $firstname, $lastname,, $profile,,, $username,,,) = mysqli_fetch_array($query)) {
+                    setcookie("PICPI-USERID", $userid, time() + (86400 * 30), "/");
                 ?>
                     <div class="home w-2/5 h-2/3 m-3 rounded-xl neumorphism flex flex-col items-center justify-center">
                         <h1 class="font-bold text-xl">Is this you?</h1>
                         <div class="neumorphism rounded  w-2/3 flex flex-col items-center justify-center p-2">
                             <img src="<?= $profile ?>" class="object-cover w-32 h-32 rounded-full m-4" alt="">
                             Welcome <?= $firstname . $lastname . '<br>' ?>
-                            Jump right to home by clicking <a class="font-bold" href='home.php?userid=<?= $userid ?>'>here</a>
+                            Jump right to home by clicking <a class="font-bold" href='home.php'>here</a>
                         </div>
-                        <!-- <a class="mt-10" href="changepassword.php?userid=<?= $userid ?>">Change Password</a> -->
+                        <!-- <a class="mt-10" href="changepassword.php">Change Password</a> -->
                     </div>
     <?php
                 }

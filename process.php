@@ -117,7 +117,7 @@
             list($userid) = mysqli_fetch_array($getloggeduser);
           ?>
             <script>
-              window.location.replace("/php-crud/home.php?userid=<?= $userid ?>")
+              window.location.replace("/php-crud/home.php")
             </script>
     <?php
           } else {

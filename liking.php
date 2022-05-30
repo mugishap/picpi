@@ -1,23 +1,6 @@
 <?php
 include './connection.php';
-$userid = $_GET[ 'userid' ];
-if ( !$userid || $userid == '' ) {
-    ?>
-    <script>
-    window.location.replace( '/php-crud/login.html' )
-    </script>
-    <?php
-    return;
-}
-$getIds = mysqli_query( $connection, "SELECT user_id FROM users WHERE user_id='$userid'" );
-if ( mysqli_num_rows( $getIds ) != 1 ) {
-    ?>
-    <script>
-    window.location.replace( '/php-crud/login.html' )
-    </script>
-    <?php
-    return;
-}
+include './checkloggedin.php';
 $today = date( 'Y-m-d H:i' );
 $query = mysqli_query( $connection, 'SELECT * FROM posts ORDER BY post_id DESC' );
 $getuser = mysqli_query( $connection, "SELECT * FROM users WHERE user_id='$userid'" );
@@ -33,5 +16,3 @@ if ( $status === 'liking' ) {
     echo $query1;
     $dislike = mysqli_query( $connection, $query1);
 }
-
-?>

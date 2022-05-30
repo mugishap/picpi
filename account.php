@@ -1,25 +1,6 @@
 <?php
 include './connection.php';
-$userid = $_GET['userid'];
-if (!$userid || $userid == '') {
-?>
-    <script>
-        window.location.replace('/php-crud/login.html')
-    </script>
-<?php
-    return;
-}
-$getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
-if (mysqli_num_rows($getIds) != 1) {
-?>
-    <script>
-        window.location.replace('/php-crud/login.html')
-    </script>
-<?php
-    return;
-}
-$getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
+include './checkloggedin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +27,7 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
             overlay.style.display = 'flex'
             overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
             <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
-                <a class="w-full flex items-center justify-center" href="home.php?userid=<?= $userid ?>#${postid}">
+                <a class="w-full flex items-center justify-center" href="home.php#${postid}">
                     <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
                     View full post
                     </button>
@@ -72,21 +53,21 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
     <div class="navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
+            <a href='home.php' class="picpi">PicPi</a>
         </div>
         <div>
-            <form action="search.php?userid=<?= $userid ?>" method='POST' class="flex items-center justify-center">
+            <form action="search.php" method='POST' class="flex items-center justify-center">
                 <input required type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
-            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+            <li class="mr-4 cursor-pointer"><form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form></li>
+            <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
     <div class="theoverlay flex-col w-screen absolute z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
@@ -123,13 +104,13 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
             </form>
         </div>
         <div>
-            <a href="edituser.php?userid=<?= $userid ?>"><button class="w-48 h-8 m-1 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
-            <a href="changepassword.php?userid=<?= $userid ?>"><button class=" m-1 change-password-btn w-48 h-8 text-white hover:bg-orange-400 rounded">Change Password</button></a>
-            <a href="processdelete.php?userid=<?= $userid ?>"><button class="m-1 w-48 h-8 text-white bg-red-400 hover:bg-red-600 rounded">Delete Account</button></a>
+            <a href="edituser.php"><button class="w-48 h-8 m-1 text-white bg-blue-500 hover:bg-blue-600 rounded">Update Profile</button></a>
+            <a href="changepassword.php"><button class=" m-1 change-password-btn w-48 h-8 text-white hover:bg-orange-400 rounded">Change Password</button></a>
+            <a href="processdelete.php"><button class="m-1 w-48 h-8 text-white bg-red-400 hover:bg-red-600 rounded">Delete Account</button></a>
         </div>
     </div>
     <h2>Your posts</h2>
-    <a class="" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create a post</button></a>
+    <a class="" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create a post</button></a>
     <div class="grid border-box  p-4 grid-cols-2 md:grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
         $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
@@ -144,6 +125,12 @@ list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality
 
         <?php
             }
+        }
+        if(isset($_GET['logout'])){
+            setcookie("PICPI-USERID", "", time() - 3600);
+            ?>
+            <script>window.location.replace('/php-crud/login.html')</script>
+            <?php
         }
         ?>
     </div>

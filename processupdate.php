@@ -27,7 +27,7 @@ if (!$connection) {
     if ($update) {
 ?>
       <script>
-        window.location.replace('/php-crud/home.php?userid=<?= $userid ?>')
+        window.location.replace('/php-crud/home.php')
       </script>
     <?php
     }
@@ -59,7 +59,7 @@ if (!$connection) {
     if ($insert) {
     ?>
       <script>
-        window.location.replace('/php-crud/home.php?userid=<?= $userid ?>')
+        window.location.replace('/php-crud/home.php')
       </script>
 <?php
     }

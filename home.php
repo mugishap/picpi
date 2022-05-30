@@ -25,50 +25,30 @@
 <body class="flex flex-col items-center">
     <?php
     include './connection.php';
-    $userid = $_GET['userid'];
-    if (!$userid || $userid == '') {
-    ?>
-        <script>
-            window.location.replace('/php-crud/login.html')
-        </script>
-    <?php
-        return;
-    }
-    $getIds = mysqli_query($connection, "SELECT user_id FROM users WHERE user_id='$userid'");
-    if (mysqli_num_rows($getIds) != 1) {
-    ?>
-        <script>
-            window.location.replace('/php-crud/login.html')
-        </script>
-    <?php
-        return;
-    }
+    include './checkloggedin.php';
     $today = date("Y-m-d H:M:S");
-    echo $today;
     $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY count DESC');
-    $getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-    list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser)
     ?>
     <div class="navbar bg-white fixed z-10 shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
         <div class="flex items-center justify-center">
             <img class="w-8 h-8" src="picpi.png" alt="">
-            <a href='home.php?userid=<?= $userid ?>' class="picpi">PicPi</a>
+            <a href='home.php' class="picpi">PicPi</a>
         </div>
         <div>
-            <form method="POST" action="search.php?userid=<?= $userid ?>" class="flex items-center justify-center">
+            <form method="POST" action="search.php" class="flex items-center justify-center">
                 <input required type="text" name='name' class="p-1 bg-[#ddd] rounded" placeholder="Search">
                 <button type="submit" name="search" class="btn btn-outline-primary material-icons text-md">search</button>
             </form>
         </div>
         <ul class="flex flex-row items-center justify-center list-none">
-            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php?userid=<?= $userid ?>"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php?userid=<?= $userid ?>"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Logout" class="material-icons" href="login.html">logout</a></li>
-            <li class="mr-4 cursor-pointer"><a href="account.php?userid=<?= $userid ?>"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
+            <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <a class="mt-24 mb-8" href="newpost.php?userid=<?= $userid ?>"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
+    <a class="mt-24 mb-8" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
 
     while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
@@ -203,7 +183,7 @@
         if ($addComment) {
         ?>
             <script>
-                window.location.replace('/php-crud/home.php?userid=<?= $userid ?>#post<?= $postid ?>')
+                window.location.replace('/php-crud/home.php#post<?= $postid ?>')
             </script>
     <?php
         }
@@ -223,7 +203,7 @@
                 var formData = new FormData();
                 formData.append("toFollowUsername", toFollowUsername);
                 formData.append("status", "follow");
-                const api = await fetch('follow.php?userid=<?= $userid ?>', {
+                const api = await fetch('follow.php', {
                     method: 'POST',
                     // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
                     body: formData
@@ -239,7 +219,7 @@
                 var formData = new FormData();
                 formData.append("toFollowUsername", toFollowUsername);
                 formData.append("status", "unfollow");
-                const api = await fetch('follow.php?userid=<?= $userid ?>', {
+                const api = await fetch('follow.php', {
                     method: 'POST',
                     // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
                     body: formData
@@ -257,7 +237,7 @@
                 var formData = new FormData();
                 formData.append("post_id", post_id);
                 formData.append("status", "liking");
-                const api = await fetch('liking.php?userid=<?= $userid ?>', {
+                const api = await fetch('liking.php', {
                     method: 'POST',
                     // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
                     body: formData
@@ -270,7 +250,7 @@
                 var formData = new FormData();
                 formData.append("post_id", post_id);
                 formData.append("status", "disliking");
-                const api = await fetch('liking.php?userid=<?= $userid ?>', {
+                const api = await fetch('liking.php', {
                     method: 'POST',
                     // headers:{'Content-Type':'application/x-www-form-urlencoded'},    
                     body: formData
