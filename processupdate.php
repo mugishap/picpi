@@ -1,4 +1,5 @@
 <?php
+include './connection.php';
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];
@@ -7,7 +8,8 @@ $gender = $_POST['gender'];
 $nationality = $_POST['nationality'];
 $username = $_POST['username'];
 $userid = $_GET['userid'];
-include './connection.php';
+
+
 
 $directory = "uploads/";
 $profileimage = $directory . basename($_FILES["profile-image"]["name"]);

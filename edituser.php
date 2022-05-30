@@ -27,14 +27,19 @@ include './connection.php';
 include './checkloggedin.php';
 $sql = "SELECT * FROM users where user_id='$userid'";
 $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
-
+if (isset($_GET['logout'])) {
+    setcookie("PICPI-USERID", "", time() - 3600);
+?>
+    <script>
+        window.location.replace('/php-crud/login.html')
+    </script>
+    <?php
+}
 if ($select == TRUE) {
     $count = mysqli_num_rows($select);
     if ($count > 0) {
         while ($rows = mysqli_fetch_assoc($select)) {
-?>
-
-
+    ?>
 
             <body>
                 <div class="neumorphism navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
@@ -53,6 +58,7 @@ if ($select == TRUE) {
 
                         <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
                         <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+                        <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
                         <li class="mr-4 cursor-pointer">
                             <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
                         </li>
