@@ -193,6 +193,7 @@
     }
 
     ?>
+    
 </body>
 <script>
     console.log("%cLOADED THE HOME PAGE", "font-size:3em;color:green;")

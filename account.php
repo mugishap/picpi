@@ -42,6 +42,11 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
                     View full post
                     </button>
                 </a>
+                <form method='POST' action="?postid=${postid}" class='w-full flex items-center justify-center'>
+                    <button type="submit" name='deletepost' class="text-white bg-red-500 rounded p-1 w-10/12 m-2 hover:bg-red-600">
+                    Delete post
+                    </button>
+                </form>            
                 <img class="w-full h-10/12" src="${src}" alt="" />
             </div>`
         }
@@ -143,7 +148,7 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
         } else {
             while (list($posterid,, $postid, $posttime, $postedimage, $caption) = mysqli_fetch_array($getUserPosts)) {
             ?>
-                <img key='<?= $postid ?>' onclick="popup('<?= $postedimage ?>',<?= $postid ?>)" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $postedimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
+                <img key='<?= $postid ?>' onclick="popup('<?= $postedimage ?>','<?= $postid ?>')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $postedimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
 
             <?php
             }
@@ -154,7 +159,22 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
             <script>
                 window.location.replace('/php-crud/login.html')
             </script>
+            <?php
+        }
+        if (isset($_POST['deletepost'])) {
+            $postid = $_GET['postid'];
+            $deletePostQuery = "DELETE FROM posts WHERE post_id='$postid'";
+            $performDeleteQuery = mysqli_query($connection, $deletePostQuery);
+            if ($performDeleteQuery) {
+            ?>
+                <script>
+                    // window.location.reload()
+                </script>
+
         <?php
+            } else {
+                return;
+            }
         }
         ?>
     </div>
