@@ -111,6 +111,7 @@
           $insertQuery = "INSERT INTO users(firstname,lastname,email,profile,telephone,gender,nationality,username,password) VALUES('$firstname','$lastname','$email','$profileimage','$telephone','$gender','$nationality','$username','$encryptedPassword');";
           $createFollowersTable = mysqli_query($connection, "CREATE TABLE followers_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,follower_id varchar(255) not null,follower_username varchar(32) not null,follower_profile varchar(255) not null);")  or die($connection);
           $createFollowingTable = mysqli_query($connection, "CREATE TABLE following_$username(follow_id varchar(255) not null DEFAULT UUID() PRIMARY KEY,following_id varchar(255) not null,following_username varchar(32) not null,following_profile varchar(255) not null);")  or die($connection);
+          $createActivityTable = mysqli_query($connection,"CREATE TABLE activity_$username(activity_id varchar(255) default uuid(),count int auto_increment PRIMARY KEY not null,activity_time datetime default current_timestamp() not null,activity_comment varchar(255) not null,related varchar(100) not null,status varchar(50) default 'READ' not null)");
           $insert =  mysqli_query($connection, $insertQuery) or die($connection);
           if ($insert) {
             $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND firstname='$firstname' AND lastname='$lastname'");
