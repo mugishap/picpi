@@ -1,8 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+    <link type="text/css" href="global.css" rel="stylesheet">
+    <link type="text/css" href="tailwind.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Update account</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.tailwindcss.com"></script>
+</head>
 <?php
 
 include './connection.php';
 include './checkloggedin.php';
-$sql = "SELECT * FROM users where user_id='$userid';";
+$sql = "SELECT * FROM users where user_id='$userid'";
 $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
 if ($select == TRUE) {
@@ -11,29 +34,7 @@ if ($select == TRUE) {
         while ($rows = mysqli_fetch_assoc($select)) {
 ?>
 
-            <!DOCTYPE html>
-            <html lang="en">
 
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
-
-                <link type="text/css" href="global.css" rel="stylesheet">
-                <link type="text/css" href="tailwind.css" rel="stylesheet">
-                <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-
-                <title>Update account</title>
-                <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
-                <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-                <script defer src="https://cdn.tailwindcss.com"></script>
-            </head>
 
             <body>
                 <div class="neumorphism navbar shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
@@ -52,9 +53,9 @@ if ($select == TRUE) {
 
                         <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
                         <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
-                                    <li class="mr-4 cursor-pointer">
-                <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
-            </li>
+                        <li class="mr-4 cursor-pointer">
+                            <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+                        </li>
                         <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $rows['profile'] ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
                     </ul>
                 </div>
@@ -124,7 +125,7 @@ if ($select == TRUE) {
                 </div>
             </body>
 
-            </html>
+</html>
 <?php
         }
     }

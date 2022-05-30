@@ -168,7 +168,7 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
             if ($performDeleteQuery) {
             ?>
                 <script>
-                    // window.location.reload()
+                    window.location.replace('/php-crud/home.php')
                 </script>
 
         <?php

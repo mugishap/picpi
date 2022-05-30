@@ -74,8 +74,8 @@
                     <?php
                     if ($username === $posterusername) {
                     ?>
-                        <i class="bx bx-edit p-2 bg-blue-400 m-1 bx-tada-hover rounded-full cursor-pointer"></i>
-                        <i class="material-icons p-1  m-1 shadow-2xl shadow-black bx-flashing-hover bg-red-400 rounded-full cursor-pointer">delete</i>
+                        <a href="editpost.php?postid=<?=$postid?>" class="bx bx-edit p-2 bg-blue-400 m-1 bx-tada-hover rounded-full cursor-pointer"></a>
+                        <form method="POST" action="?postid=<?= $postid ?>"><button type="submit" name="deletepostfromhome" class="material-icons p-1  m-1 shadow-2xl shadow-black bx-tada-hover bg-red-400 rounded-full cursor-pointer">delete</button></form>
                         <?php
                     } else {
                         $knowIfFollowing = mysqli_query($connection, "SELECT following_username from following_$username");
@@ -188,12 +188,26 @@
             <script>
                 window.location.replace('/php-crud/home.php#post<?= $postid ?>')
             </script>
-    <?php
+        <?php
         }
     }
+    if (isset($_POST['deletepostfromhome'])) {
+        $postid = $_GET['postid'];
+        $deletePostQuery = "DELETE FROM posts WHERE post_id='$postid'";
+        $performDeleteQuery = mysqli_query($connection, $deletePostQuery);
+        if ($performDeleteQuery) {
+        ?>
+            <script>
+                window.location.reload()
+            </script>
 
+    <?php
+        } else {
+            return;
+        }
+    }
     ?>
-    
+
 </body>
 <script>
     console.log("%cLOADED THE HOME PAGE", "font-size:3em;color:green;")
@@ -231,6 +245,9 @@
                 // const response = await api.json()
                 // console.log(response)
             })()
+    }
+    async function editpostpopup(post_id) {
+
     }
     async function liking(e, post_id) {
         console.log(e.classList)

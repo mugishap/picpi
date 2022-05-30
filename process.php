@@ -116,11 +116,7 @@
             $getloggeduser = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND firstname='$firstname' AND lastname='$lastname'");
             list($userid) = mysqli_fetch_array($getloggeduser);
             setcookie('PICPI-USERID', $userid, time() + (86400 * 30), "/");
-          ?>
-            <script>
-              window.location.replace("/php-crud/home.php")
-            </script>
-    <?php
+            header("Location: ./home.php");
           } else {
             echo "Sorry, there was an error was in creating your account.";
           }

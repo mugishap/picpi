@@ -1,11 +1,7 @@
 <?php
 include './connection.php';
 if (!isset($_COOKIE['PICPI-USERID'])) {
-?>
-    <script>
-        window.location.replace('/php-crud/login.html')
-    </script>
-<?php
+    header("Location: ./login.html");
     return;
 }
 $userid = $_COOKIE['PICPI-USERID'];
