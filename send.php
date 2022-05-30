@@ -40,7 +40,7 @@
             // echo "Credentials are valid";
             $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$username' AND password='$encrypt'");
             if (mysqli_num_rows($query) === 0) {
-echo $encrypt;
+// echo $encrypt;
 ?>
                 <div class="neumorphism home w-2/5 h-1/3 rounded-xl flex flex-col items-center justify-center">
                     <p> Wrong email or password </p>
