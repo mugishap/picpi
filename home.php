@@ -29,11 +29,11 @@
     $today = date("Y-m-d H:M:S");
     if (isset($_GET['logout'])) {
         setcookie("PICPI-USERID", "", time() - 3600);
-        ?>
+    ?>
         <script>
             window.location.replace('/php-crud/login.html')
         </script>
-        <?php
+    <?php
     }
     $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY count DESC');
     ?>
@@ -51,7 +51,8 @@
         <ul class="flex flex-row items-center justify-center list-none">
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li><li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm' ></i></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+            <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
             <li class="mr-4 cursor-pointer">
                 <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
@@ -61,7 +62,7 @@
     <a class="mt-24 mb-8" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
 
-    while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image) = mysqli_fetch_array($query)) {
+    while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image, $type) = mysqli_fetch_array($query)) {
         $newComm = "SELECT c.comment_id,c.comment_time,c.commenter_username,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenter_username  WHERE post_id='$postid' ORDER BY c.comment_id DESC";
         $getComments = mysqli_query($connection, $newComm) or die(mysqli_error($connection));
         if ($today === $time) {
@@ -82,7 +83,7 @@
                     <?php
                     if ($username === $posterusername) {
                     ?>
-                        <a href="editpost.php?postid=<?=$postid?>" class="bx bx-edit p-2 bg-blue-400 m-1 bx-tada-hover rounded-full cursor-pointer"></a>
+                        <a href="editpost.php?postid=<?= $postid ?>" class="bx bx-edit p-2 bg-blue-400 m-1 bx-tada-hover rounded-full cursor-pointer"></a>
                         <form method="POST" action="?postid=<?= $postid ?>"><button type="submit" name="deletepostfromhome" class="material-icons p-1  m-1 shadow-2xl shadow-black bx-tada-hover bg-red-400 rounded-full cursor-pointer">delete</button></form>
                         <?php
                     } else {
@@ -113,7 +114,21 @@
                     ?>
                 </div>
             </div>
-            <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
+            <?php
+            if ($type == 'image') {
+            ?>
+                <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
+            <?php
+            } else if ($type == 'video') {
+            ?>
+                <video controls class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'></video>
+            <?php
+            } else if ($type == 'audio') {
+            ?>
+                <audio src=""></audio>
+            <?php
+            }
+            ?>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
             <div class="w-full mt-3 mb-3 flex items-center justify-around">
@@ -196,7 +211,7 @@
             <script>
                 window.location.replace('/php-crud/home.php#post<?= $postid ?>')
             </script>
-        <?php
+    <?php
         }
     }
     if (isset($_POST['deletepostfromhome'])) {
@@ -205,7 +220,6 @@
         $performDeleteQuery = mysqli_query($connection, $deletePostQuery);
         if ($performDeleteQuery) {
             header("Location: ./home.php");
-
         } else {
             return;
         }
