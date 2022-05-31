@@ -39,8 +39,7 @@
     include './connection.php';
     include './checkloggedin.php';
     if (isset($_POST['submit'])) {
-        $text = $_POST['caption'];
-        $caption = $text . str_replace("'", "\'", $text);
+        $caption = $_POST['caption'];
         if ($caption === '') {
     ?>
             <script>
@@ -59,17 +58,17 @@
                 ?>
                 <script>
                     swal("Oops!", "Your file is too big!", "error");
-                </script>
+                    </script>
                 <?php
                 header("Location: ./newpost.php");
                 return;
             }
-            $mime = mime_content_type($postimage);
+            $mime = mime_content_type($_FILES['post-image']['tmp_name']);
             echo $mime;
             if (strstr($mime, "video/")) {
                 $uploadType = "video";
             } else if (strstr($mime, "image/")) {
-                $uploadType = "video";
+                $uploadType = "image";
             } else {
                 $uploadStatus = 0;
                 ?>
@@ -77,7 +76,7 @@
                     swal("Oops!", "Your file is not an image or video!", "error");
                 </script>
                 <?php
-                header("Location: ./newpost.php");
+                // header("Location: ./newpost.php");
                 return;
             }
             if ($uploadStatus === 0) {
