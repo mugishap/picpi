@@ -204,12 +204,8 @@
         $deletePostQuery = "DELETE FROM posts WHERE post_id='$postid'";
         $performDeleteQuery = mysqli_query($connection, $deletePostQuery);
         if ($performDeleteQuery) {
-        ?>
-            <script>
-                window.location.reload()
-            </script>
+            header("Location: ./home.php");
 
-    <?php
         } else {
             return;
         }

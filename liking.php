@@ -11,6 +11,7 @@ $status =  $_POST[ 'status' ];
 echo $status;
 if ( $status === 'liking' ) {
     $like = mysqli_query( $connection, "INSERT INTO likes(liker_id,post_id,liker_profile,likerusername) VALUES('$userid','$post_id','$profile','$username')" );
+    // $addToPosterActivity = mysqli_query($connection,"INSERT INTO activity_$posterusername()");
 } else if ( $status === 'disliking' ) {
     $query1 =  "DELETE FROM likes WHERE (liker_id='$userid') AND (post_id='$post_id') AND (likerusername='$username')";
     echo $query1;

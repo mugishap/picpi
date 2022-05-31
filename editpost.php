@@ -5,16 +5,18 @@
 include './connection.php';
 include './checkloggedin.php';
 $postid = $_GET['postid'];
-$sql = "SELECT * FROM posts where post_id='$postid'";
+$sql = "SELECT post_id,caption,image FROM posts where post_id='$postid'";
 $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
-
+// $row = mysqli_fetch_array($select);
+// $row = mysqli_fetch_array($select);
+// print_r($postid);
 if (isset($_GET['logout'])) {
     setcookie("PICPI-USERID", "", time() - 3600);
-    ?>
+?>
     <script>
         window.location.replace('/php-crud/login.html')
     </script>
-    <?php
+<?php
 }
 $count = mysqli_num_rows($select);
 if ($count != 1) {
@@ -26,10 +28,11 @@ if (isset($_POST['updatepost'])) {
     $image_tmp = $_FILES['post-image']['tmp_name'];
     $caption = $_POST['caption'];
     $directory = "uploads/";
-    $profileimage = $directory . basename($_FILES["post-image"]["name"]);
+    $postimage = $directory . basename($_FILES["post-image"]["name"]);
     $uploadStatus = 1;
-    $imageFileType = strtolower(pathinfo($profileimage, PATHINFO_EXTENSION));
-    if ($profileimage === 'uploads/') {
+    $imageFileType = strtolower(pathinfo($postimage, PATHINFO_EXTENSION));
+    echo $postimage;
+    if ($postimage === 'uploads/') {
         $updateQuery = "UPDATE posts SET image='$image',caption='$caption' WHERE post_id='$postid'";
         $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating post" . mysqli_error($connection));
         if ($update) {
@@ -46,7 +49,7 @@ if (isset($_POST['updatepost'])) {
             if ($uploadStatus == 0) {
                 echo "Sorry, your image was not uploaded.";
             } else {
-                if (move_uploaded_file($_FILES["post-image"]["tmp_name"], $profileimage)) {
+                if (move_uploaded_file($_FILES["post-image"]["tmp_name"], $postimage)) {
                     echo "The image " . htmlspecialchars(basename($_FILES["post-image"]["name"])) . " has been uploaded";
                 } else {
                     echo "Sorry, there was an error was an error uploading your file.";
@@ -55,12 +58,12 @@ if (isset($_POST['updatepost'])) {
             $updateQuery = "UPDATE users SET image='$image',caption='$caption' WHERE post_id='$postid'";
             $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating post" . mysqli_error($connection));
             if ($update) {
-                headers_sent();
+                echo "Updated";
             }
         }
     }
 }
-while (list($post_id,,,,, $caption, $image) = mysqli_fetch_array($select)) {
+while (list($post_id, $caption, $image) = mysqli_fetch_array($select)) {
 ?>
 
     <head>
@@ -112,12 +115,12 @@ while (list($post_id,,,,, $caption, $image) = mysqli_fetch_array($select)) {
             <form action="" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
                 <div class="w-full flex justify-between items-center mt-1">
                     <label for="post-image">Image</label>
-                    <input class="rounded p-1 w-2/3" type="file" id="post-image" value="<?php echo $image; ?>" name="post-image">
+                    <input class="rounded p-1 w-2/3" type="file" id="post-image" value="<?= $image; ?>" name="post-image">
                 </div>
-                <img class="object-cover" src="<?php echo $image; ?>" class='profile' style='width:100px;height:100px;border-radius:50%;' alt="">
+                <img class="object-cover" src="<?php echo $image; ?>" style='width:100px;height:100px;border-radius:50%;' alt="">
                 <div class="w-full flex justify-between items-center mt-1">
                     <label for="username">Caption</label>
-                    <textarea class="rounded p-1 w-2/3" type="text" name="caption" value="<?php echo $caption; ?>"></textarea>
+                    <textarea class="rounded p-1 w-2/3" type="text" name="caption"><?= $caption; ?></textarea>
                 </div>
                 <input class="p-1 text-white rounded w-32 bg-blue-500 neumorphism" value="Update" type="submit" name="updatepost">
             </form>
