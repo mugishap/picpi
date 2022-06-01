@@ -32,23 +32,42 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script>
         console.log("%cLOADED THE ACCOUNT PAGE", "font-size:3em;color:green;")
-        const popup = (src, postid) => {
+        const popup = (src, postid, type) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
-            overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
-            <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
+            if (type === 'image') {
+                const post = document.querySelector('.post')
+                overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
                 <a class="w-full flex items-center justify-center" href="home.php#${postid}">
-                    <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
-                    View full post
-                    </button>
+                <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
+                View full post
+                </button>
                 </a>
                 <form method='POST' action="?postid=${postid}" class='w-full flex items-center justify-center'>
-                    <button type="submit" name='deletepost' class="text-white bg-red-500 rounded p-1 w-10/12 m-2 hover:bg-red-600">
-                    Delete post
+                <button type="submit" name='deletepost' class="text-white bg-red-500 rounded p-1 w-10/12 m-2 hover:bg-red-600">
+                Delete post
                     </button>
                 </form>            
                 <img class="w-full h-10/12" src="${src}" alt="" />
-            </div>`
+                </div>`
+            } else if (type === 'video') {
+                const post = document.querySelector('.post')
+                overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
+                <a class="w-full flex items-center justify-center" href="home.php#${postid}">
+                <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
+                View full post
+                </button>
+                </a>
+                <form method='POST' action="?postid=${postid}" class='w-full flex items-center justify-center'>
+                <button type="submit" name='deletepost' class="text-white bg-red-500 rounded p-1 w-10/12 m-2 hover:bg-red-600">
+                Delete post
+                    </button>
+                </form>            
+                <video loop autoplay controls class="w-full h-10/12" src="${src}"></video>
+                </div>`
+            }
         }
         const removepopup = () => {
             const overlay = document.querySelector('.theoverlay')
@@ -80,7 +99,8 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li><li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm' ></i></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+            <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
             <li class="mr-4 cursor-pointer">
                 <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
@@ -140,17 +160,24 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
     <a class="" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create a post</button></a>
     <div class="grid border-box  p-4 grid-cols-2 md:grid-cols-3 neumorphism mt-2 rounded-xl w-7/12 h-fit overflow-y-scroll">
         <?php
-        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
+        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.time,p.image,p.caption,p.type FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.user_id='$userid' ORDER BY p.post_id DESC");
         if (mysqli_num_rows($getUserPosts) < 1) {
         ?>
             <p>You have no posts</p>
             <?php
         } else {
-            while (list($posterid,, $postid, $posttime, $postedimage, $caption) = mysqli_fetch_array($getUserPosts)) {
+            while (list($posterid,, $postid, $posttime, $media, $caption, $type) = mysqli_fetch_array($getUserPosts)) {
+                if ($type == "image") {
             ?>
-                <img key='<?= $postid ?>' onclick="popup('<?= $postedimage ?>','<?= $postid ?>')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $postedimage ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
+                    <img key='<?= $postid ?>' onclick="popup('<?= $media ?>','<?= $postid ?>','<?= $type ?>')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $media ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
 
+                <?php
+                } else if ($type == "video") {
+                ?>
+                    <video key='<?= $postid ?>' onclick="popup('<?= $media ?>','<?= $postid ?>','<?= $type ?>')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $media ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
+                    </video>
             <?php
+                }
             }
         }
         if (isset($_GET['logout'])) {

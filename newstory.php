@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,14 +19,14 @@
 
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-    <title>New post | PicPi</title>
+    <title>New story | PicPi</title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        console.log("%cLOADED THE NEWPOST PAGE", "font-size:3em;color:green;")
+        console.log("%cLOADED THE newstory PAGE", "font-size:3em;color:green;")
         const addemoji = (e) => {
             const textarea = document.querySelector('.thetextarea')
             const text = textarea.value + e.textContent
@@ -38,7 +41,7 @@
     <?php
     include './connection.php';
     include './checkloggedin.php';
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['newstory'])) {
         $caption = $_POST['caption'];
         if ($caption === '') {
     ?>
@@ -46,29 +49,21 @@
                 swal("Oops!", "You need to write something in the caption!", "error");
             </script>
             <?php
-            header("Location: ./newpost.php");
+            header("Location: ./newstory.php");
             return;
         } else {
             $directory = 'uploads/';
             $postimage = $directory . basename($_FILES['post-image']['name']);
             $uploadStatus = 1;
             $imageFileType = strtolower(pathinfo($postimage, PATHINFO_EXTENSION));
-            if ($_FILES['post-image']['size'] > 30594304) {
+            if ($_FILES['post-image']['size'] > 35943040) {
                 $uploadStatus = 0;
             ?>
                 <script>
                     swal("Oops!", "Your file is too big!", "error");
-                    document.querySelector('title').innerHTML = 'Error | Profile'
-                    const redirect = () => {
-                        window.history.go(-1)
-                    }
                 </script>
-                <div class="home w-2/5 h-3/3 rounded-xl neumorphism flex flex-col items-center justify-center p-2 mt-48">
-                    <h1 class="font-bold text-xl">Error!!!</h1>
-                    <p> Your file is too big.</p>
-                    <button type="button" onclick="redirect()" class="bg-blue-500 hover:bg-blue-600 w-48 text-white rounded p-1 btn-outline-primary">Go back</button>
-                </div>
             <?php
+                header("Location: ./newstory.php");
                 return;
             }
             $mime = mime_content_type($_FILES['post-image']['tmp_name']);
@@ -84,7 +79,7 @@
                     swal("Oops!", "Your file is not an image or video!", "error");
                 </script>
             <?php
-                // header("Location: ./newpost.php");
+                // header("Location: ./newstory.php");
                 return;
             }
             if ($uploadStatus === 0) {
@@ -108,7 +103,7 @@
     <?php
 
             } else {
-                echo "Error in uploading your post";
+                echo "Error in uploading your story";
             }
         }
     }
@@ -128,7 +123,7 @@
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newstory.php"></a></li>
             <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
             <li class="mr-4 cursor-pointer">
                 <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
@@ -137,7 +132,8 @@
         </ul>
     </div>
     <div class="form neumorphism mt-24 w-4/12 h-[40vh] rounded-xl p-4 flex items-center justify-center flex-col">
-        <h2 class="heading-2 mb-4">Create new post</h2>
+        <h2 class="heading-2 mb-4">Create new story</h2>
+        <p class=" w-full text-center text-xs text-gray-700">NB: remember your story dissapears after 24 hours!!!</p>
         <form class="w-full flex flex-col items-center justify-center" action="" method="POST" enctype="multipart/form-data">
             <div class="labels flex justify-between w-full mb-4 items-center">
                 <label for="post-image">Media</label>
@@ -160,7 +156,7 @@
                 </div>
                 <i class="material-icons p-1 rounded-full cursor-pointer neumorphism">mood</i>
             </div>
-            <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="submit">
+            <input class="p-2 text-white bg-blue-500 rounded-xl w-24 cursor-pointer" value="Submit" type="submit" name="newstory">
         </form>
     </div>
 
