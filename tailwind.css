@@ -581,6 +581,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   bottom: 4rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.top-36 {
+  top: 9rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -867,6 +875,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: fit-content;
 }
 
+.h-48 {
+  height: 12rem;
+}
+
 .h-\[70vh\] {
   height: 70vh;
 }
@@ -877,10 +889,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-4 {
   height: 1rem;
-}
-
-.h-48 {
-  height: 12rem;
 }
 
 .h-16 {
@@ -911,8 +919,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: calc(100% - 0.25rem);
 }
 
-.w-1\/5 {
-  width: 20%;
+.h-36 {
+  height: 9rem;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[11rem\] {
+  height: 11rem;
+}
+
+.h-\[192px\] {
+  height: 192px;
+}
+
+.w-5\/12 {
+  width: 41.666667%;
 }
 
 .w-full {
@@ -995,18 +1019,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-12 {
   width: 3rem;
-}
-
-.w-8\/12 {
-  width: 66.666667%;
-}
-
-.w-6\/12 {
-  width: 50%;
-}
-
-.w-5\/12 {
-  width: 41.666667%;
 }
 
 .flex-shrink {

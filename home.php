@@ -18,7 +18,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
 </head>
 
@@ -59,7 +58,45 @@
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
-    <a class="mt-24 mb-8" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
+    <div class="mt-24 neumorphism flex rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-36 p-2">
+        <a href="newstory.php">
+            <div class="flex items-end justify-center addstory h-32 w-24 p-1 m-1 rounded">
+                <i title="Create a new story" class='bg-blue-400 p-1 rounded text-white w-full flex items-center justify-center text-center bx bx-tada-hover bx-sm bxs-image-add'></i>
+            </div>
+        </a>
+        <?php
+        $getStories = mysqli_query($connection, "SELECT * FROM stories ORDER BY count DESC");
+        while (list($storyid, $storyPosterID, $postdate, $storyPosterUsername, $storyPosterProfile, $text, $media, $storyType, $removedate) = mysqli_fetch_array($getStories)) {
+        ?>
+            <div class="flex items-end justify-center addstory h-32 w-24 p-1 m-1 rounded">
+                <?php
+                if ($storyType == 'video') {
+                ?>
+                    <video class="w-full h-full object-cover rounded" src="<?= $media ?>" alt=""></video>
+                <?php
+                } else if ($storyType == 'image') {
+                ?>
+                    <img class="w-full h-full object-cover rounded" src="<?= $media ?>" alt="">
+
+                <?php
+                }
+                ?>
+            </div>
+        <?php
+        }
+        // $dateTimestamp1 = strtotime($postdate);
+        // $dateTimestamp2 = strtotime($removedate);
+        // $today = date('Y:m:d');
+        // if ($today != $dateTimestamp1) {
+        //     echo "$today is older than $postdate";
+        //     // $deleteStoryQuery = mysqli_query($connection,"DELETE FROM stories()");
+        // } else
+        //     echo "$postdate is older than $removedate";
+
+        ?>
+
+    </div>
+    <a class="mt-2 mb-8" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
 
     while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image, $type) = mysqli_fetch_array($query)) {
@@ -136,14 +173,14 @@
             <div class="w-full flex items-center">
                 <?php
                 if ($likerusername === $username) {
-                    ?>
-                <img class="w-2 h-2 rounded-full" src="<?=$liker_profile?>" alt="">
-                <p class="mt-4 text-xs text-gray-500">Liked by you</p>
+                ?>
+                    <img class="w-2 h-2 rounded-full" src="<?= $liker_profile ?>" alt="">
+                    <p class="mt-4 text-xs text-gray-500">Liked by you</p>
                 <?php
                 } else {
-                    ?>
-                <img class="w-4 h-4 rounded-full" src="<?=$liker_profile?>" alt="">
-                <p class="mt-4 text-xs text-gray-500">Liked by <?=$likerusername?></p>
+                ?>
+                    <img class="w-4 h-4 rounded-full" src="<?= $liker_profile ?>" alt="">
+                    <p class="mt-4 text-xs text-gray-500">Liked by <?= $likerusername ?></p>
                 <?php
                 }
                 ?>
@@ -327,6 +364,12 @@
         const input = document.querySelector(`#${inputid}`)
         input.focus()
     }
+    const newStoryDiv = document.querySelector('.addstory')
+    newStoryDiv.style.backgroundImage = "url(<?= $profile ?>)";
+    newStoryDiv.style.backgroundSize = "cover";
+    newStoryDiv.style.backgroundPosition = "center";
+    newStoryDiv.style.backgroundRepeat = "no-repeat";
+    newStoryDiv.style.backgroundColor = "white";
 </script>
 
 </html>

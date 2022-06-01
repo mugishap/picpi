@@ -4,12 +4,12 @@ $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $email = $_POST['email'];
 $telephone = $_POST['telephone'];
-$gender = $_POST['gender'];
+$gender = trim($_POST['gender']);
 $nationality = $_POST['nationality'];
-$username = $_POST['username'];
+$username = trim($_POST['username']);
 $userid = $_GET['userid'];
 
-
+echo $gender . "<br>"; 
 
 $directory = "uploads/";
 $profileimage = $directory . basename($_FILES["profile-image"]["name"]);
@@ -49,7 +49,7 @@ if ($profileimage === 'uploads/') {
   $row = mysqli_fetch_assoc($select);
 
   // $encryptedPassword = hash("SHA512", $password);
-  $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',profile='$profileimage',telephone='$telephone',gender='$telephone',nationality='$nationality',username='$username',password = '$password' WHERE user_id='$userid'";
+  $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',profile='$profileimage',telephone='$telephone',gender='$gender',nationality='$nationality',username='$username',password = '$password' WHERE user_id='$userid'";
   $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
   if ($update) {
     header("Location: ./home.php");

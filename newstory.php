@@ -53,9 +53,9 @@
             return;
         } else {
             $directory = 'uploads/';
-            $postimage = $directory . basename($_FILES['post-image']['name']);
+            $media = $directory . basename($_FILES['post-image']['name']);
             $uploadStatus = 1;
-            $imageFileType = strtolower(pathinfo($postimage, PATHINFO_EXTENSION));
+            $imageFileType = strtolower(pathinfo($media, PATHINFO_EXTENSION));
             if ($_FILES['post-image']['size'] > 35943040) {
                 $uploadStatus = 0;
             ?>
@@ -85,15 +85,15 @@
             if ($uploadStatus === 0) {
                 echo "Sorry, your image was not uploaded.";
             } else {
-                if (move_uploaded_file($_FILES['post-image']['tmp_name'], $postimage)) {
+                if (move_uploaded_file($_FILES['post-image']['tmp_name'], $media)) {
                     echo "The media " . htmlspecialchars(basename($_FILES['post-image']['name'])) . " has been uploaded";
                 } else {
                     echo "
                     Sorry, there was an error uploading your file.";
                 }
             }
-            $query = "INSERT INTO posts(username,profile,caption,image,type) VALUES('$username','$profile','$caption','$postimage','$uploadType')";
-            echo $query;
+            $removeDate = date('Y-m-d H:i:s', strtotime($removeDate . ' +1 day'));
+            $query = "INSERT INTO stories(user_id,username,posterprofile,text,media,type,remove_date) VALUES('$userid','$username','$profile','$text','$media','$uploadType','$removeDate')";
             $savePost = mysqli_query($connection, $query) or die(mysqli_error($connection));
             if ($savePost) {
             ?>
