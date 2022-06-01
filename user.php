@@ -3,6 +3,9 @@
 include './connection.php';
 include './checkloggedin.php';
 $searchedusername = $_GET['username'];
+if($searchedusername === $username){
+    header("Location: account.php");
+}
 $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$searchedusername'");
 list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
 
@@ -22,18 +25,32 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <script>
-        const popup = (src, postid) => {
+        const popup = (src, postid, type) => {
             const overlay = document.querySelector('.theoverlay')
             overlay.style.display = 'flex'
-            overlay.innerHTML = `<i class = 'material-icons cursor-pointer' style = 'font-size:2em;color:white;' onclick = 'removepopup()'>close</i>
-    <div class = 'flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5'>
-    <a class = 'w-full flex items-center justify-center' href = "home.php#${postid}">
-    <button type = 'button' class = 'text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600'>
-    View full post
-    </button>
-    </a>
-    <img class = 'w-full h-10/12' src = "${src}" alt = '' />
-    </div>`
+            if (type === 'image') {
+                const post = document.querySelector('.post')
+                overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-5/12">
+                <a class="w-full flex items-center justify-center" href="home.php#${postid}">
+                <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
+                View full post
+                </button>
+                </a>           
+                <img class="w-full h-10/12" src="${src}" alt="" />
+                </div>`
+            } else if (type === 'video') {
+                const post = document.querySelector('.post')
+                overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
+                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-5/12">
+                <a class="w-full flex items-center justify-center" href="home.php#${postid}">
+                <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
+                View full post
+                </button>
+                </a>          
+                <video loop autoplay controls class="w-full h-10/12" src="${src}"></video>
+                </div>`
+            }
         }
         const removepopup = () => {
             const overlay = document.querySelector('.theoverlay')
@@ -42,7 +59,7 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
         }
     </script>
     <title>
-        <?=$searchedusername ?> | PicPi
+        <?= $searchedusername ?> | PicPi
     </title>
     <link rel='shortcut icon' href='picpi.png' type='image/x-icon'>
     <link rel='preconnect' href='https://fonts.googleapis.com'>
@@ -118,12 +135,19 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
     ?>
     <div class="grid border-box  p-4 grid-cols-4 bg-gray-200 mt-2 rounded-xl w-2/3 h-1/3 overflow-y-scroll">
         <?php
-        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.username='$searchedusername' ORDER BY p.post_id DESC");
-        while (list($posterid,, $postid, $image, $caption) = mysqli_fetch_array($getUserPosts)) {
+        $getUserPosts = mysqli_query($connection, "SELECT u.user_id,u.username,p.post_id,p.image,p.caption,p.type FROM users u INNER JOIN posts p ON u.username=p.username WHERE u.username='$searchedusername' ORDER BY p.post_id DESC");
+        while (list($posterid,, $postid, $image, $caption, $type) = mysqli_fetch_array($getUserPosts)) {
+            if ($type == 'video') {
 
         ?>
-            <img onclick="popup('< ?= $image ?>',<?= $postid ?>)" key='< ?= $postid ?>' class='cursor-pointer object-cover m-2 rounded w-48 h-32' src="<?= $image ?>">
+                <video onclick="popup('<?= $image ?>','<?= $postid ?>','<?= $type ?>')" key='< ?= $postid ?>' class='cursor-pointer object-cover m-2 rounded w-48 h-32' src="<?= $image ?>"></video>
+            <?php
+            } else {
+            ?>
+
+                <img onclick="popup('<?= $image ?>','<?= $postid ?>','<?= $type ?>')" key='< ?= $postid ?>' class='cursor-pointer object-cover m-2 rounded w-48 h-32' src="<?= $image ?>">
         <?php
+            }
         }
         ?>
     </div>

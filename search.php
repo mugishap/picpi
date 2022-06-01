@@ -50,18 +50,18 @@ if (isset($_POST['search'])) {
             </ul>
         </div>
         <?php
-        $getUsers = mysqli_query($connection, "SELECT user_id,username,profile,nationality,email,telephone FROM users WHERE username like '%$name%' OR firstname like '%$name%' OR lastname='%$name%'");
+        $getUsers = mysqli_query($connection, "SELECT user_id,username,profile,email FROM users WHERE username like '%$name%' OR firstname like '%$name%' OR lastname='%$name%'");
         if (mysqli_num_rows($getUsers) == 0) {
         ?>
             <div class="overflow-y-scroll">No users found with that username or name</div>
             <?php
         } else {
             echo "Found " .  mysqli_num_rows($getUsers) . " users with $name";
-            while (list($searcheduser_id, $searchedusername, $searchedprofile, $searchednationality, $searchedemail, $searchedtelephone) = mysqli_fetch_array($getUsers)) {
+            while (list($searcheduser_id, $searchedusername, $searchedprofile, $searchedemail) = mysqli_fetch_array($getUsers)) {
             ?><a class="w-2/5 h-32 m-4" href='user.php?username=<?= $name ?>'>
                     <div class="w-full rounded neumorphism items-center box-border p-3 flex h-full">
                         <div class="neumorphism bg-[#ddd] rounded-full p-2 ml-4 mr-24">
-                            <img class="object-cover rounded-full w-24 h-24 searched-image" src="<?= $searchedprofile ?>" alt="<?= $username ?>'s image">
+                            <img class="object-cover rounded-full w-24 h-24" src="<?= $searchedprofile ?>" alt="<?= $username ?>'s image"/>
                         </div>
                         <div class="block">
                             <p><?= $searchedusername ?></p>

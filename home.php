@@ -63,6 +63,8 @@
     <?php
 
     while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image, $type) = mysqli_fetch_array($query)) {
+        $getLikes = mysqli_query($connection, "SELECT likerusername,liker_profile FROM likes WHERE post_id='$postid' LIMIT 1");
+        list($likerusername, $liker_profile) = mysqli_fetch_array($getLikes);
         $newComm = "SELECT c.comment_id,c.comment_time,c.commenter_username,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenter_username  WHERE post_id='$postid' ORDER BY c.comment_id DESC";
         $getComments = mysqli_query($connection, $newComm) or die(mysqli_error($connection));
         if ($today === $time) {
@@ -92,7 +94,6 @@
                         $following = false;
                         while ($arr = mysqli_fetch_assoc($knowIfFollowing)) {
                             array_push($followingArray, $arr['following_username']);
-                            // print_r($followingArray);
                         }
                         for ($i = 0; $i < count($followingArray); $i++) {
                             if ($followingArray[$i] === $posterusername) {
@@ -121,16 +122,33 @@
             <?php
             } else if ($type == 'video') {
             ?>
-                <video controls class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'></video>
+                <video loop controls class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'></video>
             <?php
             } else if ($type == 'audio') {
             ?>
                 <audio src=""></audio>
             <?php
+
             }
             ?>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
+            <div class="w-full flex items-center">
+                <?php
+                if ($likerusername === $username) {
+                    ?>
+                <img class="w-2 h-2 rounded-full" src="<?=$liker_profile?>" alt="">
+                <p class="mt-4 text-xs text-gray-500">Liked by you</p>
+                <?php
+                } else {
+                    ?>
+                <img class="w-4 h-4 rounded-full" src="<?=$liker_profile?>" alt="">
+                <p class="mt-4 text-xs text-gray-500">Liked by <?=$likerusername?></p>
+                <?php
+                }
+                ?>
+
+            </div>
             <div class="w-full mt-3 mb-3 flex items-center justify-around">
                 <?php
                 $getIfLiked = mysqli_query($connection, "SELECT liker_id from likes WHERE post_id='$postid' AND likerusername='$username'");
@@ -149,6 +167,7 @@
                     <i onclick='focuscomment("comment<?= $postid ?>")' class='bx bx-sm bx-comment w-fit h-full rounded hover:bg-blue-200 text-center box-border p-2 cursor-pointer'></i>
                     <p class=''><?= $commentCount ?></p>
                 </div>
+
             </div>
             <form action="?postid=<?= $postid ?>&userid=<?= $userid ?>&username='<?= $username ?>'" method="POST" class="w-full">
                 <!-- <div class="emojis-home w-8">
@@ -176,7 +195,7 @@
                             <img class="w-12 h-12 rounded-full object-cover" src="<?= $commenterprofile ?>" alt="">
                         </div>
                         <div class="w-2/3 neumorphism rounded text-sm flex flex-col items-start justify-center pt-1 pb-1 pr-3 pl-4">
-                            <a class='font-bold' href="user.php?username=<?= $commenterusername ?>&userid=<?= $userid ?>"><?= $commenterusername ?></a>
+                            <a class='font-bold' href="user.php?username=<?= $commenterusername ?>"><?= $commenterusername ?></a>
                             <p><?= $commenttext ?></p>
                             <p class="text-xs text-gray-600"><?= $commenttime ?></p>
                         </div>

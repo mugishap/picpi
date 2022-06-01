@@ -53,7 +53,7 @@
             $postimage = $directory . basename($_FILES['post-image']['name']);
             $uploadStatus = 1;
             $imageFileType = strtolower(pathinfo($postimage, PATHINFO_EXTENSION));
-            if ($_FILES['post-image']['size'] > 30594304) {
+            if ($_FILES['post-image']['size'] > 35594304) {
                 $uploadStatus = 0;
             ?>
                 <script>

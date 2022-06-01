@@ -38,7 +38,7 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
             if (type === 'image') {
                 const post = document.querySelector('.post')
                 overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
-                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
+                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-5/12">
                 <a class="w-full flex items-center justify-center" href="home.php#${postid}">
                 <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
                 View full post
@@ -54,7 +54,7 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
             } else if (type === 'video') {
                 const post = document.querySelector('.post')
                 overlay.innerHTML = `<i class="material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>
-                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-1/5">
+                <div class="flex flex-col items-center h-5/12 justify-center p-2 bg-white rounded w-5/12">
                 <a class="w-full flex items-center justify-center" href="home.php#${postid}">
                 <button type="button" class="text-white bg-blue-500 rounded p-1 w-10/12 m-2 hover:bg-blue-600">
                 View full post
