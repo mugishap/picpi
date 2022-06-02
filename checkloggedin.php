@@ -9,7 +9,7 @@ $getUser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid
 if (!$getUser || mysqli_num_rows($getUser) !== 1) {
 ?>
     <script>
-        window.location.replace('/php-crud/login.html')
+        window.location.replace('/picpi/login.html')
     </script>
 <?php
     return;

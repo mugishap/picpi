@@ -1,4 +1,4 @@
-# PHP-Crud
+# picpi
 
 Below are some queries used to create tables;
 

@@ -14,7 +14,7 @@ if (isset($_GET['logout'])) {
     setcookie("PICPI-USERID", "", time() - 3600);
 ?>
     <script>
-        window.location.replace('/php-crud/login.html')
+        window.location.replace('/picpi/login.html')
     </script>
 <?php
 }

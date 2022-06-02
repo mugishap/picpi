@@ -3,11 +3,11 @@ include './connection.php';
 include './checkloggedin.php';
 if (isset($_GET['logout'])) {
     setcookie("PICPI-USERID", "", time() - 3600);
-    ?>
+?>
     <script>
-        window.location.replace('/php-crud/login.html')
+        window.location.replace('/picpi/login.html')
     </script>
-    <?php
+<?php
 }
 ?>
 <!DOCTYPE html>
@@ -49,12 +49,20 @@ if (isset($_GET['logout'])) {
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
-            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li><li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm' ></i></li>
-                        <li class="mr-4 cursor-pointer">
+            <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+            <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
+            <li class="mr-4 cursor-pointer">
                 <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
+    </div>
+
+    <div>
+        <?php
+
+        $getMostPopularPosts = mysqli_query($connection, "SELECT p.post_id,p.username,p.caption,c.commenter_username,comment,liker_id FROM posts p INNER JOIN likes l USING(post_id) INNER JOIN comments c USING(post_id) ORDER BY  (SELECT COUNT(l.like_id) FROM likes l);");
+        ?>
     </div>
 </body>
 

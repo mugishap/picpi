@@ -103,7 +103,7 @@
             if ($savePost) {
             ?>
                 <script>
-                    window.location.replace('/php-crud/home.php')
+                    window.location.replace('/picpi/home.php')
                 </script>
     <?php
 

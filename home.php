@@ -31,7 +31,7 @@
         setcookie("PICPI-USERID", "", time() - 3600);
     ?>
         <script>
-            window.location.replace('/php-crud/login.html')
+            window.location.replace('/picpi/login.html')
         </script>
     <?php
     }
@@ -172,24 +172,31 @@
             ?>
             <p class="text-gray-500 mt-2"><?= $time ?></p>
             <p><?= $caption ?></p>
-            <div class="w-full flex items-center">
+            <?php
+            if (mysqli_num_rows($getLikes) !== 0) {
+                ?>
+            <div class="w-full flex items-center justify-start m-2">
                 <?php
                 if ($likerusername === $username) {
                 ?>
-                    <img class="w-2 h-2 rounded-full" src="<?= $liker_profile ?>" alt="">
+                    <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
                     <p class="mt-4 text-xs text-gray-500">Liked by you</p>
                 <?php
                 } else {
                 ?>
-                    <img class="w-4 h-4 rounded-full" src="<?= $liker_profile ?>" alt="">
+                    <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
                     <p class="mt-4 text-xs text-gray-500">Liked by <?= $likerusername ?></p>
                 <?php
                 }
                 ?>
 
             </div>
+            <?php
+            }
+            ?>
             <div class="w-full mt-3 mb-3 flex items-center justify-around">
                 <?php
+                
                 $getIfLiked = mysqli_query($connection, "SELECT liker_id from likes WHERE post_id='$postid' AND likerusername='$username'");
                 list($fetchedIdOfLiker) = mysqli_fetch_array($getIfLiked);
                 if ($userid === $fetchedIdOfLiker) {
@@ -267,7 +274,7 @@
         if ($addComment) {
         ?>
             <script>
-                window.location.replace('/php-crud/home.php#post<?= $postid ?>')
+                window.location.replace('/picpi/home.php#post<?= $postid ?>')
             </script>
     <?php
         }
