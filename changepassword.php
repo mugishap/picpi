@@ -40,10 +40,11 @@
         <?php
 
         include './connection.php';
+        include './checkloggedin.php';
         if (isset($_POST['changepass'])) {
             $prevpassword = $_POST['prevpassword'];
             $newpassword = $_POST['newpassword'];
-            $userid = $_GET['userid'];
+            $userid = $_COOKIE['PICPI-USERID'];
 
             if (trim($prevpassword) === '' || trim($newpassword) === "") {
                 echo "Invalid credentials";
@@ -54,7 +55,6 @@
             } else {
                 $encrypt = hash("SHA512", $newpassword);
                 $prevEncrypt = hash("SHA512", $prevpassword);
-
                 $query = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid' AND password='$prevEncrypt'");
                 if (mysqli_num_rows($query) === 0) {
                     echo "Wrong credentials";

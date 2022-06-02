@@ -12,7 +12,7 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Home | PicPi</title>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
 </head>
 
 <body class="flex flex-col items-center">
+
     <?php
     include './connection.php';
     include './checkloggedin.php';
@@ -58,6 +59,7 @@
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>
     </div>
+
     <div class="mt-24 neumorphism flex rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-36 p-2">
         <a href="newstory.php">
             <div class="flex items-end justify-center addstory h-32 w-24 p-1 m-1 rounded">
@@ -66,17 +68,17 @@
         </a>
         <?php
         $getStories = mysqli_query($connection, "SELECT * FROM stories ORDER BY count DESC");
-        while (list($storyid, $storyPosterID, $postdate, $storyPosterUsername, $storyPosterProfile, $text, $media, $storyType, $removedate) = mysqli_fetch_array($getStories)) {
+        while (list($storyid, $storyPosterID, $postdate, $storyPosterUsername, $storyPosterProfile, $storyText, $media, $storyType, $removedate) = mysqli_fetch_array($getStories)) {
         ?>
             <div class="flex items-end justify-center addstory h-32 w-24 p-1 m-1 rounded">
                 <?php
                 if ($storyType == 'video') {
                 ?>
-                    <video class="w-full h-full object-cover rounded" src="<?= $media ?>" alt=""></video>
+                    <video onclick="popup('<?= $storyPosterProfile ?>','<?= $storyPosterUsername ?>','<?= $media ?>', '<?= $storyText ?>','<?= $storyid ?>', '<?= $storyType ?>')" class="w-full h-full object-cover rounded" src="<?= $media ?>" alt=""></video>
                 <?php
                 } else if ($storyType == 'image') {
                 ?>
-                    <img class="w-full h-full object-cover rounded" src="<?= $media ?>" alt="">
+                    <img onclick="popup('<?= $storyPosterProfile ?>','<?= $storyPosterUsername ?>','<?= $media ?>','<?= $storyText ?>','<?= $storyid ?>', '<?= $storyType ?>')" class="w-full h-full object-cover rounded" src="<?= $media ?>" alt="">
 
                 <?php
                 }
@@ -281,10 +283,55 @@
         }
     }
     ?>
+    <div class="theoverlay flex-col w-screen fixed z-100 bg-[#00000057] h-screen items-center justify-center " style="display: none;">
 
 </body>
 <script>
     console.log("%cLOADED THE HOME PAGE", "font-size:3em;color:green;")
+    const popup = (storyPosterProfile, storyPosterUsername, src, text, postid, type) => {
+        const overlay = document.querySelector('.theoverlay')
+        overlay.style.display = 'flex'
+        if (type === 'image') {
+            const post = document.querySelector('.post')
+            overlay.innerHTML = `
+            <div class="flex flex-col items-center h-4/5 mt-16 justify-center p-4 box-border bg-white rounded w-4/12">
+                <div class='w-full h-2/12 flex items-center justify-between'>
+                    <div class='w-8/12 h-full flex items-start justify-center'>
+                        <a href='user.php?username=${storyPosterUsername}' class='flex items-center justify-start w-full h-full'>
+                            <img src="${storyPosterProfile}" class='rounded-full w-16 h-16' />
+                            <p class='text-xl font-semibold ml-4'>${storyPosterUsername}</p>
+                        </a>
+                    </div>
+                    <i class="w-4/12 h-5 text-center flex items-baseline justify-center material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>   
+                </div>   
+                <img class="w-full h-8/12" src="${src}" alt="" />
+                <p>${text}</p>
+            </div>
+                `
+        } else if (type === 'video') {
+            const post = document.querySelector('.post')
+            overlay.innerHTML = `
+            <div class="flex flex-col items-center h-4/5 mt-16 justify-center p-4 box-border bg-white rounded w-4/12">
+                <div class='w-full h-2/12 flex items-center justify-between'>
+                    <div class='w-8/12 h-full m-1 flex items-start justify-center'>
+                        <a href='user.php?username=${storyPosterUsername}' class='flex items-center justify-start w-full h-full'>
+                            <img src="${storyPosterProfile}" class='rounded-full w-16 h-16' />
+                            <p class='text-xl font-semibold ml-4'>${storyPosterUsername}</p>
+                        </a>
+                    </div>
+                    <i class="w-4/12 h-5 text-center flex items-baseline justify-center material-icons cursor-pointer" style="font-size:2em;" onclick="removepopup()">close</i>   
+                </div>   
+                <video loop controls class="w-full h-8/12" src="${src}"></video>
+                <p>${text}</p>
+            </div>
+            `
+        }
+    }
+    const removepopup = () => {
+        const overlay = document.querySelector('.theoverlay')
+        overlay.innerHTML = ''
+        overlay.style.display = 'none'
+    }
     async function follow(e, toFollowUsername) {
         // console.log(e.textContent)
         const text = e.textContent
