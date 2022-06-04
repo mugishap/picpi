@@ -15,12 +15,11 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
 
-    <title>Login</title>
+    <title>Change Password | <?=$username?></title>
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
 <body>
@@ -44,7 +43,6 @@
         if (isset($_POST['changepass'])) {
             $prevpassword = $_POST['prevpassword'];
             $newpassword = $_POST['newpassword'];
-            $userid = $_COOKIE['PICPI-USERID'];
 
             if (trim($prevpassword) === '' || trim($newpassword) === "") {
                 echo "Invalid credentials";
@@ -60,7 +58,7 @@
                     echo "Wrong credentials";
                     return;
                 } else {
-                    $updatequery = mysqli_query($connection, "UPDATE users SET password='$encrypt'  WHERE user_id='$userid' AND password='$prevEncrypt'");
+                    $updatequery = mysqli_query($connection, "UPDATE users SET password='$encrypt'  WHERE user_id='$userid' AND username='$username'");
                     echo "$updatequery";
                     while (list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email, $password, $role) = mysqli_fetch_array($query)) {
         ?>
