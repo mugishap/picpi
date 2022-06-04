@@ -60,7 +60,7 @@
         </ul>
     </div>
 
-    <div class="mt-24 neumorphism flex rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-36 p-2">
+    <div class="mt-24 neumorphism overflow-x-scroll flex rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-36 p-2">
         <a href="newstory.php">
             <div class="flex items-end justify-center addstory h-32 w-24 p-1 m-1 rounded">
                 <i title="Create a new story" class='bg-blue-400 p-1 rounded text-white w-full flex items-center justify-center text-center bx bx-tada-hover bx-sm bxs-image-add'></i>
