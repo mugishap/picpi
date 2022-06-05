@@ -15,6 +15,7 @@ if ( $status === 'liking' ) {
     $addToLikerActivity = mysqli_query($connection,"INSERT INTO activity_$username(activity_comment,related) VALUES('You liked a post from $posterusername','$post_id')");
 } else if ( $status === 'disliking' ) {
     $query1 =  "DELETE FROM likes WHERE (liker_id='$userid') AND (post_id='$post_id') AND (likerusername='$username')";
-    echo $query1;
+    $removeFromPosterActivity = mysqli_query($connection,"DELETE FROM activity_$posterusername WHERE (activity_comment='$username liked your post') AND (related='$post_id')");
+    $removeFromLikerActivity = mysqli_query($connection,"DELETE FROM activity_$username WHERE (activity_comment='You liked a post from $posterusername') AND (related='$post_id')");
     $dislike = mysqli_query( $connection, $query1);
 }

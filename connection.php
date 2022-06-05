@@ -4,10 +4,7 @@ $user = "root";
 $password = "";
 $dbname = "picpi";
 $connection = mysqli_connect($server,$user,$password,$dbname);
-// if(!$connection){
-//     echo "Connection not successfull<br>";
-// }
-// else{
-//     echo "Connected successfully<br>";
-// }
+if(!$connection){
+    echo "Connection not successfull<br>" . mysqli_connect_error();
+}
 ?>
