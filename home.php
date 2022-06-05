@@ -53,11 +53,11 @@
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
             <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
-<li>
-<span class="material-icons">
-sms
-</span>
-</li>
+            <li class="mr-4 cursor-pointer">
+                <a title="Messages" href="users.php" class="material-icons">
+                    sms
+</a>
+            </li>
             <li class="mr-4 cursor-pointer">
                 <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
@@ -179,29 +179,29 @@ sms
             <p><?= $caption ?></p>
             <?php
             if (mysqli_num_rows($getLikes) !== 0) {
-                ?>
-            <div class="w-full flex items-center justify-start m-2">
-                <?php
-                if ($likerusername === $username) {
-                ?>
-                    <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
-                    <p class="mt-4 text-xs text-gray-500">Liked by you</p>
-                <?php
-                } else {
-                ?>
-                    <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
-                    <p class="mt-4 text-xs text-gray-500">Liked by <?= $likerusername ?></p>
-                <?php
-                }
-                ?>
+            ?>
+                <div class="w-full flex items-center justify-start m-2">
+                    <?php
+                    if ($likerusername === $username) {
+                    ?>
+                        <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
+                        <p class="mt-4 text-xs text-gray-500">Liked by you</p>
+                    <?php
+                    } else {
+                    ?>
+                        <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
+                        <p class="mt-4 text-xs text-gray-500">Liked by <?= $likerusername ?></p>
+                    <?php
+                    }
+                    ?>
 
-            </div>
+                </div>
             <?php
             }
             ?>
             <div class="w-full mt-3 mb-3 flex items-center justify-around">
                 <?php
-                
+
                 $getIfLiked = mysqli_query($connection, "SELECT liker_id from likes WHERE post_id='$postid' AND likerusername='$username'");
                 list($fetchedIdOfLiker) = mysqli_fetch_array($getIfLiked);
                 if ($userid === $fetchedIdOfLiker) {

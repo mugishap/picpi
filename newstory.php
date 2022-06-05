@@ -125,7 +125,7 @@
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newstory.php"></a></li>
             <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
-<li>
+<li class="mr-4 cursor-pointer">
 <span class="material-icons">
 sms
 </span>

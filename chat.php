@@ -1,5 +1,5 @@
 <?php 
-  include_once "php/connection.php";
+  include_once "./connection.php";
   if(!isset($_COOKIE['PICPI-USERID'])){
     header("location: login.html");
   }

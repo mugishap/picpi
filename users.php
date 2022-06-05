@@ -1,5 +1,6 @@
 <?php 
-  include_once "php/connection.php";
+  include_once "./connection.php";
+  include './checkloggedin.php';
   if(!isset($_COOKIE['PICPI-USERID'])){
     header("location: login.html");
   }
@@ -11,14 +12,14 @@
       <header>
         <div class="content">
           <?php 
-            $sql = mysqli_query($connection, "SELECT * FROM users WHERE user_id = {$_COOKIE['user_id']}");
+            $sql = mysqli_query($connection, "SELECT * FROM users WHERE user_id ='$userid'");
             if(mysqli_num_rows($sql) > 0){
               $row = mysqli_fetch_assoc($sql);
             }
           ?>
-          <img src="php/uploads/<?php echo $row['img']; ?>" alt="">
+          <img src="<?php echo $row['profile']; ?>" alt="">
           <div class="details">
-            <span><?php echo $row['fname']. " " . $row['lname'] ?></span>
+            <span><?php echo $row['firstname']. " " . $row['lastname'] ?></span>
             <p><?php echo $row['status']; ?></p>
           </div>
         </div>
