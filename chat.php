@@ -1,7 +1,7 @@
 <?php 
   include_once "php/connection.php";
-  if(!isset($_COOKIE['UNIQUE'])){
-    header("location: login.php");
+  if(!isset($_COOKIE['PICPI-USERID'])){
+    header("location: login.html");
   }
 ?>
 <?php include_once "header.php"; ?>
@@ -10,8 +10,8 @@
     <section class="chat-area">
       <header>
         <?php 
-          $user_id = mysqli_real_escape_string($conn, $_GET['user_id']);
-          $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$user_id}");
+          $user_id = mysqli_real_escape_string($connection, $_GET['user_id']);
+          $sql = mysqli_query($connection, "SELECT * FROM users WHERE user_id = {$user_id}");
           if(mysqli_num_rows($sql) > 0){
             $row = mysqli_fetch_assoc($sql);
           }else{

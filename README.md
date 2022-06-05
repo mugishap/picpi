@@ -122,10 +122,22 @@ Create Table
 PRIMARY KEY (`follow_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
 
+### Messages table
+------------------
+
+CREATE TABLE `messages` (
+  `msg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `incoming_msg_id` int(255) NOT NULL,
+  `outgoing_msg_id` int(255) NOT NULL,
+  `msg` varchar(1000) NOT NULL,
+  PRIMARY KEY (`msg_id`)
+);
+
 
 ### Table descriptions
 --------------------
 Command runned :desc table_name;
+
 
 #User's table
 ------------
@@ -141,5 +153,8 @@ Command runned :desc table_name;
 ------------
 #highlights's table
 ------------
+
+#Messages table
+----------------
 
 

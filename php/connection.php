@@ -2,7 +2,7 @@
   $hostname = "127.0.0.1";
   $username = "root";
   $password = "";
-  $dbname = "chatapp";
+  $dbname = "picpi";
 
   $conn = mysqli_connect($hostname, $username, $password, $dbname);
   if(!$conn){

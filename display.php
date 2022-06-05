@@ -111,7 +111,7 @@ include './connection.php';
     ?>
     <a href="signup.php" class="addnew">Add user</a>
     <a href="viewuser.php" class="addnew">Search user</a>
-     <a href="login.php" class="addnew">Logout</a>
+     <a href="login.html" class="addnew">Logout</a>
     <form action="deleteall.php"><input type="submit" value="Delete all users" id="truncate"></form>
     <div class="table">
         <table>
