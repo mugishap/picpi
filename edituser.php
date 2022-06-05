@@ -67,7 +67,7 @@ if ($select == TRUE) {
                 </div>
                 <div class="m-auto mt-32 formupdate neumorphism flex flex-col w-4/12 p-4 box-border">
                     <h2 class="heading-2">Update PicPi account</h2>
-                    <form action="processupdate.php?userid=<?php echo $rows['user_id'] ?>" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
+                    <form action="processupdate.php" class="w-full flex flex-col items-center justify-center" method="post" enctype='multipart/form-data'>
                         <div class="w-full flex justify-between items-center mt-1">
                             <label for="">First Name</label>
                             <input class="rounded p-1 w-2/3" type="text" id="firstname" value="<?php echo $rows['firstname']; ?>" name="firstname">

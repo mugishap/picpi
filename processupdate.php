@@ -1,14 +1,14 @@
 <?php
 include './connection.php';
 include './checkloggedin.php';
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname'];
-$email = $_POST['email'];
-$telephone = $_POST['telephone'];
-$gender = trim($_POST['gender']);
-$nationality = $_POST['nationality'];
-$username = trim($_POST['username']);
-$userid = $_GET['userid'];
+$newfirstname = $_POST['firstname'];
+$newlastname = $_POST['lastname'];
+$newemail = $_POST['email'];
+$newtelephone = $_POST['telephone'];
+$newgender = trim($_POST['gender']);
+$newnationality = $_POST['nationality'];
+$newusername = trim($_POST['username']);
+
 
 echo $gender . "<br>"; 
 
@@ -22,9 +22,14 @@ if ($profileimage === 'uploads/') {
   $row = mysqli_fetch_assoc($select);
 
   // $encryptedPassword = hash("SHA512", $password);
-  $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',telephone='$telephone',gender='$gender',nationality='$nationality',username='$username' WHERE user_id='$userid'";
+  
+  $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
+  $updateFollowersTable = mysqli_query($connection,"ALTER TABLE followers_".$username. " RENAME TO followers_".$newusername);
+  $updateFollowingTable = mysqli_query($connection,"ALTER TABLE following_".$username. " RENAME TO following_".$newusername);
+  $updateActivityTable = mysqli_query($connection,"ALTER TABLE activity_".$username. " RENAME TO activity_".$newusername);
+
   $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
-  if ($update) {
+  if ($update && $updateFollowersTable && $updateFollowingTable && $updateActivityTable) {
     header("Location: ./home.php");
   }
 } else {
@@ -50,13 +55,16 @@ if ($profileimage === 'uploads/') {
   $row = mysqli_fetch_assoc($select);
 
   // $encryptedPassword = hash("SHA512", $password);
-  $updateQuery = "UPDATE users SET firstname='$firstname', lastname='$lastname',email='$email',profile='$profileimage',telephone='$telephone',gender='$gender',nationality='$nationality',username='$username',password = '$password' WHERE user_id='$userid'";
+  $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',profile='$newprofileimage',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
   $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
-  if ($update) {
+  
+  $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
+  $updateFollowersTable = mysqli_query($connection,"ALTER TABLE followers_".$username. " RENAME TO followers_".$newusername);
+  $updateFollowingTable = mysqli_query($connection,"ALTER TABLE following_".$username. " RENAME TO following_".$newusername);
+  $updateActivityTable = mysqli_query($connection,"ALTER TABLE activity_".$username. " RENAME TO activity_".$newusername);
+
+
+  if ($update && $updateFollowersTable && $updateFollowingTable && $updateActivityTable) {
     header("Location: ./home.php");
   }
 }
-
-
-
-?>
