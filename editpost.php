@@ -10,14 +10,7 @@ $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 // $row = mysqli_fetch_array($select);
 // $row = mysqli_fetch_array($select);
 // print_r($postid);
-if (isset($_GET['logout'])) {
-    setcookie("PICPI-USERID", "", time() - 3600);
-?>
-    <script>
-        window.location.replace('/picpi/login.html')
-    </script>
-<?php
-}
+
 $count = mysqli_num_rows($select);
 if ($count != 1) {
     header("Location: ./home.php");
@@ -105,7 +98,7 @@ while (list($post_id, $caption, $image) = mysqli_fetch_array($select)) {
                 <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
                 <li class="mr-4 cursor-pointer"><a title="Notifications" class='bx bx-bell bx-sm' href="notifications.php"></a></li>
                 <li class="mr-4 cursor-pointer">
-                    <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+                    <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
                 </li>
                 <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
             </ul>

@@ -1,10 +1,10 @@
 <?php
       include_once "connection.php";
 
-    $outgoing_id = $_COOKIE['user_id'];
+    $outgoing_id = $_COOKIE['PICPI-USERID'];
     $searchTerm = mysqli_real_escape_string($connection, $_POST['searchTerm']);
 
-    $sql = "SELECT * FROM users WHERE NOT user_id = {$outgoing_id} AND (fname LIKE '%{$searchTerm}%' OR lname LIKE '%{$searchTerm}%') ";
+    $sql = "SELECT * FROM users WHERE NOT user_id = {$outgoing_id} AND (firstname LIKE '%{$searchTerm}%' OR lastname LIKE '%{$searchTerm}%') ";
     $output = "";
     $query = mysqli_query($connection, $sql);
     if(mysqli_num_rows($query) > 0){

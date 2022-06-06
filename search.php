@@ -44,7 +44,7 @@ if (isset($_POST['search'])) {
                 <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
                 <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li><li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm' ></i></li>
                             <li class="mr-4 cursor-pointer">
-                <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+                <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
                 <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
             </ul>

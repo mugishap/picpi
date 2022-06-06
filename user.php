@@ -85,7 +85,7 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
 
             <li class='mr-4 cursor-pointer'><a title='Explore' class='bx bx-compass bx-sm' href="explore.php"></a></li>
             <li class='mr-4 cursor-pointer'><a title='New post' class='bx bx-add-to-queue bx-sm' href="newpost.php"></a></li>
-            <li class='mr-4 cursor-pointer'><a title='Logout' class='material-icons' href='login.html'>logout</a></li>
+            <li class='mr-4 cursor-pointer'><a title='Logout' class='material-icons' href='login.php'>logout</a></li>
             <li class='mr-4 cursor-pointer'><a href="account.php"><img src="<?= $profile ?>" class='object-cover w-10 h-10 rounded-full' alt=''></a></li>
         </ul>
     </div>

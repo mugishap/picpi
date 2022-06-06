@@ -107,7 +107,7 @@
       <p>
         <input required type="text" placeholder="Last name..." name="lastname" />
       </p>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
     </div>
     <div class="tab">
       Contact Info:
@@ -117,13 +117,13 @@
       <p>
         <input required type="number" placeholder="Phone..." name="telephone" pattern="[0-9]{10,12}" />
       </p>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
 
     </div>
     <div class="tab">
       Profile picture:
       <p><input required type="file" name="profile-image" /></p>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
 
     </div>
     <div class="tab">
@@ -131,7 +131,7 @@
       <p>
         <input required type="text" placeholder="Username..." name="username" />
       </p>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
 
     </div>
     <div class="tab">
@@ -145,7 +145,7 @@
           <input id="gender2" type="radio" name="gender" value="Female" />Female
         </div>
       </div>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
 
     </div>
     <div class="tab">
@@ -163,7 +163,7 @@
           ?>
         </select>
       </div>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
 
     </div>
     <div class="tab">
@@ -174,7 +174,7 @@
       <p>
         <input required type="password" placeholder="Confirm Password..." name="cpassword" type="password" />
       </p>
-      <p>Already have an account? <a href="login.html">Login</a></p>
+      <p>Already have an account? <a href="login.php">Login</a></p>
 
     </div>
     <div style="overflow: auto">

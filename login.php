@@ -1,35 +1,51 @@
-<?php 
-  if(isset($_COOKIE['user_id'])){
-    header("location: users.php");
-  }
-?>
+<!DOCTYPE html>
+<html lang="en">
 
-<?php include_once "header.php"; ?>
-<body>
-  <div class="wrapper">
-    <section class="form login">
-      <header>Picpi Chat</header>
-      <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
-        <div class="error-text"></div>
-        <div class="field input">
-          <label>Email Address</label>
-          <input type="text" name="email" placeholder="Enter your email" required>
-        </div>
-        <div class="field input">
-          <label>Password</label>
-          <input type="password" name="password" placeholder="Enter your password" required>
-          <i class="fas fa-eye"></i>
-        </div>
-        <div class="field button">
-          <input type="submit" name="submit" value="Continue to Chat">
-        </div>
-      </form>
-      <div class="link">Not yet signed up? <a href="index.php">Signup now</a></div>
-    </section>
-  </div>
-  
-  <script src="javascript/pass-show-hide.js"></script>
-  <script src="javascript/login.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+    <link type="text/css" href="global.css" rel="stylesheet">
+    <link type="text/css" href="tailwind.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <title>Login</title>
+    <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+
+<body class="flex items-center justify-center flex-col">
+    <?php
+    if (isset($_COOKIE['PICPI-USERID'])) {
+        header("location: home.php");
+    }
+    ?>
+
+    <div class="neumorphism flex flex-col items-center justify-center form w-1/3 m-auto rounded p-4 mt-48">
+        <img src="picpi.png" class="w-32 h-32 m-4" alt="">
+        <h2 class="text-2xl m-4">Welcome Back</h2>
+        <form action="send.php" method="post" class="w-full flex flex-col items-center">
+            <div class="holders w-full flex flex-row items-center justify-between m-1">
+                <label for="username">Username: </label>
+                <input type="text" placeholder="Enter username" name="username" id="username" required>
+            </div>
+            <div class="holders w-full flex flex-row items-center justify-between m-1">
+                <label for="password">Password: </label>
+                <input type="password" placeholder="Enter password" name="password" id="password" required>
+            </div>
+            <button type="submit" name="login" class="p-2 mt-4 w-24 hover:bg-blue-600 text-white rounded bg-blue-400">Submit</button>
+            <p class="whitespace-nowrap mt-2">Not a member yet? <a class="hover:text-blue-600" href="signup.php">Signup</a></p>
+        </form>
+    </div>
 </body>
+
 </html>

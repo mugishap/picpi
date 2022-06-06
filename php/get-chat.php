@@ -1,7 +1,7 @@
 <?php 
-      if(isset($_COOKIE['user_id'])){
+      if(isset($_COOKIE['PICPI-USERID'])){
         include_once "connection.php";
-        $outgoing_id = $_COOKIE['user_id'];
+        $outgoing_id = $_COOKIE['PICPI-USERID'];
         $incoming_id = mysqli_real_escape_string($connection, $_POST['incoming_id']);
         $output = "";
         $sql = "SELECT * FROM messages LEFT JOIN users ON users.user_id = messages.outgoing_msg_id
@@ -18,7 +18,7 @@
                                 </div>';
                 }else{
                     $output .= '<div class="chat incoming">
-                                <img src="php/uploads/'.$row['img'].'" alt="">
+                                <img src="'.$row['profile'].'" alt="">
                                 <div class="details">
                                     <p>'. $row['msg'] .'</p>
                                 </div>
@@ -30,7 +30,7 @@
         }
         echo $output;
     }else{
-        header("location: ../login.html");
+        header("location: ../login.php");
     }
 
 ?>

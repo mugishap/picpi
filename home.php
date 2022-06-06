@@ -27,14 +27,7 @@
     include './connection.php';
     include './checkloggedin.php';
     $today = date("Y-m-d H:M:S");
-    if (isset($_GET['logout'])) {
-        setcookie("PICPI-USERID", "", time() - 3600);
-    ?>
-        <script>
-            window.location.replace('/picpi/login.html')
-        </script>
-    <?php
-    }
+
     $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY count DESC');
     ?>
     <div class="navbar bg-white fixed z-10 shadow-2xl mb-8 p-2 w-full h-12  flex items-center justify-around">
@@ -56,10 +49,10 @@
             <li class="mr-4 cursor-pointer">
                 <a title="Messages" href="users.php" class="material-icons">
                     sms
-</a>
+                </a>
             </li>
             <li class="mr-4 cursor-pointer">
-                <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+                <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>

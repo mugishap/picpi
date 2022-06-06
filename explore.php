@@ -1,14 +1,7 @@
 <?php
 include './connection.php';
 include './checkloggedin.php';
-if (isset($_GET['logout'])) {
-    setcookie("PICPI-USERID", "", time() - 3600);
-?>
-    <script>
-        window.location.replace('/picpi/login.html')
-    </script>
-<?php
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +50,7 @@ sms
 </span>
 </li>
             <li class="mr-4 cursor-pointer">
-                <form action="" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+                <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
             <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
         </ul>

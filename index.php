@@ -1,6 +1,6 @@
 <?php 
-  if(isset($_COOKIE['user_id'])){
-    header("location: users.php");
+  if(isset($_COOKIE['PICPI-USERID'])){
+    header("location: home.php");
   }
 ?>
 
@@ -14,11 +14,11 @@
         <div class="name-details">
           <div class="field input">
             <label>First Name</label>
-            <input type="text" name="fname" placeholder="First name" required>
+            <input type="text" name="firstname" placeholder="First name" required>
           </div>
           <div class="field input">
             <label>Last Name</label>
-            <input type="text" name="lname" placeholder="Last name" required>
+            <input type="text" name="lastname" placeholder="Last name" required>
           </div>
         </div>
         <div class="field input">
@@ -38,7 +38,7 @@
           <input type="submit" name="submit" value="Continue to Chat">
         </div>
       </form>
-      <div class="link">Already signed up? <a href="login.html">Login now</a></div>
+      <div class="link">Already signed up? <a href="login.php">Login now</a></div>
     </section>
   </div>
 
