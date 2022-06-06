@@ -101,11 +101,8 @@ list($followingcount) = mysqli_fetch_array($getFollowingCount);
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
             <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
-<li class="mr-4 cursor-pointer">
-<span class="material-icons">
-sms
-</span>
-</li>
+            <li class="mr-4 cursor-pointer"><a title="Messages" href="users.php" class="material-icons">sms</a></li>
+
             <li class="mr-4 cursor-pointer">
                 <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
             </li>
@@ -181,7 +178,7 @@ sms
                 ?>
                     <video key='<?= $postid ?>' onclick="popup('<?= $media ?>','<?= $postid ?>','<?= $type ?>')" class="selector m-1 cursor-pointer object-cover rounded w-48 h-32" src="<?= $media ?>" alt="<?= $username ?>'s post on <?= $posttime ?>">
                     </video>
-            <?php
+                <?php
                 }
             }
         }
@@ -190,8 +187,8 @@ sms
             $deletePostQuery = "DELETE FROM posts WHERE post_id='$postid'";
             $performDeleteQuery = mysqli_query($connection, $deletePostQuery);
             if ($performDeleteQuery) {
-            ?>
-                <script>
+                ?>
+                  <script>
                     window.location.replace('/picpi/home.php')
                 </script>
 

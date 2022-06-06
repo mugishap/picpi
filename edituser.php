@@ -52,11 +52,8 @@ if ($select == TRUE) {
                         <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
                         <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
                         <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
-                        <li>
-                            <span class="material-icons">
-                                sms
-                            </span>
-                        </li>
+                        <li class="mr-4 cursor-pointer"><a title="Messages" href="users.php" class="material-icons">sms</a></li>
+
                         <li class="mr-4 cursor-pointer">
                             <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
                         </li>
