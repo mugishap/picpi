@@ -12,7 +12,6 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Home | PicPi</title>
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
     <link rel="shortcut icon" href="picpi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -413,6 +412,9 @@
         input.focus()
     }
     const newStoryDiv = document.querySelector('.addstory')
+    if(newStoryDiv) {
+        console.log("Defined")
+    }
     newStoryDiv.style.backgroundImage = "url(<?= $profile ?>)";
     newStoryDiv.style.backgroundSize = "cover";
     newStoryDiv.style.backgroundPosition = "center";

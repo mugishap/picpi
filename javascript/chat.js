@@ -6,7 +6,6 @@ const form = document.querySelector(".typing-area"),
 
 form.onsubmit = (e) => {
     e.preventDefault();
-    console.log("Hello")
 }
 inputField.focus();
 inputField.onkeyup = () => {

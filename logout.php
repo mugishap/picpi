@@ -5,7 +5,7 @@
         if(isset($logout_id)){
             $status = "Offline now";
             $sql = mysqli_query($connection, "UPDATE users SET status = '{$status}' WHERE user_id='$logout_id'");
-            setcookie("PICPI-USERID", "", time() - 3600);
+            setcookie("PICPI-USERID", "", time() - 3600,'/');
             if($sql){
 
                 header("location: ./login.php");

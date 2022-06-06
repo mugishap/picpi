@@ -2,11 +2,11 @@
       if(isset($_COOKIE['PICPI-USERID'])){
         include_once "./../connection.php";
         $outgoing_id = $_COOKIE['PICPI-USERID'];
-        $incoming_id = mysqli_real_escape_string($connection, $_POST['incoming_id']);
+        $incoming_id = $_POST['incoming_id'];
         $output = "";
         $sql = "SELECT * FROM messages LEFT JOIN users ON users.user_id = messages.outgoing_msg_id
-                WHERE (outgoing_msg_id = '$outgoing_id' AND incoming_msg_id = '$incoming_id')
-                OR (outgoing_msg_id = '$incoming_id' AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id";
+                WHERE (outgoing_msg_id = '$outgoing_id' AND incoming_msg_id = $incoming_id)
+                OR (outgoing_msg_id = $incoming_id AND incoming_msg_id = '$outgoing_id') ORDER BY msg_id";
         $query = mysqli_query($connection, $sql);
         if(mysqli_num_rows($query) > 0){
             while($row = mysqli_fetch_assoc($query)){

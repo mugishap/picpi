@@ -7,7 +7,7 @@ if (!isset($_COOKIE['PICPI-USERID'])) {
 ?>
 <?php include_once "header.php"; ?>
 
-<body class="flex items-start">
+<body class="flex items-start justify-center">
   <div class="navbar bg-white fixed z-10 shadow-2xl mb-12 p-2 w-full h-12  flex items-center justify-around">
     <div class="flex items-center justify-center">
       <img class="w-8 h-8" src="picpi.png" alt="">
