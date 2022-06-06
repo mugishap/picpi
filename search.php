@@ -42,10 +42,11 @@ if (isset($_POST['search'])) {
                 <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
                 <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
-                <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li><li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm' ></i></li>
-                            <li class="mr-4 cursor-pointer">
-                <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
-            </li>
+                <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
+                <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
+                <li class="mr-4 cursor-pointer">
+                    <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
+                </li>
                 <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
             </ul>
         </div>
@@ -58,10 +59,10 @@ if (isset($_POST['search'])) {
         } else {
             echo "Found " .  mysqli_num_rows($getUsers) . " users with $name";
             while (list($searcheduser_id, $searchedusername, $searchedprofile, $searchedemail) = mysqli_fetch_array($getUsers)) {
-            ?><a class="w-2/5 h-32 m-4" href='user.php?username=<?= $name ?>'>
+            ?><a class="w-2/5 h-32 m-4" href='user.php?username=<?= $searchedusername ?>'>
                     <div class="w-full rounded neumorphism items-center box-border p-3 flex h-full">
                         <div class="neumorphism bg-[#ddd] rounded-full p-2 ml-4 mr-24">
-                            <img class="object-cover rounded-full w-24 h-24" src="<?= $searchedprofile ?>" alt="<?= $username ?>'s image"/>
+                            <img class="object-cover rounded-full w-24 h-24" src="<?= $searchedprofile ?>" alt="<?= $username ?>'s image" />
                         </div>
                         <div class="block">
                             <p><?= $searchedusername ?></p>
