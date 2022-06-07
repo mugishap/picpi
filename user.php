@@ -7,8 +7,16 @@ if($searchedusername === $username){
     header("Location: account.php");
 }
 $query = mysqli_query($connection, "SELECT * FROM users WHERE username='$searchedusername'");
-list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gender, $nationality,, $email,,) = mysqli_fetch_array($query);
-
+list($searcheduserid, $searchedfirstname, $searchedlastname, $searchedtelephone, $searchedprofile, $searchedgender, $searchednationality,, $searchedemail,,) = mysqli_fetch_array($query);
+$getFollowersCount  = mysqli_query($connection, "SELECT COUNT(follow_id) from followers_$searchedusername");
+$getFollowingCount = mysqli_query($connection, "SELECT COUNT(follow_id) from following_$searchedusername");
+if (!$getFollowersCount || $getFollowingCount) {
+    $followercount = "Error";
+    $followingcount = "Error";
+    // return;
+}
+list($followercount) = mysqli_fetch_array($getFollowersCount);
+list($followingcount) = mysqli_fetch_array($getFollowingCount);
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -96,7 +104,7 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
         <form class='flex flex-col items-center justify-center w-3/5'>
             <div class='flex w-10/12 items-center justify-between'>
                 <label>Names: </label>
-                <input type='text' disabled class='bg-transparent' value='<?= $firstname . " " . $lastname ?>'>
+                <input type='text' disabled class='bg-transparent' value='<?= $searchedfirstname . " " . $searchedlastname ?>'>
             </div>
             <div class='flex w-10/12 items-center justify-between'>
                 <label>Username: </label>
@@ -104,21 +112,31 @@ list($searcheduserid, $firstname, $lastname, $telephone, $searchedprofile, $gend
             </div>
             <div class='flex w-10/12 items-center justify-between '>
                 <label>Country: </label>
-                <input type='text' disabled class='bg-transparent' value='<?= $nationality ?>'>
+                <input type='text' disabled class='bg-transparent' value='<?= $searchednationality ?>'>
             </div>
             <div class='flex w-10/12 items-center justify-between '>
                 <label>Telephone: </label>
-                <input type='text' disabled class='bg-transparent' value='<?= $telephone ?>'>
+                <input type='text' disabled class='bg-transparent' value='<?= $searchedtelephone ?>'>
             </div>
             <div class='flex w-10/12 items-center justify-between '>
                 <label>Gender: </label>
-                <input type='text' disabled class='bg-transparent' value='<?= $gender ?>'>
+                <input type='text' disabled class='bg-transparent' value='<?= $searchedgender ?>'>
             </div>
             <div class='flex w-10/12 items-center justify-between '>
                 <label>Email: </label>
-                <input type='text' disabled class='bg-transparent' value='<?= $email ?>'>
+                <input type='text' disabled class='bg-transparent' value='<?= $searchedemail ?>'>
             </div>
         </form>
+    </div>  
+    <div class="follow-data bg-gray-200 flex items-center justify-around w-2/3 p-4 mt-0">
+        <div class="w-1/2 flex items-center flex-col justify-center">
+            <a class="font-bold text-xl" href="followdata.php?username=<?= $searchedusername ?>">Followers</a>
+            <p class="text-xl"><?= $followercount ?></p>
+        </div>
+        <div class="w-1/2 flex items-center flex-col justify-center">
+            <a class="font-bold text-xl" href="followdata.php?username=<?= $searchedusername ?>">Following</a>
+            <p class="text-xl"><?= $followingcount ?></p>
+        </div>
     </div>
     <?php
     if ($userid === $searcheduserid) {

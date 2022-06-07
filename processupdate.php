@@ -10,7 +10,7 @@ $newnationality = $_POST['nationality'];
 $newusername = trim($_POST['username']);
 
 
-echo $gender . "<br>"; 
+echo $gender . "<br>";
 
 $directory = "uploads/";
 $profileimage = $directory . basename($_FILES["profile-image"]["name"]);
@@ -22,11 +22,14 @@ if ($profileimage === 'uploads/') {
   $row = mysqli_fetch_assoc($select);
 
   // $encryptedPassword = hash("SHA512", $password);
-  
+
   $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
-  $updateFollowersTable = mysqli_query($connection,"ALTER TABLE followers_".$username. " RENAME TO followers_".$newusername);
-  $updateFollowingTable = mysqli_query($connection,"ALTER TABLE following_".$username. " RENAME TO following_".$newusername);
-  $updateActivityTable = mysqli_query($connection,"ALTER TABLE activity_".$username. " RENAME TO activity_".$newusername);
+  $updateFollowersTable = mysqli_query($connection, "ALTER TABLE followers_" . $username . " RENAME TO followers_" . $newusername);
+  $updateFollowingTable = mysqli_query($connection, "ALTER TABLE following_" . $username . " RENAME TO following_" . $newusername);
+  $updateActivityTable = mysqli_query($connection, "ALTER TABLE activity_" . $username . " RENAME TO activity_" . $newusername);
+  $updateLikes = mysqli_query($connection, "UPDATE likes SET likerusername='$newusername' AND likerprofile='$newprofileimage' WHERE liker_id='$userid'");
+  $updateComments = mysqli_query($connection, "UPDATE comments SET commenter_username='$newusername' AND WHERE commenter_id='$userid'");
+  $updatePosts = mysqli_query($connection, "UPDATE posts SET posterusername='$newusername' AND profile='$newprofileimage' WHERE poster_id='$userid'");
 
   $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
   if ($update && $updateFollowersTable && $updateFollowingTable && $updateActivityTable) {
@@ -57,12 +60,14 @@ if ($profileimage === 'uploads/') {
   // $encryptedPassword = hash("SHA512", $password);
   $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',profile='$newprofileimage',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
   $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating user" . mysqli_error($connection));
-  
-  $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
-  $updateFollowersTable = mysqli_query($connection,"ALTER TABLE followers_".$username. " RENAME TO followers_".$newusername);
-  $updateFollowingTable = mysqli_query($connection,"ALTER TABLE following_".$username. " RENAME TO following_".$newusername);
-  $updateActivityTable = mysqli_query($connection,"ALTER TABLE activity_".$username. " RENAME TO activity_".$newusername);
 
+  $updateQuery = "UPDATE users SET firstname='$newfirstname', lastname='$newlastname',email='$newemail',telephone='$newtelephone',gender='$newgender',nationality='$newnationality',username='$newusername' WHERE user_id='$userid'";
+  $updateFollowersTable = mysqli_query($connection, "ALTER TABLE followers_" . $username . " RENAME TO followers_" . $newusername);
+  $updateFollowingTable = mysqli_query($connection, "ALTER TABLE following_" . $username . " RENAME TO following_" . $newusername);
+  $updateActivityTable = mysqli_query($connection, "ALTER TABLE activity_" . $username . " RENAME TO activity_" . $newusername);
+  $updateLikes = mysqli_query($connection, "UPDATE likes SET likerusername='$newusername' AND likerprofile='$newprofileimage' WHERE liker_id='$userid'");
+  $updateComments = mysqli_query($connection, "UPDATE comments SET commenter_username='$newusername' AND WHERE commenter_id='$userid'");
+  $updatePosts = mysqli_query($connection, "UPDATE posts SET posterusername='$newusername' AND profile='$newprofileimage' WHERE poster_id='$userid'");
 
   if ($update && $updateFollowersTable && $updateFollowingTable && $updateActivityTable) {
     header("Location: ./home.php");

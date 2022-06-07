@@ -44,7 +44,7 @@
             <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
             <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
-            <li class="mr-4 cursor-pointer"><i class='bx bx-bell bx-sm'></i></li>
+            <li class="mr-4 cursor-pointer"><a href='activity.php' class='bx bx-bell bx-sm'></a></li>
             <li class="mr-4 cursor-pointer"><a title="Messages" href="users.php" class="material-icons">send</a></li>
             <li class="mr-4 cursor-pointer">
                 <form action="logout.php" method="GET"><button title="Logout" class="material-icons" name="logout" type="submit">logout</button></form>
@@ -264,6 +264,8 @@
         $commentQuery = "INSERT INTO comments(post_id,commenter_id,commenter_username,comment) VALUES('$postid','$userid',$username,'$comment')";
         // echo $commentQuery; 
         $addComment = mysqli_query($connection, $commentQuery) or die(mysqli_error($connection));
+        $addToPosterActivity = mysqli_query($connection, "INSERT INTO activity_$posterusername(activity_comment,related) VALUES('$username commented on your post','$postid')");
+        $addToCommenterActivity = mysqli_query($connection,"INSERT INTO activity_$username(activity_comment,related) VALUES('You commented on a post from $posterusername','$postid')");
         if ($addComment) {
         ?>
             <script>
