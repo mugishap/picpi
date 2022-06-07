@@ -7,9 +7,6 @@ include './checkloggedin.php';
 $postid = $_GET['postid'];
 $sql = "SELECT post_id,caption,image FROM posts where post_id='$postid'";
 $select  = mysqli_query($connection, $sql) or die(mysqli_error($connection));
-// $row = mysqli_fetch_array($select);
-// $row = mysqli_fetch_array($select);
-// print_r($postid);
 
 $count = mysqli_num_rows($select);
 if ($count != 1) {
@@ -26,12 +23,14 @@ if (isset($_POST['updatepost'])) {
     $imageFileType = strtolower(pathinfo($postimage, PATHINFO_EXTENSION));
     echo $postimage;
     if ($postimage === 'uploads/') {
-        $updateQuery = "UPDATE posts SET image='$image',caption='$caption' WHERE post_id='$postid'";
+        $updateQuery = "UPDATE posts SET caption='$caption' WHERE post_id='$postid'";
         $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating post" . mysqli_error($connection));
         if ($update) {
             header("Location: ./home.php");
         }
     } else {
+        // echo "<br><br><br>br<br>br<br><br>br<br>";
+        // echo "Hello";
         $check = getimagesize($_FILES["post-image"]["tmp_name"]);
         if ($check !== false) {
             echo "File is an image" . $check["mime"] . ".";
@@ -39,20 +38,20 @@ if (isset($_POST['updatepost'])) {
         } else {
             echo "File is not an image";
             $uploadStatus = 0;
-            if ($uploadStatus == 0) {
-                echo "Sorry, your image was not uploaded.";
+        }
+        if ($uploadStatus == 0) {
+            echo "Sorry, your image was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["post-image"]["tmp_name"], $postimage)) {
+                echo "The image " . htmlspecialchars(basename($_FILES["post-image"]["name"])) . " has been uploaded";
             } else {
-                if (move_uploaded_file($_FILES["post-image"]["tmp_name"], $postimage)) {
-                    echo "The image " . htmlspecialchars(basename($_FILES["post-image"]["name"])) . " has been uploaded";
-                } else {
-                    echo "Sorry, there was an error was an error uploading your file.";
-                }
+                echo "Sorry, there was an error was an error uploading your file.";
             }
-            $updateQuery = "UPDATE users SET image='$image',caption='$caption' WHERE post_id='$postid'";
-            $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating post" . mysqli_error($connection));
-            if ($update) {
-                echo "Updated";
-            }
+        }
+        $updateQuery = "UPDATE posts SET image='$postimage',caption='$caption' WHERE post_id='$postid'";
+        $update =  mysqli_query($connection, $updateQuery) or die("Error occured in updating post" . mysqli_error($connection));
+        if ($update) {
+            header("Location: ./home.php");
         }
     }
 }
@@ -94,7 +93,7 @@ while (list($post_id, $caption, $image) = mysqli_fetch_array($select)) {
             </div>
             <ul class="flex flex-row items-center justify-center list-none">
                 <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
-                <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
+
                 <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
                 <li class="mr-4 cursor-pointer"><a title="Notifications" class='bx bx-bell bx-sm' href="notifications.php"></a></li>
                 <li class="mr-4 cursor-pointer">

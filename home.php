@@ -107,7 +107,7 @@
 
     ?>
 
-        <div id="post<?= $postid ?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-fit p-3">
+        <div id="post<?= $postid ?>" key='<?= $postid ?>' class="neumorphism rounded-xl m-1 sm:w-6/12 w-10/12 md:w-4/12 h-64 p-3">
             <div class="flex w-full items-center justify-start">
                 <div class="flex w-2/5 items-center justify-start">
                     <img class="object-cover m-2 w-10 h-10 rounded-full  " src='<?= $posterprofile ?>'>
@@ -150,7 +150,7 @@
             <?php
             if ($type == 'image') {
             ?>
-                <img class=" object-cover rounded-xl mb-1 mt-1 h-[70vh] w-full" src='<?= $image ?>'>
+                <img class=" object-cover rounded-xl mb-1 mt-1 h-[50vh] w-full" src='<?= $image ?>'>
             <?php
             } else if ($type == 'video') {
             ?>

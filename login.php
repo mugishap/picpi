@@ -36,7 +36,7 @@
         <form action="send.php" method="post" class="w-full flex flex-col items-center">
             <div class="holders w-full flex flex-row items-center justify-between m-1">
                 <label for="username">Username: </label>
-                <input type="text" placeholder="Enter username" name="username" id="username" required>
+                <input pattern="[a-z].*" type="text" placeholder="Enter username" name="username" id="username" required>
             </div>
             <div class="holders w-full flex flex-row items-center justify-between m-1">
                 <label for="password">Password: </label>
@@ -46,6 +46,11 @@
             <p class="whitespace-nowrap mt-2">Not a member yet? <a class="hover:text-blue-600" href="signup.php">Signup</a></p>
         </form>
     </div>
+    <script type="text/javascript">
+        window.addEventListener('beforeunload',()=>{
+            alert("Finishing the page will log you out");
+        })
+    </script>
 </body>
 
 </html>

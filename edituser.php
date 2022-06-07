@@ -49,7 +49,7 @@ if ($select == TRUE) {
                     <ul class="flex flex-row items-center justify-center list-none">
                         <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
 
-                        <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
+                        
                         <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
                         <li class="mr-4 cursor-pointer"><a href='activity.php' class='bx bx-bell bx-sm'></a></li>
                         <li class="mr-4 cursor-pointer"><a title="Messages" href="users.php" class="material-icons">send</a></li>
@@ -77,7 +77,7 @@ if ($select == TRUE) {
                         </div>
                         <div class="w-full flex justify-between items-center mt-1">
                             <label for="profile-image">Profile</label>
-                            <input class="rounded p-1 w-2/3" type="file" id="profile-image" value="<?php echo $rows['profile']; ?>" name="profile-image">
+                            <input class="rounded p-1 w-2/3" type="file" onchange="changeProfile()" id="profile-image" value="<?php echo $rows['profile']; ?>" name="profile-image">
                         </div>
                         <img class="object-cover" src="<?php echo $rows['profile']; ?>" class='profile' style='width:100px;height:100px;border-radius:50%;' alt="">
                         <div class="w-full flex justify-between items-center mt-1">
@@ -124,6 +124,9 @@ if ($select == TRUE) {
                     </form>
 
                 </div>
+                <script>
+                    const image = document.querySelector('.profile');
+                </script>
             </body>
 
 </html>

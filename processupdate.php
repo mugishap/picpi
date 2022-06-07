@@ -1,3 +1,7 @@
+<?php
+  include './connection.php';
+  include './checkloggedin.php';
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +45,7 @@
     </div>
     <ul class="flex flex-row items-center justify-center list-none">
       <li class="mr-4 cursor-pointer"><a title="Home" class="bx bx-home-alt bx-sm" href="home.php"></a></li>
-      <li class="mr-4 cursor-pointer"><a title="Explore" class="bx bx-compass bx-sm" href="explore.php"></a></li>
+      
       <li class="mr-4 cursor-pointer"><a title="New post" class="bx bx-add-to-queue bx-sm" href="newpost.php"></a></li>
       <li class="mr-4 cursor-pointer"><a href='activity.php' class='bx bx-bell bx-sm'></a></li>
       <li class="mr-4 cursor-pointer"><a title="Messages" href="users.php" class="material-icons">send</a></li>
@@ -51,16 +55,15 @@
       <li class="mr-4 cursor-pointer"><a href="account.php"><img src="<?= $profile ?>" class="object-cover w-10 h-10 rounded-full" alt=""></a></li>
     </ul>
   </div>
+
   <?php
-  include './connection.php';
-  include './checkloggedin.php';
   $newfirstname = $_POST['firstname'];
   $newlastname = $_POST['lastname'];
   $newemail = $_POST['email'];
   $newtelephone = $_POST['telephone'];
   $newgender = trim($_POST['gender']);
   $newnationality = $_POST['nationality'];
-  $newusername = trim($_POST['username']);
+  $newusername = trim(mysqli_real_escape_string($connection,$_POST['username']));
 
   $checkOtherUsername = mysqli_query($connection, "SELECT username FROM users WHERE NOT user_id='$userid' AND username='$newusername'");
   $checkOtherEmail = mysqli_query($connection, "SELECT email FROM users WHERE NOT user_id='$userid' AND email='$newemail'");
