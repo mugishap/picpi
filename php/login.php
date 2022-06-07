@@ -1,5 +1,6 @@
 <?php 
-      include_once "connection.php";
+      include_once "./../connection.php";
+      include './../checkloggedin.php';
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     if(!empty($email) && !empty($password)){

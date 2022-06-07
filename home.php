@@ -94,7 +94,7 @@
     <a class="mt-2 mb-8" href="newpost.php"><button class="text-white rounded bg-blue-500 p-2 w-48 hover:bg-blue-600">Create new post</button></a>
     <?php
 
-    while (list($postid, $count, $time, $posterusername, $posterprofile, $caption, $image, $type) = mysqli_fetch_array($query)) {
+    while (list($postid,$posterID, $count, $time, $posterusername, $posterprofile, $caption, $image, $type) = mysqli_fetch_array($query)) {
         $getLikes = mysqli_query($connection, "SELECT likerusername,liker_profile FROM likes WHERE post_id='$postid' LIMIT 1");
         list($likerusername, $liker_profile) = mysqli_fetch_array($getLikes);
         $newComm = "SELECT c.comment_id,c.comment_time,c.commenter_username,c.comment,u.profile FROM comments c INNER JOIN users u ON u.username=c.commenter_username  WHERE post_id='$postid' ORDER BY c.comment_id DESC";
@@ -172,12 +172,12 @@
                     <?php
                     if ($likerusername === $username) {
                     ?>
-                        <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
+                        <img class="object-cover w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
                         <p class="mt-4 text-xs text-gray-500">Liked by you</p>
                     <?php
                     } else {
                     ?>
-                        <img class="w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
+                        <img class="object-cover w-8 h-8 rounded-full" src="<?= $liker_profile ?>" alt="">
                         <p class="mt-4 text-xs text-gray-500">Liked by <?= $likerusername ?></p>
                     <?php
                     }

@@ -97,7 +97,7 @@
                     Sorry, there was an error uploading your file.";
                 }
             }
-            $query = "INSERT INTO posts(username,profile,caption,image,type) VALUES('$username','$profile','$caption','$postimage','$uploadType')";
+            $query = "INSERT INTO posts(poster_id,username,profile,caption,image,type) VALUES('$userid','$username','$profile','$caption','$postimage','$uploadType')";
             echo $query;
             $savePost = mysqli_query($connection, $query) or die(mysqli_error($connection));
             if ($savePost) {

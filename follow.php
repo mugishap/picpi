@@ -3,8 +3,6 @@ include './connection.php';
 include './checkloggedin.php';
 $today = date('Y-m-d H:i');
 $query = mysqli_query($connection, 'SELECT * FROM posts ORDER BY post_id DESC');
-$getuser = mysqli_query($connection, "SELECT * FROM users WHERE user_id='$userid'");
-list($userid, $firstname, $lastname, $telephone, $profile, $gender, $nationality, $username, $email,, $role) = mysqli_fetch_array($getuser);
 
 $toFollowUsername = $_POST['toFollowUsername'];
 $getToFollow = mysqli_query($connection, "SELECT user_id,profile FROM users WHERE username='$toFollowUsername'");

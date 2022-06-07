@@ -2,7 +2,7 @@
 include_once "./connection.php";
 include './checkloggedin.php';
 if (!isset($_COOKIE['PICPI-USERID'])) {
-  header("location: login.php");
+  header("location: ./../login.php");
 }
 ?>
 <?php include_once "header.php"; ?>

@@ -56,7 +56,7 @@ include './checkloggedin.php';
     <div>
         <?php
 
-        $getMostPopularPosts = mysqli_query($connection, "SELECT p.post_id,p.username,p.caption,c.commenter_username,comment,liker_id FROM posts p INNER JOIN likes l USING(post_id) INNER JOIN comments c USING(post_id) ORDER BY  (SELECT COUNT(l.like_id) FROM likes l);");
+        $getMostPopularPosts = mysqli_query($connection, "SELECT p.poster_id,p.post_id,p.username,p.caption,c.commenter_username,comment,liker_id FROM posts p INNER JOIN likes l USING(post_id) INNER JOIN comments c USING(post_id) ORDER BY  (SELECT COUNT(l.like_id) FROM likes l);");
         ?>
     </div>
 </body>
