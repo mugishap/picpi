@@ -333,12 +333,10 @@
         overlay.style.display = 'none'
     }
     async function follow(e, toFollowUsername) {
-        // console.log(e.textContent)
         const text = e.textContent
         text === 'Follow' ?
             (async () => {
                 e.textContent = 'Unfollow'
-                // console.log(e.textContent)
                 var formData = new FormData();
                 formData.append("toFollowUsername", toFollowUsername);
                 formData.append("status", "follow");
@@ -348,11 +346,9 @@
                     body: formData
                 })
                 // const response = await api.json()
-                // console.log(JSON.stringify(response))
             })() :
             (async () => {
                 e.textContent = 'Follow'
-                // console.log(e.textContent)
                 const text = e.textContent
                 text === 'Unfollow'
                 var formData = new FormData();
@@ -364,7 +360,6 @@
                     body: formData
                 })
                 // const response = await api.json()
-                // console.log(response)
             })()
     }
     async function editpostpopup(post_id) {
@@ -398,13 +393,12 @@
                     body: formData
                 })
                 const response = await api.json()
-                console.log(response)
+                // console.log(response)
             })()
     }
     const addemoji = (e) => {
         const commentarea = document.querySelector('.thecommentarea')
         const text = commentarea.value + e.textContent
-        console.log(text)
         commentarea.value = text
     }
     const focuscomment = (inputid) => {

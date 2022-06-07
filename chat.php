@@ -46,7 +46,7 @@ if (!isset($_COOKIE['PICPI-USERID'])) {
         <a href="users.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
         <img src="<?php echo $row['profile']; ?>" alt="">
         <div class="details">
-          <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
+          <a class="font-semibold text-xl" href="user.php?username=<?=$row['username']?>"><?php echo $row['firstname'] . " " . $row['lastname'] ?></a>
           <p><?php echo $row['status']; ?></p>
         </div>
       </header>
